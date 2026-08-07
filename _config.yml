@@ -1,0 +1,14 @@
+# GitHub Pages Configuration
+title: Latin II
+description: A resource for learning classical Latin
+author: Magister Automatum
+url: https://magister-automatum.github.io/Latin-II
+
+# Build settings
+theme: jekyll-theme-minimal
+markdown: kramdown
+
+# Exclude files from Jekyll processing
+exclude:
+  - .nojekyll
+  - README.md

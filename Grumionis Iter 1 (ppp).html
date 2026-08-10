@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Iter Grumiōnis — I · Epistula Scrīpta (PPP)</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:Georgia,serif;font-size:16px;line-height:1.6;background:#f5f0e8;color:#1a1108;min-height:100vh;}
+
+/* DECLENSION + NEUTER COLOURS */
+.n1,.n2,.n3{text-decoration-line:underline;text-decoration-color:transparent;text-decoration-thickness:2px;transition:text-decoration-color .1s;}
+body.review-on .n1{text-decoration-color:#c0392b;}
+body.review-on .n2{text-decoration-color:#2471a3;}
+body.review-on .n3{text-decoration-color:#1e8449;}
+body.neut-on .neut{background:#fffbe6;border-bottom:2px dotted #c9920a;padding-bottom:1px;border-radius:2px;}
+
+/* TOPBAR */
+#topbar{position:sticky;top:0;z-index:200;background:#2c1a0e;color:#f5f0e8;
+  display:flex;align-items:center;gap:12px;padding:0 16px;height:48px;font-size:.85rem;}
+#topbar h1{font-size:1rem;font-weight:700;letter-spacing:.03em;flex-shrink:0;}
+#topbar .spacer{flex:1;}
+#score-disp{font-size:.8rem;opacity:.85;white-space:nowrap;}
+.tb-btn{background:transparent;border:1px solid #7a5c3a;color:#f5f0e8;border-radius:4px;padding:3px 10px;font-size:.78rem;cursor:pointer;}
+.tb-btn:hover{background:#3d2510;}
+.badge{font-size:.7rem;background:#7a5c3a;padding:2px 8px;border-radius:10px;white-space:nowrap;}
+
+/* SETTINGS PANEL */
+#settings-panel{position:fixed;top:48px;right:0;width:280px;background:#2c1a0e;color:#f5f0e8;
+  padding:16px;z-index:199;transform:translateX(100%);transition:transform .2s ease;border-left:2px solid #7a5c3a;}
+#settings-panel.open{transform:translateX(0);}
+.sp-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;font-size:.88rem;}
+.sp-row label{line-height:1.3;}
+.toggle{appearance:none;width:40px;height:22px;border-radius:11px;background:#5a3a1a;cursor:pointer;position:relative;flex-shrink:0;transition:background .15s;}
+.toggle:checked{background:#b87333;}
+.toggle::after{content:'';position:absolute;width:16px;height:16px;border-radius:50%;background:#fff;top:3px;left:3px;transition:left .15s;}
+.toggle:checked::after{left:21px;}
+.sp-legend{font-size:.78rem;margin-top:4px;line-height:1.5;}
+.leg-swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:middle;}
+.leg-r{background:#c0392b;}.leg-b{background:#2471a3;}.leg-g{background:#1e8449;}
+#neut-explain{background:#3d2510;border-radius:5px;padding:8px 10px;font-size:.76rem;color:#ffe8a0;line-height:1.6;margin-top:4px;}
+#charmap{display:none;background:#fff3d6;padding:7px 16px;font-size:.82rem;border-bottom:1px solid #e0cdb0;}
+
+/* PAGE WRAPPER */
+#page{max-width:920px;margin:0 auto;padding:20px 16px 60px;}
+
+/* HOME */
+.home-header{text-align:center;padding:28px 0 20px;}
+.home-header h2{font-size:1.7rem;color:#2c1a0e;}
+.home-header p{color:#7a5c3a;margin-top:6px;font-size:.92rem;font-style:italic;}
+.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px;}
+@media(max-width:600px){.home-grid{grid-template-columns:1fr;}}
+.home-card{background:#fffdf7;border:2px solid #c8a97e;border-radius:10px;padding:24px 20px;cursor:pointer;
+  transition:border-color .15s,box-shadow .15s;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.home-card:hover{border-color:#7a5c3a;box-shadow:0 3px 14px rgba(0,0,0,.12);}
+.home-card .hc-icon{font-size:2.4rem;margin-bottom:12px;}
+.home-card h3{font-size:1.1rem;color:#2c1a0e;margin-bottom:4px;}
+.home-card .hc-latin{font-style:italic;color:#7a5c3a;font-size:.84rem;margin-bottom:10px;}
+.home-card p{font-size:.86rem;color:#444;line-height:1.55;}
+.home-card .hc-btn{margin-top:18px;background:#2c1a0e;color:#f5f0e8;border:none;border-radius:6px;padding:9px 22px;font-size:.9rem;cursor:pointer;font-family:inherit;}
+.home-card .hc-btn:hover{background:#4a2d15;}
+.bridge-note{max-width:640px;margin:22px auto 0;background:#e8f0e4;border:1.5px solid #7fa06a;border-radius:8px;padding:12px 16px;font-size:.85rem;color:#2d4a1e;line-height:1.6;}
+
+/* INTRO CARDS */
+.intro-card{background:#fff3d6;border:2px solid #d9b45a;border-radius:10px;padding:20px 20px 16px;margin-bottom:16px;}
+.intro-card h2{font-size:1.05rem;color:#5a4000;margin-bottom:10px;}
+.intro-card p{font-size:.88rem;color:#5a4000;line-height:1.65;margin-bottom:10px;}
+.ex-sent{background:#fff;border-left:4px solid #c9920a;padding:10px 14px;border-radius:0 8px 8px 0;margin:10px 0;font-size:.93rem;line-height:1.75;}
+.ex-sent .eng{font-size:.8rem;color:#666;display:block;margin-top:3px;font-style:italic;}
+.ex-sent .neut{background:#fffbe6;border-bottom:2px dotted #c9920a;}
+
+/* VOCAB TABLE */
+.vocab-table{width:100%;border-collapse:collapse;margin:10px 0 14px;background:#fffdf7;font-size:.86rem;}
+.vocab-table th{background:#f0e8d8;border:1px solid #c8a97e;padding:6px 9px;text-align:left;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:#5a4000;}
+.vocab-table td{border:1px solid #c8a97e;padding:6px 9px;vertical-align:top;}
+.vocab-table td.vt-latin{font-style:italic;font-weight:700;white-space:nowrap;}
+.vocab-table td.vt-der{min-width:90px;color:#aaa;}
+.vt-n{font-size:.68rem;background:#c9920a;color:#fff;border-radius:8px;padding:1px 6px;margin-left:5px;font-style:normal;font-weight:400;vertical-align:middle;}
+
+/* BACK LINK */
+.back-link{font-size:.82rem;color:#7a5c3a;cursor:pointer;display:inline-block;margin-bottom:14px;}
+.back-link:hover{text-decoration:underline;}
+
+/* STORY LAYOUT */
+.story-layout{display:grid;grid-template-columns:160px 1fr 250px;gap:16px;}
+@media(max-width:860px){.story-layout{grid-template-columns:1fr;}
+  .story-col{order:1;}.vocab-bar-col{order:2;}.summary-col{order:3;position:static;}}
+.story-col{min-width:0;}
+.vocab-bar-col{min-width:0;}
+.vocab-bar{background:#fffbe6;border:1.5px solid #d9b45a;border-radius:8px;padding:12px;font-size:.76rem;position:sticky;top:58px;}
+.vocab-bar h4{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#a06b00;margin-bottom:8px;}
+.vb-row{margin-bottom:6px;line-height:1.45;}
+.vb-lat{font-style:italic;font-weight:700;color:#2c1a0e;}
+.vb-def{color:#555;}
+.vb-note{font-size:.68rem;color:#a06b00;font-style:italic;margin-top:8px;border-top:1px solid #e0cdb0;padding-top:6px;line-height:1.5;}
+.scene-label{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7a5c3a;margin-bottom:10px;}
+.path-badge{display:inline-block;font-size:.78rem;font-weight:700;background:#2c1a0e;color:#f5f0e8;padding:3px 12px;border-radius:4px;margin-bottom:10px;letter-spacing:.05em;}
+.converge-note{font-size:.76rem;color:#7a5c3a;font-style:italic;margin-bottom:6px;}
+.prediction-echo{background:#f8f3ec;border-left:3px solid #c8a97e;padding:8px 12px;font-size:.84rem;color:#555;font-style:italic;margin-bottom:12px;border-radius:0 4px 4px 0;}
+
+/* LATIN TEXT */
+p.latin{font-size:1.04rem;line-height:1.9;margin-bottom:14px;}
+p.latin .sp{font-style:italic;color:#3a1a6e;}
+.glosses{background:#f0e8d8;border-left:3px solid #c8a97e;padding:8px 12px;border-radius:0 4px 4px 0;font-size:.81rem;margin:12px 0;line-height:1.8;}
+hr.div{border:none;border-top:1px solid #d4cce8;margin:12px 0;}
+.feat-box{background:#fffbe6;border:1.5px solid #c9920a;border-radius:8px;padding:10px 14px;margin:12px 0;}
+.feat-box .fb-lbl{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#a06b00;margin-bottom:4px;}
+.feat-box .fb-latin{font-size:1.05rem;font-style:italic;}
+
+/* COMPREHENSION BLOCK */
+.comp-block{background:#fff;border:1.5px solid #c8a97e;border-radius:8px;padding:16px 18px;margin-top:16px;}
+.comp-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#7a5c3a;margin-bottom:12px;}
+.comp-q{margin-bottom:16px;}
+.comp-q:last-child{margin-bottom:0;}
+.cq-prompt{font-size:.89rem;margin-bottom:8px;line-height:1.5;}
+.cq-prompt em{font-style:italic;}
+.mc-list{list-style:none;}
+.mc-list li{margin-bottom:5px;}
+.mc-btn{width:100%;text-align:left;background:#f8f3ec;border:1px solid #c8a97e;border-radius:5px;padding:7px 10px;font-size:.85rem;cursor:pointer;font-family:inherit;line-height:1.4;transition:background .1s;}
+.mc-btn:hover:not(:disabled){background:#f0e4cf;}
+.mc-btn:disabled{cursor:default;}
+.mc-btn.c-ok{background:#d4edda;border-color:#28a745;}
+.mc-btn.c-err{background:#f8d7da;border-color:#dc3545;}
+.fb{display:none;font-size:.83rem;padding:8px 11px;border-radius:5px;margin-top:6px;line-height:1.5;}
+.fb.show{display:block;}
+.fb.ok{background:#d4edda;color:#155724;}
+.fb.err{background:#f8d7da;color:#721c24;}
+.rq-prompt{font-size:.89rem;margin-bottom:7px;line-height:1.5;}
+.rq-input{width:100%;border:1px solid #c8a97e;border-radius:5px;padding:7px 9px;font-family:inherit;font-size:.87rem;background:#faf6ef;resize:vertical;min-height:46px;}
+.rq-controls{margin-top:6px;}
+.rq-btn{background:#f0e4cf;border:1px solid #c8a97e;border-radius:5px;padding:5px 14px;font-size:.81rem;cursor:pointer;font-family:inherit;}
+.rq-btn:hover:not(:disabled){background:#e0d0b0;}
+.rq-answer{background:#fff3cd;border:1px solid #ffc107;border-radius:5px;padding:8px 11px;font-size:.84rem;margin-top:7px;display:none;line-height:1.5;}
+
+/* SUMMARY COLUMN */
+.summary-col{position:sticky;top:58px;align-self:start;}
+.summary-card{background:#fffdf7;border:1.5px solid #c8a97e;border-radius:8px;padding:16px;}
+.sum-label{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#7a5c3a;margin-bottom:6px;}
+.sum-hint{font-size:.77rem;color:#888;margin-bottom:8px;line-height:1.4;}
+.sum-textarea{width:100%;border:1px solid #c8a97e;border-radius:5px;padding:8px;font-family:inherit;font-size:.87rem;resize:vertical;min-height:90px;background:#faf6ef;}
+.sum-count{font-size:.71rem;color:#888;text-align:right;margin-top:3px;}
+
+/* DECISION */
+.decision-banner{background:#2c1a0e;color:#f5f0e8;border-radius:8px;padding:14px 18px;margin:20px 0 14px;}
+.decision-banner h3{font-size:1rem;margin-bottom:4px;}
+.decision-banner p{font-size:.84rem;opacity:.9;line-height:1.5;}
+.choices-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+@media(max-width:700px){.choices-grid{grid-template-columns:1fr;}}
+.choice-card{background:#fffdf7;border:1.5px solid #c8a97e;border-radius:8px;padding:14px;}
+.cc-via{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#7a5c3a;margin-bottom:5px;}
+.cc-latin{font-size:.91rem;line-height:1.5;margin-bottom:5px;font-style:italic;}
+.cc-sub{display:block;font-size:.77rem;color:#666;font-style:normal;margin-top:3px;}
+.cc-choose-btn{margin-top:10px;width:100%;background:#2c1a0e;color:#f5f0e8;border:none;border-radius:5px;padding:8px;font-size:.85rem;cursor:pointer;font-family:inherit;}
+.cc-choose-btn:hover{background:#4a2d15;}
+.cc-predict-lbl{font-size:.74rem;color:#7a5c3a;margin:10px 0 4px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;}
+.cc-predict-input{width:100%;border:1px solid #c8a97e;border-radius:5px;padding:6px 8px;font-size:.83rem;font-family:inherit;min-height:58px;resize:vertical;background:#faf6ef;}
+.cc-count{font-size:.71rem;color:#888;text-align:right;margin-top:2px;}
+.cc-gate-btn{margin-top:8px;width:100%;background:#ccc;color:#555;border:none;border-radius:5px;padding:8px;font-size:.85rem;cursor:not-allowed;font-family:inherit;}
+.cc-gate-btn.ready{background:#2c1a0e;color:#f5f0e8;cursor:pointer;}
+.cc-gate-btn.ready:hover{background:#4a2d15;}
+
+/* BUTTONS */
+.btn-block{margin-top:20px;}
+.btn-primary{background:#2c1a0e;color:#f5f0e8;border:none;border-radius:6px;padding:10px 22px;font-size:.92rem;cursor:pointer;font-family:inherit;display:none;}
+.btn-primary.show{display:inline-block;}
+.btn-primary:hover{background:#4a2d15;}
+.btn-secondary{background:transparent;color:#2c1a0e;border:2px solid #2c1a0e;border-radius:6px;padding:9px 22px;font-size:.9rem;cursor:pointer;font-family:inherit;margin-top:10px;display:block;width:100%;}
+.btn-secondary:hover{background:#f0e8d8;}
+.full-card{background:#fffdf7;border:1.5px solid #c8a97e;border-radius:10px;padding:22px 20px 18px;margin-bottom:16px;}
+
+/* RESULTS */
+.result-score-box{background:#f0e8d8;border-radius:8px;padding:14px 18px;margin-bottom:14px;}
+.result-score-box h3{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:#7a5c3a;margin-bottom:6px;}
+.big-score{font-size:1.9rem;font-weight:bold;color:#2c1a0e;}
+.score-comment{font-size:.87rem;color:#6b5b4e;margin-top:3px;}
+.route-line{font-size:.85rem;color:#555;margin-bottom:10px;line-height:1.6;}
+.sum-review{margin-bottom:10px;}
+.sum-review h4{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:#7a5c3a;margin-bottom:3px;}
+.sum-review p{font-size:.87rem;background:#fff;border-radius:6px;padding:8px 10px;color:#555;font-style:italic;line-height:1.5;}
+.produce-box{background:#e8f0e4;border:1.5px solid #7fa06a;border-radius:8px;padding:14px 16px;margin:14px 0;}
+.produce-box h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.07em;color:#2d4a1e;margin-bottom:6px;}
+.produce-box p{font-size:.86rem;color:#2d4a1e;line-height:1.55;margin-bottom:8px;}
+
+/* PRACTICE SECTION */
+.acc-header{text-align:center;padding:16px 0 18px;}
+.acc-header h2{font-size:1.4rem;color:#2c1a0e;}
+.acc-header p{font-size:.87rem;color:#555;margin-top:6px;line-height:1.5;}
+.acc-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.ast{flex:1;min-width:110px;background:#f0e8d8;border:1.5px solid #c8a97e;border-radius:6px;padding:8px 10px;text-align:center;font-size:.81rem;cursor:pointer;font-family:inherit;transition:background .1s,color .1s;}
+.ast.active{background:#2c1a0e;color:#f5f0e8;border-color:#2c1a0e;}
+.ast-shuffle{flex:0 0 auto;min-width:auto;background:#1e4d35;color:#e0ffe8;border-color:#1e4d35;}
+.ast-shuffle:hover{background:#256040;}
+.acc-layout{display:grid;grid-template-columns:240px 1fr;gap:20px;}
+.acc-layout .acc-ref{grid-column:1;grid-row:1;align-self:start;}
+.acc-layout .acc-main{grid-column:2;grid-row:1;min-width:0;}
+@media(max-width:700px){.acc-layout{grid-template-columns:1fr;}
+  .acc-layout .acc-ref{grid-column:1;grid-row:2;position:static;}
+  .acc-layout .acc-main{grid-column:1;grid-row:1;}}
+.acc-ref{background:#f0e8d8;border:1px solid #c8a97e;border-radius:8px;padding:14px;font-size:.79rem;position:sticky;top:58px;}
+.acc-ref h4{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#7a5c3a;margin-bottom:10px;}
+.wb-row{display:grid;grid-template-columns:90px 16px auto;gap:2px;font-size:.78rem;line-height:1.7;align-items:baseline;}
+.wb-nom{color:#555;font-style:italic;}.wb-arr{color:#bbb;text-align:center;}.wb-acc{font-weight:700;font-style:italic;}
+.wb-head{font-weight:700;font-size:.75rem;color:#2c1a0e;margin:8px 0 4px;}
+.wb-note{font-size:.69rem;color:#888;font-style:italic;margin-top:2px;}
+.acc-intro{background:#fff;border:1px solid #c8a97e;border-radius:8px;padding:12px 14px;margin-bottom:14px;font-size:.87rem;line-height:1.6;}
+.acc-rule{background:#fff3cd;border-left:3px solid #ffc107;padding:7px 11px;font-size:.83rem;margin:8px 0;border-radius:0 5px 5px 0;}
+.spot-sent{background:#fffdf7;border:1px solid #c8a97e;border-radius:7px;padding:11px 13px;margin-bottom:9px;}
+.spot-num{font-size:.68rem;color:#7a5c3a;font-weight:700;text-transform:uppercase;margin-bottom:6px;}
+.spot-words{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:5px;align-items:center;}
+.word-btn{background:#f8f3ec;border:1.5px solid #c8a97e;border-radius:5px;padding:5px 12px;font-size:.97rem;cursor:pointer;font-family:inherit;font-style:italic;transition:background .1s,border-color .1s;}
+.word-btn:hover:not(:disabled){background:#f0e0c0;border-color:#a06030;}
+.word-btn.correct{background:#d4edda;border-color:#28a745;cursor:default;}
+.word-btn.wrong{background:#f8d7da;border-color:#dc3545;}
+.spot-period{font-style:italic;color:#888;font-size:.95rem;}
+.spot-fb{font-size:.8rem;min-height:17px;margin-top:3px;line-height:1.4;}
+.spot-fb.ok{color:#155724;}.spot-fb.err{color:#721c24;}
+.sort-grid{display:flex;flex-direction:column;gap:8px;}
+.sort-item{background:#fff;border:1px solid #c8a97e;border-radius:8px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+.sort-word{font-size:.97rem;font-style:italic;flex:1;}
+.sort-btns{display:flex;gap:5px;}
+.sb{padding:6px 11px;border-radius:6px;border:2px solid #c8a97e;background:#f8f3ec;font-family:Georgia,serif;font-size:.82rem;cursor:pointer;font-weight:600;transition:all .12s;min-width:40px;}
+.sb:hover:not(:disabled){border-color:#7a5c3a;background:#f0e8d8;}
+.sb.s-ok{background:#d4edda;border-color:#28a745;}
+.sb.s-err{background:#f8d7da;border-color:#dc3545;}
+.sb.s-rev{background:#d4edda;border-color:#28a745;}
+.sb:disabled{cursor:default;opacity:.75;}
+.sort-tally{font-size:.78rem;color:#6b5b4e;margin-top:6px;}
+
+/* PRINT */
+@media print{
+  #topbar,#settings-panel,#charmap,.back-link,.choices-grid,.decision-banner,
+  .btn-block,.comp-block,.rq-controls,.rq-answer,.rq-input,.bridge-note,
+  .cc-choose-btn{display:none!important;}
+  body{background:#fff;color:#000;font-size:9pt;}
+  #page{display:none!important;}
+  #print-body{display:block!important;font-family:Arial,sans-serif;font-size:9pt;color:#000;max-width:100%;}
+  .ws-title{font-size:12pt;font-weight:bold;margin-bottom:2pt;}
+  .ws-sub{font-size:8pt;color:#333;margin-bottom:6pt;}
+  .ws-meta{font-size:8pt;color:#555;margin-bottom:10pt;}
+  .ws-prediction{font-size:8.5pt;font-style:italic;border-left:3pt solid #999;padding:4pt 8pt;margin-bottom:10pt;background:#f9f9f9;}
+  .ws-section{margin-bottom:0;page-break-inside:avoid;}
+  .ws-h{font-size:9.5pt;font-weight:bold;margin:8pt 0 4pt;}
+  .ws-para{text-align:justify;font-size:9pt;line-height:1.5;margin-bottom:5pt;}
+  .ws-gloss{font-size:8pt;margin-bottom:6pt;line-height:1.7;}
+  .ws-gloss b{font-weight:bold;}
+  .q-table{width:100%;border-collapse:collapse;margin-bottom:7pt;}
+  .q-table td{border:1px solid #000;padding:4pt 6pt;vertical-align:top;width:50%;height:88pt;font-size:8pt;line-height:1.4;}
+  .feat-sent{font-size:9pt;font-style:italic;margin-top:6pt;margin-bottom:3pt;}
+  .ws-student-table{width:100%;border-collapse:collapse;margin-top:6pt;margin-bottom:2pt;}
+  .ws-student-table td{border:1px solid #000;width:50%;padding:4pt 6pt;vertical-align:top;height:60pt;font-size:8pt;}
+  .ws-stu-label{font-size:7.5pt;font-weight:bold;display:block;margin-bottom:3pt;}
+  .ws-student-content{font-style:italic;font-size:8pt;color:#333;}
+  .ws-neut-box{border:1.5pt solid #000;padding:7pt;margin-bottom:7pt;page-break-inside:avoid;}
+  .ws-neut-box h4{font-size:8.5pt;margin-bottom:3pt;}
+  .ws-neut-table{width:100%;border-collapse:collapse;}
+  .ws-neut-table td{border:1pt solid #000;height:44pt;padding:3pt 4pt;font-size:7.5pt;vertical-align:top;}
+  .ws-vocab-table{width:100%;border-collapse:collapse;margin-bottom:8pt;}
+  .ws-vocab-table td,.ws-vocab-table th{border:1pt solid #000;padding:2pt 5pt;font-size:7.5pt;text-align:left;vertical-align:top;}
+  .ws-vocab-table th{background:#eee;}
+  .ws-vocab-table td.wsv-der{width:120pt;}
+  .ws-produce-box{border:1.5pt solid #000;padding:7pt;margin-top:8pt;page-break-inside:avoid;}
+  .ws-produce-box h4{font-size:8.5pt;margin-bottom:4pt;}
+  .sect-line{border:none;border-bottom:1px solid #000;margin-top:3pt;margin-bottom:16pt;height:16pt;display:block;}
+  .ws-cog-box{border:1pt dashed #000;padding:7pt;margin-top:8pt;}
+  .ws-cog-box h4{font-size:8.5pt;margin-bottom:3pt;}
+  .ws-cog-box p{font-size:8pt;margin-bottom:3pt;line-height:1.4;}
+  .cog-table{width:100%;border-collapse:collapse;margin-top:5pt;}
+  .cog-table td{border:1pt solid #000;padding:4pt 6pt;vertical-align:top;font-size:8pt;line-height:1.45;}
+  .cog-table td.cog-left{width:55%;}
+  .cog-title{font-weight:bold;margin-bottom:3pt;}
+  .cog-gloss{font-size:7pt;margin-top:3pt;line-height:1.4;}
+  .cog-q{margin-bottom:12pt;}
+  .cog-q:last-child{margin-bottom:0;}
+}
+#print-body{display:none;}
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <h1>Iter Grumiōnis · I</h1>
+  <span class="badge" id="mode-badge">Review for Stage 24 — The PPP</span>
+  <div class="spacer"></div>
+  <span id="score-disp"></span>
+  <button class="tb-btn" onclick="toggleSettings()">⚙ Supports</button>
+  <button class="tb-btn" onclick="window.print()">🖨 Print</button>
+</div>
+
+<div id="settings-panel">
+  <div class="sp-row">
+    <label>Declension colours<br>
+      <span class="sp-legend">
+        <span class="leg-swatch leg-r"></span>1st &nbsp;
+        <span class="leg-swatch leg-b"></span>2nd &nbsp;
+        <span class="leg-swatch leg-g"></span>3rd
+      </span>
+    </label>
+    <input type="checkbox" class="toggle" id="tog-review" onchange="applySupports()">
+  </div>
+  <div class="sp-row">
+    <label>Participle highlight<br>
+      <span class="sp-legend" style="color:#c9920a;">■ scrīpta · relicta · parāta</span>
+    </label>
+    <input type="checkbox" class="toggle" id="tog-neut" checked onchange="applySupports()">
+  </div>
+  <div class="sp-row">
+    <label>Character map</label>
+    <input type="checkbox" class="toggle" id="tog-charmap" onchange="applySupports()">
+  </div>
+  <div id="neut-explain">
+    <strong>The PPP:</strong> the 4th principal part (scrībō… <em>scrīptus</em>) used as an
+    ADJECTIVE — "having been written." It rides a noun and copies its ending:
+    <em>epistula scrīpta, epistulam scrīptam, verba scrīpta</em>.
+    Don't confuse it with the perfect VERB (<em>scrīpsit</em> — he wrote).
+  </div>
+</div>
+
+<div id="charmap">
+  <b style="color:#a06b00">Characters:</b>
+  Grumio — the cook, once a boy in Greece &nbsp;|&nbsp; Cerberus — his dog &nbsp;|&nbsp;
+  Nīcander — a Greek wine-merchant &nbsp;|&nbsp; vīcīna — the widow next door &nbsp;|&nbsp;
+  senex — the letter's unseen writer
+</div>
+
+<div id="page"></div>
+
+<script>
+/* HELPERS */
+const n1 = t => `<span class="n1">${t}</span>`;
+const n2 = t => `<span class="n2">${t}</span>`;
+const n3 = t => `<span class="n3">${t}</span>`;
+const nn2= t => `<span class="n2 neut">${t}</span>`;   /* 2nd decl neuter */
+const nn3= t => `<span class="n3 neut">${t}</span>`;   /* 3rd decl neuter */
+const pf = t => `<span class="neut">${t}</span>`;      /* perfect-tense verb */
+const pg = () => document.getElementById('page');
+const $  = id => document.getElementById(id);
+function gl(pairs){ return pairs.map(([k,v])=>`<b>${k}</b> = ${v}`).join(' &nbsp;|&nbsp; '); }
+function gbox(pairs){ return pairs.length ? `<div class="glosses">${gl(pairs)}</div>` : ''; }
+
+/* STATE */
+const S = {
+  path:{p2:null,p3:null,end:null}, predictions:{},
+  summaries:{s1:'',s2:'',s3:'',s4:''}, questions:{s1:'',s2:'',s3:'',s4:''},
+  score:{c:0,t:0}, spotState:{},
+};
+
+function updateScore(){
+  const d=$('score-disp');
+  if(d) d.textContent = S.score.t>0 ? `${S.score.c} / ${S.score.t}` : '';
+}
+function toggleSettings(){ $('settings-panel').classList.toggle('open'); }
+function applySupports(){
+  document.body.classList.toggle('review-on', $('tog-review').checked);
+  document.body.classList.toggle('neut-on', $('tog-neut').checked);
+  $('charmap').style.display = $('tog-charmap').checked ? 'block' : 'none';
+}
+document.addEventListener('click',e=>{
+  const p=$('settings-panel');
+  if(p&&p.classList.contains('open')&&!p.contains(e.target)&&!e.target.closest('.tb-btn'))
+    p.classList.remove('open');
+});
+function mcAnswer(listId, fbId, chosen, correct, okTxt, errTxt){
+  S.score.t++; const ok=(chosen===correct); if(ok) S.score.c++;
+  updateScore();
+  document.querySelectorAll(`#${listId} .mc-btn`).forEach(b=>b.disabled=true);
+  document.querySelectorAll(`#${listId} .mc-btn`)[chosen].classList.add(ok?'c-ok':'c-err');
+  if(!ok) document.querySelectorAll(`#${listId} .mc-btn`)[correct].classList.add('c-ok');
+  const fb=$(fbId); fb.textContent=ok?okTxt:errTxt; fb.className=`fb show ${ok?'ok':'err'}`;
+}
+function revealAnswer(id){
+  $(id).style.display='block';
+  const b=$(`${id}-btn`); if(b){b.textContent='Answer shown';b.disabled=true;}
+}
+function saveSum(key, gateFn){
+  S.summaries[key]=($(`sum-${key}`)||{value:''}).value;
+  const n=S.summaries[key].trim().length, cnt=$(`cnt-${key}`);
+  if(cnt){ cnt.textContent=`${n} / 30 minimum`; cnt.style.color=n>=30?'#1e8449':'#888'; }
+  if(gateFn&&window[gateFn]) window[gateFn]();
+}
+function saveQ(key){ S.questions[key]=($(`q-${key}`)||{value:''}).value; }
+function summaryCol(key, gateFn){
+  const n=(S.summaries[key]||'').trim().length;
+  return `<div class="summary-col"><div class="summary-card">
+    <div class="sum-label">📝 Summa mea <span style="color:#c0392b;">(required)</span></div>
+    <div class="sum-hint">What happened in this section? (Latin or English) — note one <b>PPP</b> you met. <b>30 characters minimum</b> to unlock the next decision.</div>
+    <textarea class="sum-textarea" id="sum-${key}" placeholder="Write your summary…"
+      oninput="saveSum('${key}','${gateFn||''}')">${S.summaries[key]||''}</textarea>
+    <div class="sum-count" id="cnt-${key}">${n} / 30 minimum</div>
+    <div class="sum-label" style="margin-top:12px;">❓ Quaestiōnēs meae</div>
+    <div class="sum-hint">What do you wonder about? What confused you?</div>
+    <textarea class="sum-textarea" id="q-${key}" placeholder="Write your questions…"
+      style="min-height:70px;" oninput="saveQ('${key}')">${S.questions[key]||''}</textarea>
+  </div></div>`;
+}
+function attrStr(s){ return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
+function compBlock(prefix, mc, rev){
+  return `<div class="comp-block">
+    <div class="comp-label">📖 Comprehension</div>
+    <div class="comp-q">
+      <div class="cq-prompt"><b>1.</b> ${mc.prompt}</div>
+      <ul class="mc-list" id="mc-${prefix}">
+        ${mc.opts.map((o,i)=>`<li><button class="mc-btn" onclick="mcAnswer('mc-${prefix}','fb-${prefix}',${i},${mc.correct},
+          '${attrStr(mc.ok)}','${attrStr(mc.err)}')">${o}</button></li>`).join('')}
+      </ul>
+      <div class="fb" id="fb-${prefix}"></div>
+    </div>
+    <div class="comp-q">
+      <div class="rq-prompt"><b>2.</b> ${rev.prompt}</div>
+      <textarea class="rq-input" placeholder="Write your answer first, then check…" rows="2"></textarea>
+      <div class="rq-controls"><button class="rq-btn" id="rev-${prefix}-btn" onclick="revealAnswer('rev-${prefix}')">Show answer</button></div>
+      <div class="rq-answer" id="rev-${prefix}">${rev.answer}</div>
+    </div>
+  </div>`;
+}
+
+/* ═══════════════════════════════════════════
+   VOCABULARY
+   ═══════════════════════════════════════════ */
+const VOCAB = [
+  ['epistula, -ae (f)','letter (epístola)',''],
+  ['Graecia, -ae (f) / Graecus, -a, -um','Greece / Greek (Grecia)',''],
+  ['patria, -ae (f)','homeland (patria)',''],
+  ['vīcus, -ī (m)','village (cf. vecino)',''],
+  ['nāvis, nāvis (f)','ship (nave)',''],
+  ['portus, -ūs (m)','harbor (puerto)',''],
+  ['popīna, -ae (f)','snack bar, cook-shop (cantina)',''],
+  ['sepulcrum, -ī (n)','tomb, grave (sepulcro)',''],
+  ['morbus, -ī (m)','disease, plague (cf. mórbido)',''],
+  ['vīcīna, -ae (f)','neighbor woman (vecina)',''],
+  ['ōlim','once, long ago',''],
+  ['trādō, -ere, trādidī, trāditus','hand over (tradición)','24'],
+  ['āmittō, -ere, āmīsī, āmissus','lose, send away','24'],
+  ['pereō, -īre, periī','die, perish (perecer)','24'],
+  ['incipiō, -ere, incēpī, inceptus','begin (incipiente)','24'],
+  ['prōmittō, -ere, prōmīsī, prōmissus','promise (prometer)','24'],
+  ['reddō, -ere, reddidī, redditus','give back','24'],
+  ['exeō, -īre, exiī, exitus','go out (éxito!)','24'],
+  ['redeō, -īre, rediī, reditus','go back, return','24'],
+  ['abeō, -īre, abiī','go away','24'],
+  ['contineō, -ēre, -uī, contentus','contain (contener)','24'],
+  ['pōnō, -ere, posuī, positus','place, put (poner)','24'],
+  ['scrīptus, -a, -um','written (escrito) — from scrībō','P'],
+  ['relictus, -a, -um','left behind — from relinquō','P'],
+  ['clausus, -a, -um','closed (clausura) — from claudō','P'],
+  ['sepultus, -a, -um','buried (sepultado) — from sepeliō','P'],
+  ['mortuus, -a, -um','dead (muerto)','P'],
+];
+const VB = [
+  ['epistula, -ae','letter',0],['Graecia / Graecus','Greece / Greek',0],
+  ['patria, -ae','homeland',0],['vīcus, -ī','village',0],
+  ['nāvis, nāvem','ship',0],['portus, -ūs','harbor',0],
+  ['popīna, -ae','snack bar',0],['sepulcrum, -ī','tomb (n!)',0],
+  ['morbus, -ī','disease',0],['vīcīna, -ae','neighbor',0],['ōlim','once, long ago',0],
+  ['trādō → trāditus','hand over → handed over',1],
+  ['āmittō → āmissus','lose → lost',1],
+  ['pereō → periit','perish → died',1],
+  ['incipiō → incēpit','begin → began',1],
+  ['prōmittō → prōmissus','promise(d)',1],
+  ['reddō → reddam','give back (future!)',1],
+  ['exeō → exiit','go out → went out',1],
+  ['redeō → redībō','return (I shall!)',1],
+  ['contineō → continet','contains',1],
+  ['pōnō → positus','place(d)',1],
+  ['scrīptus','written',2],['relictus','left behind',2],
+  ['clausus','closed',2],['sepultus','buried',2],['mortuus','dead',2],
+];
+function vocabBar(){
+  return `<div class="vocab-bar">
+    <h4>📌 Episode vocab — Stage 24 preview</h4>
+    ${VB.map(([l,d,n])=>`<div class="vb-row"><span class="vb-lat">${l}</span>${n===1?'<span class="vt-n">24</span>':n===2?'<span class="vt-n">PPP</span>':''}<br><span class="vb-def">${d}</span></div>`).join('')}
+    <div class="vb-note">These words are NOT glossed in the story — find them here.
+    <span class="vt-n" style="vertical-align:baseline;">24</span> = Stage 24 verb families, met early.
+    <span class="vt-n" style="vertical-align:baseline;">PPP</span> = today's new grammar: the 4th principal part as an adjective.</div>
+  </div>`;
+}
+function vocabTable(){
+  return `<table class="vocab-table">
+    <tr><th>Latin word</th><th>Definition</th><th>Derivative</th></tr>
+    ${VOCAB.map(([l,d,n])=>`<tr>
+      <td class="vt-latin">${l}${n==='24'?'<span class="vt-n">St 24</span>':n==='P'?'<span class="vt-n">PPP</span>':''}</td>
+      <td>${d}</td><td class="vt-der">&nbsp;</td></tr>`).join('')}
+  </table>`;
+}
+
+/* ═══════════════════════════════════════════
+   STORY DATA
+   ═══════════════════════════════════════════ */
+
+const S1 = {
+  title:'Pars I — Mercātor Graecus',
+  text:`
+  <p class="latin">
+    in ${n1('popīnā')} ${n3('Grumiōnis')} ${n3('nox')} erat.
+    ${n3('Grumio')} ${n1('cēnam')} ${pf('parātam')} in ${n1('mēnsā')} pōnēbat et verba Graeca cantābat.
+    ${n3('mercātor')} Graecus, ${n3('Nīcander')}, ${nn2('vīnum')} bibēbat.
+    subitō ${n3('mercātor')} surrēxit et clāmāvit:
+    <span class="sp">"linguam Graecam audiō! tū es Graecus!"</span>
+  </p>
+  <p class="latin">
+    ${n3('Grumio')} nihil respondit. tum ${n3('coquus')} dīxit:
+    <span class="sp">"puer in Graeciā eram. sed ea vīta abiit."</span>
+    ${n3('Nīcander')} ${n1('epistulam')} ${pf('scrīptam')} ${n3('Grumiōnī')} trādidit.
+    <span class="sp">"senex in vīcō tuō epistulam scrīpsit.
+    epistula ${pf('scrīpta')} nōmina mortuōrum continet."</span>
+    ${n3('Grumio')} ${n1('epistulam')} spectābat. ${n3('coquus')} verba ${pf('scrīpta')} timēbat.
+  </p>`,
+  glosses:[],
+  feat:'epistula scrīpta nōmina mortuōrum continet.',
+  mc:{prompt:'<em>epistula scrīpta</em> — What does scrīpta tell you, and which word does it describe?',
+    opts:['It describes epistula — "a letter that has been written." The -a ending agrees with epistula (f sg).',
+          'It is the verb of the sentence — "he wrote."',
+          'It describes nōmina — the written names.',
+          'It is an adverb meaning "in writing."'],
+    correct:0,
+    ok:'Optimē! scrīpta is the 4th principal part of scrībō working as an ADJECTIVE: it describes epistula and agrees with it. "He wrote" would be scrīpsit — a different form doing a different job.',
+    err:'Temptā iterum! Compare scrīpsit (senex epistulam scrīpsit — he WROTE) with scrīpta. Which one is glued to a noun?'},
+  rev:{prompt:'Grumio has not spoken of Greece in forty years. Find the Latin where he admits what he once was — and what he says happened to that life.',
+    answer:'<strong>Answer:</strong> <em>puer in Graeciā eram. sed ea vīta abiit.</em> — "I was a boy in Greece. But that life has gone away." (abiit — a Stage 24 compound of eō!)'},
+  rows:[
+    [`1. Who is Nīcander, and what gives Grumio away? Answer with the Latin.`,
+     `3. epistula scrīpta nōmina mortuōrum continet. — Label every word S / G / DO / V, and explain what scrīpta adds to epistula.`],
+    [`2. Complete using Latin from the text:<br>mercātor surrēxit et clāmāvit quod ___________.`,
+     `4. Find TWO perfect-tense verbs (a Stage 8 skill!) in this section and name the doer of each. (Careful: scrīpta is NOT one of them — why not?)`],
+  ],
+  cog:[`Grumio has hidden his Greek past through his whole story — Caecilius's kitchen, Pompeii, Rome. Why might a man like Grumio keep his first life secret for forty years? What finally makes him speak: the letter, the language, or the man? Cite Latin.`,
+       `Rome was full of people taken from somewhere else, like Grumio. What does this scene suggest about how the enslaved and freed carried their homelands with them — and about what a single sentence in an old language can do?`],
+};
+
+/* DECISION 1 — three viable directions (display order shuffles) */
+const DEC1 = [
+  {key:'A', latin:'Grumio epistulam capit et sōlus legit.', sub:'Read it himself, alone, when the popīna is quiet.'},
+  {key:'B', latin:'"lege mihi omnia," Grumio dīcit.', sub:'Ask Nīcander to read it aloud — hear it in a friendly voice.'},
+  {key:'C', latin:'"nōn nunc. cibum parō."', sub:'Not now. Not tonight. There is food to cook.'},
+];
+
+const P2 = {
+  A:{
+    label:'Via I-A — Verba Scrīpta', badge:'Via I-A · He reads alone',
+    text:`
+    <p class="latin">
+      ${n3('nox')} erat. ${n3('Grumio')} sōlus* in ${n1('popīnā')} sedēbat et ${n1('epistulam')} lēgit.
+      verba ${pf('scrīpta')} multa nārrāvērunt:
+      <span class="sp">"morbus magnus ōlim vīcum dēlēvit*. multī periērunt. sepulcra multa fēcimus."</span>
+    </p>
+    <p class="latin">
+      sed ${n1('epistula')} dē familiā ${n3('Grumiōnis')} nihil dīxit:
+      <span class="sp">"familiam tuam nōn videō in nōminibus ${pf('scrīptīs')}. fortasse* in vīcō sunt sepulcra sine nōminibus."</span>
+      ${n3('Grumio')} lacrimāvit. ${n3('Cerberus')} prope dominum sedēbat et dominum spectābat.
+      verba ${pf('scrīpta')} lacrimās movent.
+    </p>`,
+    glosses:[['sōlus*','alone'],['dēlēvit*','destroyed'],['fortasse*','perhaps']],
+    feat:'verba scrīpta lacrimās movent.',
+    mc:{prompt:'<em>verba scrīpta lacrimās movent.</em> — Which word is the subject, and how does scrīpta help you decide?',
+      opts:['verba — a neuter plural with the plural verb movent; scrīpta agrees with verba (-a, neuter plural), so the written words are doing the moving.',
+            'lacrimās — it is the emotional word.',
+            'scrīpta — participles are always subjects.',
+            'Grumio, understood from the story.'],
+      correct:0,
+      ok:'Optimē! movent is plural; verba is the neuter plural subject, and scrīpta wears the same neuter plural -a to describe it. lacrimās (-ās) is the DO.',
+      err:'Temptā iterum! Find the plural verb, then find which noun scrīpta matches in ending.'},
+    rev:{prompt:'What does the letter say destroyed the village, and when? Find the exact Latin.',
+      answer:'<strong>Answer:</strong> <em>morbus magnus ōlim vīcum dēlēvit</em> — a great disease destroyed the village, long ago. And then: <em>multī periērunt</em> (periērunt — Stage 24 pereō, "died").'},
+    rows:[
+      [`1. What happened to the village, in the letter's exact words? Copy the Latin.`,
+       `3. verba scrīpta / nōminibus scrīptīs — the same participle wears two different endings here. Why? What is each one agreeing with?`],
+      [`2. Complete using Latin from the text:<br>Grumio lacrimāvit quod epistula ___________.`,
+       `4. sepulcra multa fēcimus — who is "we," and what did they do? What does the -imus ending tell you?`],
+    ],
+    cog:[`Grumio chooses to read the letter alone, at night. Is grief private or shared in his world — and in yours? What does the empty popīna give him that Nīcander's company could not?`,
+         `The letter answers everything except the one question that matters (fortasse…). Is partial knowledge better or worse than none? Would Grumio have sailed to Greece if the letter had named every grave?`],
+  },
+  B:{
+    label:'Via I-B — Vōx Mercātōris', badge:'Via I-B · Nīcander reads aloud',
+    text:`
+    <p class="latin">
+      ${n3('Nīcander')} ${n1('epistulam')} lēgit. ${n3('mercātor')} verba ${pf('scrīpta')} nārrābat:
+      <span class="sp">"morbus magnus ōlim vīcum dēlēvit*. multī periērunt."</span>
+      <span class="sp">"et familia mea?"</span> ${n3('Grumio')} rogāvit.
+      ${n3('Nīcander')} nihil respondit.
+    </p>
+    <p class="latin">
+      tum ${n3('mercātor')} dīxit: <span class="sp">"epistula dē familiā tuā nihil dīcit.
+      sed audī — senex sepulcra multa fēcit. fortasse* familia tua in sepulcrīs ${pf('factīs')} est.
+      venī cum mē! nāvis mea in portū est."</span>
+      ${n1('epistula')} ${pf('lēcta')} multa nārrāvit — sed nōn omnia.
+    </p>`,
+    glosses:[['dēlēvit*','destroyed'],['fortasse*','perhaps']],
+    feat:'epistula lēcta multa nārrāvit — sed nōn omnia.',
+    mc:{prompt:'<em>epistula lēcta</em> — "the letter, once read…" Which form would instead mean "he READ the letter"?',
+      opts:['epistulam lēgit — the perfect verb; lēcta is the participle describing the letter itself.',
+            'epistula lēcta — the same words mean both.',
+            'epistulam lēctam — just change the endings.',
+            'legit epistula — swap the word order.'],
+      correct:0,
+      ok:'Optimē! lēgit = someone did the reading (perfect verb, Stage 8). lēcta = the letter as a has-been-read thing (participle, agreeing with epistula). One action, two grammatical costumes.',
+      err:'Temptā iterum! Which form appears with a DOER (Nīcander)? Which one just sits on the noun?'},
+    rev:{prompt:'Nīcander does more than read — he makes an offer. Find the Latin of the invitation.',
+      answer:'<strong>Answer:</strong> <em>venī cum mē! nāvis mea in portū est.</em> — "Come with me! My ship is in the harbor." The messenger becomes the way home.'},
+    rows:[
+      [`1. What question does Grumio interrupt with, and what answer does he get at first? Answer with the Latin.`,
+       `3. in sepulcrīs factīs — which noun does factīs describe, and how do the endings prove it?`],
+      [`2. Complete using Latin from the text:<br>fortasse familia tua ___________.`,
+       `4. epistula lēcta multa nārrāvit — sed nōn omnia. Explain the difference between lēcta and nārrāvit: which is a verb, which is a participle, and how do you know?`],
+    ],
+    cog:[`Grumio hears the worst news of his life in another man's voice. Is that easier or harder than reading it alone? What does Nīcander do — and NOT do — that makes him a good messenger?`,
+         `"multa — sed nōn omnia." The letter tells much but not everything. Why does Nīcander turn that gap into an invitation rather than a comfort? What kind of friend does that make him?`],
+  },
+  C:{
+    label:'Via I-C — Epistula Relicta', badge:'Via I-C · The letter waits',
+    text:`
+    <p class="latin">
+      ${n3('Grumio')} ${n1('epistulam')} nōn cēpit. ${n3('coquus')} cibum parābat et parābat.
+      sed ${n3('coquus')} ${n1('epistulam')} ${pf('relictam')} semper spectābat.
+      ${n3('Cerberus')} quoque ${n1('epistulam')} spectābat.
+      ${n3('canis')} prope ${n1('mēnsam')} sedēbat et nōn dormiēbat.
+    </p>
+    <p class="latin">
+      ${n3('nox')} erat. ${n3('Grumio')} dormīre nōn poterat. tum ${n3('coquus')} surrēxit.
+      <span class="sp">"bene,"</span> dīxit. <span class="sp">"legō."</span>
+      ${n3('Grumio')} ${n1('epistulam')} ${pf('relictam')} cēpit et lēgit:
+      <span class="sp">"morbus magnus ōlim vīcum dēlēvit*. multī periērunt."</span>
+      dē familiā ${n1('epistula')} nihil dīxit.
+      ${n3('Grumio')} ad ${n3('Cerberum')} dīxit: <span class="sp">"canis — ad Graeciam ībimus."</span>
+    </p>`,
+    glosses:[['dēlēvit*','destroyed']],
+    feat:'Grumio epistulam relictam cēpit.',
+    mc:{prompt:'<em>Grumio epistulam relictam cēpit.</em> — Why relictam and not relicta?',
+      opts:['Because it agrees with epistulam, the DO — the participle copies its noun’s ending, number, and job in the sentence.',
+            'Because Grumio is masculine.',
+            'Because cēpit is perfect tense.',
+            'The two forms are interchangeable.'],
+      correct:0,
+      ok:'Optimē! epistulam is the DO (-am), so its participle wears the matching -am: the left-behind letter, taken at last. A PPP goes wherever its noun goes.',
+      err:'Temptā iterum! What job is epistulam doing (check the -am)? The participle must dress to match.'},
+    rev:{prompt:'What finally breaks Grumio’s resistance? Find the three-word Latin sentence.',
+      answer:'<strong>Answer:</strong> <em>Grumio dormīre nōn poterat.</em> — he could not sleep. Some letters read themselves in the dark.'},
+    rows:[
+      [`1. Two creatures keep watch over the unread letter. Who, and what does each do? Answer with the Latin.`,
+       `3. epistulam relictam — the participle appears twice in this section with the same ending. What is it agreeing with, and why -am both times?`],
+      [`2. Complete using Latin from the text:<br>Grumio surrēxit quod ___________.`,
+       `4. ad Graeciam ībimus — parse ībimus: what tense, what person, and which Stage 24 verb family does it come from?`],
+    ],
+    cog:[`Grumio postpones the letter and cooks instead. Is that avoidance, or a way of staying standing? When is putting hard news off wise — and when does it cost you? Use the sleepless night as evidence.`,
+         `Cerberus keeps vigil beside the letter all evening. Throughout these stories the dog seems to know things before the humans say them. What do animals "know" in Grumio’s world — and what does his presence do for Grumio here?`],
+  },
+};
+
+/* DECISION 2 — three viable directions (display order shuffles) */
+const DEC2 = [
+  {key:'A', latin:'Grumio popīnam vīcīnae trādit.', sub:'Entrust it to the widow next door — it stays alive while he is gone.'},
+  {key:'B', latin:'Grumio popīnam claudit.', sub:'Shutter it. Some things should sleep until he returns.'},
+  {key:'C', latin:'Grumio popīnam Nīcandrō vēndit.', sub:'Sell it to Nīcander — a clean break and a full purse.'},
+];
+
+const P3 = {
+  A:{
+    label:'Via II-A — Vīcīna', badge:'Via II-A · Entrusted next door',
+    text:`
+    <p class="latin">
+      ${n1('vīcīna')} erat fēmina bona. <span class="sp">"tū ōlim cēnam mihi parāvistī,"</span>
+      ${n1('fēmina')} dīxit, <span class="sp">"ubi marītus* meus periit. nōn ea verba, sed eum cibum
+      memoriā teneō."</span>
+    </p>
+    <p class="latin">
+      ${n3('Grumio')} ${n1('vīcīnae')} omnia trādidit.
+      ${n1('vīcīna')} prōmīsit: <span class="sp">"popīnam ${pf('trāditam')} bene servābō. redī ad nōs!"</span>
+      ${n1('fēmina')} lacrimāvit et rīsit. ${n1('vīcīna')} ${n1('popīnam')} ${pf('trāditam')} servābit.
+    </p>`,
+    glosses:[['marītus*','husband']],
+    feat:'vīcīna popīnam trāditam servābit.',
+    mc:{prompt:'<em>popīnam trāditam servābō</em> — What does trāditam describe, and what tense is servābō?',
+      opts:['trāditam describes popīnam (both -am, DO); servābō is future — "I shall keep the handed-over popīna safe."',
+            'trāditam describes vīcīnam; servābō is perfect.',
+            'trāditam is the main verb; servābō describes it.',
+            'Both words describe Grumio.'],
+      correct:0,
+      ok:'Optimē! The participle rides its noun (popīnam trāditam), and the -bō ending is the Stage 11 future: her promise reaches forward. trādō → trāditus is a Stage 24 family.',
+      err:'Temptā iterum! Match trāditam’s -am to a noun; then check servābō’s -bō against your future-tense chart.'},
+    rev:{prompt:'Why does the widow agree so readily? Find her memory — the Latin she offers as her reason.',
+      answer:'<strong>Answer:</strong> <em>tū ōlim cēnam mihi parāvistī, ubi marītus meus periit</em> — "you once made me dinner, when my husband died." A cook’s kindness, repaid years later.'},
+    rows:[
+      [`1. What did Grumio once do for the vīcīna, and when? Answer with the Latin.`,
+       `3. popīnam trāditam — label both words (job in sentence) and explain why their endings match.`],
+      [`2. Complete using Latin from the text:<br>vīcīna prōmīsit: "___________."`,
+       `4. parāvistī and periit are both perfect. Give the doer and the meaning of each — and find the Stage 24 verb among them.`],
+    ],
+    cog:[`Grumio hands his whole new life to a neighbor on the strength of one remembered dinner. What does this scene say about how community worked in a Roman street — favors, memory, trust? Would this exchange work today?`,
+         `"redī ad nōs" — return to US. Who is "us"? Without anyone saying so, what has Rome quietly become for Grumio — and does he know it yet?`],
+  },
+  B:{
+    label:'Via II-B — Popīna Clausa', badge:'Via II-B · Shuttered and sleeping',
+    text:`
+    <p class="latin">
+      ${n3('Grumio')} cibum omnem vīcīnīs dedit. tum ${n3('coquus')} ${n1('popīnam')} clausit.
+      ${n3('Grumio')} ${n1('popīnam')} ${pf('clausam')} spectābat et spectābat.
+      in ${n1('popīnā')} ${pf('clausā')} erant decem annī vītae novae.
+    </p>
+    <p class="latin">
+      ${n3('Cerberus')} ${n1('popīnam')} ${pf('clausam')} nōn amāvit. ${n3('canis')} ululāvit*.
+      <span class="sp">"bene est, canis,"</span> ${n3('Grumio')} dīxit. <span class="sp">"nōn valē dīcimus. redībimus."</span>
+    </p>`,
+    glosses:[['ululāvit*','howled']],
+    feat:'Grumio popīnam clausam spectābat et spectābat.',
+    mc:{prompt:'This section shows the SAME participle in two costumes: <em>popīnam clausam</em> and <em>in popīnā clausā</em>. Why do the endings differ?',
+      opts:['The participle copies its noun each time: -am when popīnam is the DO, -ā when popīnā follows in (a PP). Same word, same meaning — different job.',
+            'clausam is feminine but clausā is neuter.',
+            'One is a verb and one is an adjective.',
+            'The writer made an agreement error.'],
+      correct:0,
+      ok:'Optimē! A PPP is an adjective: it dresses to match its noun’s job. popīnam clausam (DO) but in popīnā clausā (PP). Watching the endings shift IS the skill.',
+      err:'Temptā iterum! Find each clausa- form’s noun and check what job that noun is doing.'},
+    rev:{prompt:'Grumio makes the dog a promise. Find it — one word of comfort, one Stage 24 verb in the future.',
+      answer:'<strong>Answer:</strong> <em>redībimus</em> — "we shall return" (redeō, a Stage 24 compound of eō, in the Stage 11 future). And before it: nōn valē dīcimus — this is not goodbye.'},
+    rows:[
+      [`1. What does Grumio do with the food before closing? Answer with the Latin.`,
+       `3. Find all THREE clausa- forms in this section. For each, name the noun it describes and that noun's job.`],
+      [`2. Complete using Latin from the text:<br>Cerberus ululāvit quod ___________.`,
+       `4. in popīnā clausā erant decem annī vītae novae — what does this sentence literally say, and what does it really mean?`],
+    ],
+    cog:[`Grumio gives the food away, closes the door, and then stands looking — spectābat et spectābat. Why is leaving a place harder than leaving a person can be? What is he actually looking at?`,
+         `"nōn valē dīcimus. redībimus." Is closing the popīna an act of doubt (maybe he won’t come back) or of faith (it will be here when he does)? Which choice — entrusting, closing, selling — would YOU have made, and why?`],
+  },
+  C:{
+    label:'Via II-C — Pecūnia Nīcandrī', badge:'Via II-C · Sold — with a promise',
+    text:`
+    <p class="latin">
+      ${n3('Nīcander')} pecūniam magnam dedit et ${n1('popīnam')} ēmit.
+      sed ${n3('mercātor')} rīsit et dīxit:
+      <span class="sp">"audī cōnsilium meum. post iter, popīnam tibi reddam. prōmittō."</span>
+      ${n3('Grumio')} nihil dīxit. tum ${n3('coquus')} rīsit.
+      <span class="sp">"tū es bonus amīcus, Nīcander."</span>
+    </p>
+    <p class="latin">
+      māne* ${n3('Nīcander')} pecūniam ${pf('prōmissam')} dedit.
+      ${n3('Grumio')} pecūniam ${pf('datam')} cēpit et in ${n1('nāvem')} portāvit.
+      ${n1('popīna')} ${pf('vēndita')} post eōs manēbat* — sed nōn valē, dīxērunt. nōn valē.
+    </p>`,
+    glosses:[['māne*','early in the morning'],['manēbat*','remained, stayed behind']],
+    feat:'Nīcander pecūniam prōmissam dedit.',
+    mc:{prompt:'<em>pecūniam prōmissam dedit</em> — Which Stage 24 verb family does prōmissam come from, and what does it describe?',
+      opts:['prōmittō (→ prōmissus) — it describes pecūniam: he gave the money he had promised.',
+            'mittō — it describes Nīcander: a sent merchant.',
+            'pōnō — it describes dedit.',
+            'petō — it means "sought money."'],
+      correct:0,
+      ok:'Optimē! prōmittō, prōmittere, prōmīsī, prōmissus — the 4th form IS the participle: the promised money. Your Stage 24 chart is a PPP dictionary.',
+      err:'Temptā iterum! Check your Stage 24 mittō family: which compound means "promise," and what is its 4th form?'},
+    rev:{prompt:'Nīcander’s sale comes with a secret kindness. Find the two-sentence promise.',
+      answer:'<strong>Answer:</strong> <em>post iter, popīnam tibi reddam. prōmittō.</em> — "after the journey, I shall give the popīna back to you. I promise." (reddō and prōmittō — both Stage 24.)'},
+    rows:[
+      [`1. What does Nīcander buy, and what does he immediately promise? Answer with the Latin.`,
+       `3. This section holds THREE participles: prōmissam, datam, vēndita. Name each one's noun and explain each ending.`],
+      [`2. Complete using Latin from the text:<br>Grumio rīsit et dīxit: "___________."`,
+       `4. reddam and prōmittō — one is future, one is present. Which is which, and how do you know?`],
+    ],
+    cog:[`Nīcander buys the popīna and promises to sell it back. Is this kindness dressed as business, business dressed as kindness, or something Romans would not have separated? What would Caecilius the banker say about this deal?`,
+         `Grumio takes the money — but the story says "nōn valē, dīxērunt." If the sale can be undone, what did Grumio actually sell? What does he keep that no purse can hold?`],
+  },
+};
+
+/* DECISION 3 — endings (display order shuffles) */
+const DEC3 = [
+  {key:'A', latin:'Grumio cēnam magnam amīcīs parat.', sub:'One last feast — send the old life off with food.'},
+  {key:'B', latin:'Grumio cum cane per viās Rōmae ambulat.', sub:'A quiet night walk through the sleeping city.'},
+  {key:'C', latin:'Grumio epistulam iterum legit — et respondet.', sub:'Read the letter once more, and write an answer to carry.'},
+];
+
+const ENDINGS = {
+  A:{
+    label:'Exitus I — Cēna Magna',
+    text:`
+    <p class="latin">
+      ${n3('Grumio')} ${n1('cēnam')} magnam parāvit. amīcī vēnērunt: ${n1('vīcīna')}, ${n3('Nīcander')},
+      omnēs vīcīnī. ${n1('cēna')} ${pf('parāta')} omnēs dēlectāvit.
+      omnēs rīsērunt; multī quoque lacrimāvērunt.
+    </p>
+    <p class="latin">
+      <span class="sp">"ad patriam!"</span> omnēs clāmāvērunt. ${n3('Cerberus')} ossa* multa cēpit.
+      ${n3('Grumio')} ad amīcōs dīxit: <span class="sp">"vōs estis familia mea nova.
+      sed familiam meam prīmam petō*. redībō."</span>
+    </p>
+    <p class="latin">
+      māne* ${n3('Grumio')} et ${n3('Cerberus')} ${n1('nāvem')} ${pf('parātam')} intrāvērunt.
+      sōl surrēxit. ${n1('nāvis')} ē portū exiit. iter incēpit!
+    </p>`,
+    glosses:[['ossa*','bones'],['petō*','I seek, I go looking for'],['māne*','early in the morning']],
+    feat:'cēna parāta omnēs dēlectāvit.',
+    mc:{prompt:'<em>cēna parāta omnēs dēlectāvit.</em> — This sentence holds a participle AND a perfect verb. Which is which?',
+      opts:['parāta is the participle (describing cēna, the subject); dēlectāvit is the perfect verb (the dinner delighted everyone).',
+            'dēlectāvit is the participle; parāta is the verb.',
+            'Both are participles.',
+            'Both are perfect verbs.'],
+      correct:0,
+      ok:'Optimē! parāta sits on its noun (cēna parāta — the prepared dinner); dēlectāvit DOES something (-vit, Stage 8 perfect). Telling these apart is this episode’s whole skill.',
+      err:'Temptā iterum! Which word is glued to a noun with a matching ending, and which word carries the -vit of a done action?'},
+    rev:{prompt:'The final lines fire off two Stage 24 verbs. Find them and give their meanings.',
+      answer:'<strong>Answer:</strong> <em>exiit</em> — went out (exeō) — and <em>incēpit</em> — began (incipiō). The ship went out; the journey began.'},
+    rows:[
+      [`1. Who comes to the feast? List the guests in Latin.`,
+       `3. cēna parāta / nāvem parātam — the same participle, two endings. Explain both agreements.`],
+      [`2. Complete using Latin from the text:<br>Grumio ad amīcōs dīxit: "vōs estis ___________."`,
+       `4. familiam meam prīmam petō. redībō. — What is Grumio saying about his two families? Parse redībō (tense, person, verb family).`],
+    ],
+    cog:[`Grumio says goodbye the only way he knows — by feeding people. Trace this back through everything you have read of him, all the way to Caecilius’s kitchen. Is cooking his trade, his language, or his love? Cite Latin from anywhere in his story.`,
+         `"vōs estis familia mea nova. sed familiam meam prīmam petō." Can both sentences be fully true at once? What does the feast let Grumio say that the letter could not?`],
+  },
+  B:{
+    label:'Exitus II — Nox in Viīs',
+    text:`
+    <p class="latin">
+      ${n3('nox')} erat. ${n3('Grumio')} et ${n3('Cerberus')} per viās Rōmae ambulābant.
+      templa ${pf('clausa')} in viīs stābant. ${n1('lūna')}* urbem spectābat.
+      ${n3('Grumio')} Rōmam spectābat et spectābat.
+      <span class="sp">"urbs mea nova es,"</span> ${n3('coquus')} dīxit. <span class="sp">"redībō."</span>
+      ${n3('Grumio')} urbī prōmīsit.
+    </p>
+    <p class="latin">
+      māne* ${n3('Grumio')} verba ${pf('scrīpta')} ${n1('vīcīnae')} dedit:
+      <span class="sp">"valē — redībō."</span>
+      tum ${n3('Grumio')} et ${n3('Cerberus')} ${n1('nāvem')} ${pf('parātam')} intrāvērunt.
+      sōl surrēxit. ${n1('nāvis')} ē portū exiit. iter incēpit!
+    </p>`,
+    glosses:[['lūna*','the moon'],['māne*','early in the morning']],
+    feat:'Grumio verba scrīpta vīcīnae dedit.',
+    mc:{prompt:'<em>Grumio verba scrīpta vīcīnae dedit.</em> — Label the sentence: what are verba scrīpta and vīcīnae doing?',
+      opts:['verba scrīpta is the DO (neuter plural, participle agreeing); vīcīnae is the dative — he gave the written words TO the neighbor.',
+            'verba scrīpta is the subject; vīcīnae is the DO.',
+            'vīcīnae is a genitive — the neighbor’s words.',
+            'scrīpta is the main verb.'],
+      correct:0,
+      ok:'Optimē! dedit takes a DO (verba scrīpta — the written words) and a dative receiver (vīcīnae, Stage 9!). The participle rides the neuter plural noun with its matching -a.',
+      err:'Temptā iterum! Who gives, what is given, who receives? Then check which noun scrīpta matches.'},
+    rev:{prompt:'Grumio makes a promise to something that cannot answer. Find the Latin — and its receiver.',
+      answer:'<strong>Answer:</strong> <em>"urbs mea nova es… redībō." Grumio urbī prōmīsit.</em> — he promised THE CITY (urbī, dative) that he would return. Rome has become someone you can make promises to.'},
+    rows:[
+      [`1. What do Grumio and Cerberus see on their night walk? Answer with the Latin.`,
+       `3. templa clausa in viīs stābant — label every word, and explain the agreement of clausa.`],
+      [`2. Complete using Latin from the text:<br>Grumio urbī ___________.`,
+       `4. The farewell note is two words: valē — redībō. Parse both. Why might Grumio choose the shortest possible goodbye?`],
+    ],
+    cog:[`Grumio spends his last night not with people but with the city itself — closed temples, moonlight, streets. What kind of goodbye is this? What does walking a place do that words cannot?`,
+         `He leaves the vīcīna two written words. After an episode that began with a letter full of the dead, what has Grumio learned about what written words can carry — and what they cannot?`],
+  },
+  C:{
+    label:'Exitus III — Verba ad Mortuōs',
+    text:`
+    <p class="latin">
+      ${n3('Grumio')} ${n1('epistulam')} iterum lēgit. tum ${n3('coquus')} quoque epistulam scrīpsit.
+      verba ad familiam ${pf('mortuam')} scrīpsit:
+      <span class="sp">"māter — pater — veniō ad vōs. nōmina vestra* memoriā teneō.
+      cibum vōbīs parābō, ut ōlim* vōs mihi parāvistis."</span>
+    </p>
+    <p class="latin">
+      ${n3('Grumio')} ${n1('epistulam')} ${pf('scrīptam')} cēpit et servāvit.
+      <span class="sp">"prope sepulcra legam,"</span> dīxit.
+      māne* ${n3('Grumio')} et ${n3('Cerberus')} ${n1('nāvem')} ${pf('parātam')} intrāvērunt —
+      ${n3('coquus')} epistulam ${pf('scrīptam')} ad Graeciam portāvit.
+      sōl surrēxit. ${n1('nāvis')} ē portū exiit. iter incēpit!
+    </p>`,
+    glosses:[['vestra*','your (plural)'],['ut ōlim*','as once, long ago'],['māne*','early in the morning']],
+    feat:'Grumio epistulam scrīptam ad Graeciam portāvit.',
+    mc:{prompt:'This ending holds both <em>scrīpsit</em> and <em>scrīptam</em>. Which is which — and how can you always tell?',
+      opts:['scrīpsit is the perfect verb (Grumio DID the writing); scrīptam is the participle riding epistulam (the written letter). The verb has a doer; the participle has a noun.',
+            'They are the same form in different positions.',
+            'scrīptam is the verb because it is longer.',
+            'scrīpsit describes the letter; scrīptam is what Grumio did.'],
+      correct:0,
+      ok:'Optimē! That is the whole episode in one sentence pair: scrīpsit (he wrote — perfect, Stage 8) versus epistulam scrīptam (the written letter — PPP, agreeing in -am). Doer-form versus done-to-form.',
+      err:'Temptā iterum! Find the subject of scrīpsit. Then find the noun whose ending scrīptam copies.'},
+    rev:{prompt:'What does Grumio promise the dead — in the language he knows best?',
+      answer:'<strong>Answer:</strong> <em>cibum vōbīs parābō, ut ōlim vōs mihi parāvistis</em> — "I shall make food for you, as once you made it for me." The cook’s promise: a meal, returned across forty years.'},
+    rows:[
+      [`1. To whom does Grumio write, and what does he say he will do? Answer with the Latin.`,
+       `3. epistulam scrīptam appears twice in the final lines. What is the participle agreeing with each time, and what job is that noun doing?`],
+      [`2. Complete using Latin from the text:<br>"prope sepulcra ___________," dīxit.`,
+       `4. parābō and parāvistis — same verb, two tenses, two doers. Parse both and explain what the pairing means in the letter.`],
+    ],
+    cog:[`Romans wrote to their dead — tomb inscriptions speak to passersby, and offerings were brought to graves at the Parentālia. What can WRITING to the dead do that speaking or remembering cannot? Why does Grumio plan to read it aloud there anyway?`,
+         `"veniō ad vōs" — present tense, to people forty years gone. Is this journey for them, or for him? Can it be for them at all — and does that matter? Use his promise (cibum vōbīs parābō) in your answer.`],
+  },
+};
+
+/* ═══════════════════════════════════════════
+   RENDER — HOME & INTRO
+   ═══════════════════════════════════════════ */
+
+function renderHome(){
+  pg().innerHTML=`
+  <div class="home-header"><h2>Iter Grumiōnis</h2>
+    <p>Episode I — Epistula Scrīpta · a review adventure for Stage 24</p></div>
+  <div class="home-grid">
+    <div class="home-card">
+      <div class="hc-icon">📜</div>
+      <h3>Read the Adventure</h3>
+      <div class="hc-latin">Fābula tua — your story, your choices</div>
+      <p>A Greek merchant walks into the popīna and hears something in Grumio's song
+      that no one in Rome has ever heard. He carries a letter from a village forty years
+      away — and the letter carries names. Three decisions are yours.</p>
+      <button class="hc-btn" onclick="renderVocabIntro()">Begin →</button>
+    </div>
+    <div class="home-card">
+      <div class="hc-icon">🎯</div>
+      <h3>Practice: The PPP</h3>
+      <div class="hc-latin">Participia Exercē</div>
+      <p>Three quick drills: spot the participle, PPP or perfect verb, and which noun
+      does it describe. Use before or after the story.</p>
+      <button class="hc-btn" onclick="renderPractice(0)">Start practicing →</button>
+    </div>
+  </div>
+  <div class="bridge-note"><b>Review for Stage 24:</b> this episode teaches ONE new thing — the
+  <b>PPP</b> (perfect passive participle, the 4th principal part used as an adjective).
+  Everything else is Stage 1–12 grammar plus <b>Stage 24 verb families</b> (trādō, pereō,
+  incipiō…) — your next stage's words, met early.
+  27 different routes lead through the story — every choice is a real choice.</div>`;
+}
+
+function renderVocabIntro(){
+  pg().innerHTML=`
+  <span class="back-link" onclick="renderHome()">← Home</span>
+  <div class="full-card">
+    <div class="scene-label">Antequam legis — Before you read</div>
+    <p style="font-size:.9rem;margin-bottom:8px;line-height:1.6;">New words for this episode.
+    Words tagged <span class="vt-n" style="vertical-align:baseline;">St 24</span> come straight from the Stage 24
+    verb families — you are meeting your next stage's words early. Words tagged
+    <span class="vt-n" style="vertical-align:baseline;">PPP</span> ARE today's new grammar: fourth principal parts
+    wearing adjective endings. Fill in a derivative for each as you find them.</p>
+    ${vocabTable()}
+    <button class="btn-primary show" onclick="renderNeutIntro(0)">Next — What is a PPP? ▶</button>
+    <button class="btn-secondary" onclick="renderS1()">Skip ahead — straight to the story ▶</button>
+  </div>`;
+}
+
+function renderNeutIntro(step){
+  const screens=[
+    `<div class="intro-card">
+      <h2>🟪 One new thing: the PPP</h2>
+      <p>Every verb in your Stage 24 chart has FOUR forms:
+      <em>trādō, trādere, trādidī, <b>trāditus</b></em>. You already use the third form
+      (trādidit — he handed over, the Stage 8 perfect). Today you unlock the fourth.</p>
+      <p><b>The 4th principal part is the PPP</b> — the <em>perfect passive participle</em>.
+      It means "having been X-ed," and it works as an <b>adjective</b> describing a noun:</p>
+      <p><em>epistula <b>scrīpta</b></em> — a letter (that has been) written<br>
+      <em>cēna <b>parāta</b></em> — a prepared dinner &nbsp;·&nbsp;
+      <em>popīna <b>clausa</b></em> — a closed-up shop</p>
+      <p>The noun did not DO anything — something was done TO it. That is the "passive" part.</p>
+    </div>
+    <button class="btn-primary show" onclick="renderNeutIntro(1)">Next — It agrees! ▶</button>`,
+
+    `<div class="intro-card">
+      <h2>🟪 It agrees like an adjective — and it is NOT the verb</h2>
+      <p>A PPP copies its noun's gender, number, and job — exactly like magnus/magna/magnum:</p>
+      <div class="ex-sent"><em>cibus <span class="neut">parātus</span> · cēna <span class="neut">parāta</span> · vīnum <span class="neut">parātum</span></em>
+        <span class="eng">plural: cibī parātī · cēnae parātae · verba parāta — and it follows its noun's case: epistulam scrīptam (DO), in popīnā clausā (PP)</span></div>
+      <p><b>The trap:</b> don't mistake the PPP for the perfect verb!</p>
+      <div class="ex-sent"><em>senex epistulam <b>scrīpsit</b></em> — the old man WROTE the letter (verb: someone did it)
+        <span class="eng"><em>epistula <span class="neut">scrīpta</span></em> — the WRITTEN letter (participle: describes the thing it was done to)</span></div>
+      <p>Your Stage 24 chart is a PPP dictionary: captus, missus, factus, datus, dictus, positus, āctus, trāditus…</p>
+    </div>
+    <button class="btn-primary show" onclick="renderNeutIntro(2)">Next — Quick check ▶</button>`,
+
+    `<div class="intro-card">
+      <h2>🟪 Quick check (optional warm-up)</h2>
+      <p style="margin-bottom:12px">In <em>"Grumio epistulam scrīptam lēgit"</em> — which word is the PPP?</p>
+      <ul class="mc-list" id="ni-opts">
+        ${['scrīptam','lēgit','epistulam','Grumio'].map((w,i)=>`
+        <li><button class="mc-btn" onclick="neutCheck(${i})"><em>${w}</em></button></li>`).join('')}
+      </ul>
+      <div class="fb" id="ni-fb"></div>
+      <button class="btn-primary show" onclick="renderS1()">Begin the story ▶</button>
+    </div>`,
+  ];
+  pg().innerHTML=`<span class="back-link" onclick="renderVocabIntro()">← Vocabulary</span>${screens[step]}`;
+}
+function neutCheck(i){
+  const done=document.querySelector('#ni-opts .mc-btn:disabled'); if(done) return;
+  S.score.t++; const ok=(i===0); if(ok) S.score.c++; updateScore();
+  document.querySelectorAll('#ni-opts .mc-btn').forEach(b=>b.disabled=true);
+  document.querySelectorAll('#ni-opts .mc-btn')[i].classList.add(ok?'c-ok':'c-err');
+  if(!ok) document.querySelectorAll('#ni-opts .mc-btn')[0].classList.add('c-ok');
+  $('ni-fb').textContent = ok
+    ? 'Optimē! scrīptam is the PPP — it rides epistulam with a matching -am: Grumio read the WRITTEN letter. lēgit is the perfect VERB (he read); the participle just describes.'
+    : 'Temptā iterum! lēgit is what Grumio DID (perfect verb). Which word is glued to epistulam, copying its -am ending?';
+  $('ni-fb').className=`fb show ${ok?'ok':'err'}`;
+}
+
+/* ═══════════════════════════════════════════
+   RENDER — STORY
+   ═══════════════════════════════════════════ */
+
+function decisionGrid(decId, cards, handler, sumKey){
+  const order=[...cards];
+  for(let i=order.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [order[i],order[j]]=[order[j],order[i]]; }
+  return `<div class="choices-grid" id="${decId}">
+    ${order.map((c,i)=>`<div class="choice-card">
+      <div class="cc-via">Via ${['I','II','III'][i]}</div>
+      <div class="cc-latin">${c.latin}<span class="cc-sub">${c.sub}</span></div>
+      <div class="cc-predict-lbl">Prediction (required) — what happens on this path?</div>
+      <textarea class="cc-predict-input" id="pred-${decId}-${c.key}" placeholder="Predict (30+ characters), then choose…"
+        oninput="gateDec('${decId}','${sumKey}')"></textarea>
+      <div class="cc-count" id="pcnt-${decId}-${c.key}">0 / 30 minimum</div>
+      <button class="cc-gate-btn" id="choose-${decId}-${c.key}" onclick="tryChoose('${handler}','${decId}','${c.key}')">Choose this path →</button>
+    </div>`).join('')}
+  </div>`;
+}
+function gateDec(decId, sumKey){
+  const sumOk=(($(`sum-${sumKey}`)||{value:''}).value.trim().length)>=30;
+  document.querySelectorAll(`#${decId} .cc-predict-input`).forEach(p=>{
+    const key=p.id.split('-').pop();
+    const n=p.value.trim().length;
+    const cnt=$(`pcnt-${decId}-${key}`);
+    if(cnt){ cnt.textContent=`${n} / 30 minimum`; cnt.style.color=n>=30?'#1e8449':'#888'; }
+    const b=$(`choose-${decId}-${key}`);
+    if(b) b.classList.toggle('ready', sumOk && n>=30);
+  });
+}
+function tryChoose(handler, decId, key){
+  const b=$(`choose-${decId}-${key}`);
+  if(!b||!b.classList.contains('ready')) return;
+  window[handler](key);
+}
+function grabPred(decId,key){
+  const p=$(`pred-${decId}-${key}`);
+  if(p&&p.value.trim()) S.predictions[decId]=p.value.trim();
+}
+
+function renderS1(){
+  pg().innerHTML=`
+  <span class="back-link" onclick="renderVocabIntro()">← Vocabulary</span>
+  <div class="story-layout">
+    <div class="vocab-bar-col">${vocabBar()}</div>
+    <div class="story-col">
+      <div class="scene-label">📖 ${S1.title}</div>
+      ${S1.text}
+      ${gbox(S1.glosses)}
+      <div class="feat-box"><div class="fb-lbl">Sentence under the microscope</div>
+        <div class="fb-latin">${S1.feat}</div></div>
+      ${compBlock('s1', S1.mc, S1.rev)}
+    </div>
+    ${summaryCol('s1','gateD1')}
+  </div>
+  <div class="decision-banner">
+    <h3>⚖️ Dēcīsiō I — Epistula in mēnsā est</h3>
+    <p>The letter is on the table. Forty years wait inside it. Every path is a real path —
+    your choice steers the story. Read each Latin option carefully: it tells you exactly what Grumio will do.</p>
+  </div>
+  ${decisionGrid('d1', DEC1, 'goP2', 's1')}`;
+  window.gateD1=()=>gateDec('d1','s1');
+  window.scrollTo(0,0);
+}
+function goP2(key){ grabPred('d1',key); S.path.p2=key; renderP2(); }
+
+function renderP2(){
+  const d=P2[S.path.p2];
+  pg().innerHTML=`
+  <span class="back-link" onclick="renderS1()">← Pars I</span>
+  <div class="path-badge">${d.badge}</div>
+  ${S.predictions.d1?`<div class="prediction-echo"><strong>Your prediction:</strong> ${S.predictions.d1}</div>`:''}
+  <div class="story-layout">
+    <div class="vocab-bar-col">${vocabBar()}</div>
+    <div class="story-col">
+      <div class="scene-label">📖 Pars II — ${d.label.split('— ')[1]}</div>
+      ${d.text}
+      ${gbox(d.glosses)}
+      <div class="feat-box"><div class="fb-lbl">Sentence under the microscope</div>
+        <div class="fb-latin">${d.feat}</div></div>
+      ${compBlock('s2', d.mc, d.rev)}
+    </div>
+    ${summaryCol('s2','gateD2')}
+  </div>
+  <div class="converge-note">However it was read, the letter says the same: the village struck long ago, many dead — and of Grumio’s family, nothing. Only Greece can answer.</div>
+  <div class="decision-banner">
+    <h3>⚖️ Dēcīsiō II — Quid dē popīnā?</h3>
+    <p>Grumio is going to Greece. But a life has grown here — a shop, a street, a dog's favorite corner.
+    What becomes of the popīna while he is gone? Every path is a real path.</p>
+  </div>
+  ${decisionGrid('d2', DEC2, 'goP3', 's2')}`;
+  window.gateD2=()=>gateDec('d2','s2');
+  window.scrollTo(0,0);
+}
+function goP3(key){ grabPred('d2',key); S.path.p3=key; renderP3(); }
+
+function renderP3(){
+  const d=P3[S.path.p3];
+  pg().innerHTML=`
+  <span class="back-link" onclick="renderP2()">← Pars II</span>
+  <div class="path-badge">${d.badge}</div>
+  ${S.predictions.d2?`<div class="prediction-echo"><strong>Your prediction:</strong> ${S.predictions.d2}</div>`:''}
+  <div class="story-layout">
+    <div class="vocab-bar-col">${vocabBar()}</div>
+    <div class="story-col">
+      <div class="scene-label">📖 Pars III — ${d.label.split('— ')[1]}</div>
+      ${d.text}
+      ${gbox(d.glosses)}
+      <div class="feat-box"><div class="fb-lbl">Sentence under the microscope</div>
+        <div class="fb-latin">${d.feat}</div></div>
+      ${compBlock('s3', d.mc, d.rev)}
+    </div>
+    ${summaryCol('s3','gateD3')}
+  </div>
+  <div class="converge-note">Rome is settled — kept, closed, or sold with a promise. In the harbor, nāvis parāta stat.</div>
+  <div class="decision-banner">
+    <h3>⚖️ Dēcīsiō III — Ultima nox Rōmae</h3>
+    <p>The ship sails at dawn. One night remains in Rome. How does Grumio spend it?
+    Every path leads to a different ending.</p>
+  </div>
+  ${decisionGrid('d3', DEC3, 'goEnd', 's3')}`;
+  window.gateD3=()=>gateDec('d3','s3');
+  window.scrollTo(0,0);
+}
+function goEnd(key){ grabPred('d3',key); S.path.end=key; renderEnding(); }
+
+function renderEnding(){
+  const e=ENDINGS[S.path.end];
+  pg().innerHTML=`
+  <span class="back-link" onclick="renderP3()">← Pars III</span>
+  <div class="path-badge">${e.label}</div>
+  ${S.predictions.d3?`<div class="prediction-echo"><strong>Your prediction:</strong> ${S.predictions.d3}</div>`:''}
+  <div class="story-layout">
+    <div class="vocab-bar-col">${vocabBar()}</div>
+    <div class="story-col">
+      ${e.text}
+      ${gbox(e.glosses)}
+      <div class="feat-box"><div class="fb-lbl">Sentence under the microscope</div>
+        <div class="fb-latin">${e.feat}</div></div>
+      ${compBlock('s4', e.mc, e.rev)}
+      <div class="btn-block"><button class="cc-gate-btn" style="width:auto;padding:10px 22px;" id="btn-finis" onclick="if(this.classList.contains('ready'))renderResults()">Fīnis — See results ▶</button></div>
+    </div>
+    ${summaryCol('s4','gateFinis')}
+  </div>`;
+  window.gateFinis=()=>{ const ok=(($('sum-s4')||{value:''}).value.trim().length)>=30;
+    const b=$('btn-finis'); if(b) b.classList.toggle('ready', ok); };
+  window.gateFinis();
+  window.scrollTo(0,0);
+}
+
+/* ═══════════════════════════════════════════
+   RESULTS + PRINT BODY
+   ═══════════════════════════════════════════ */
+
+function stripTags(h){ const d=document.createElement('div'); d.innerHTML=h; return d.textContent.replace(/\s+/g,' ').trim(); }
+
+function renderResults(){
+  const pct=S.score.t>0?Math.round(S.score.c/S.score.t*100):0;
+  const comment=S.score.t===0?'(No questions attempted this run.)':pct===100?'Perfectum! Full marks!':pct>=75?'Bene! Well done.':pct>=50?'Satis bene.':'Temptā iterum!';
+  const p2=P2[S.path.p2], p3=P3[S.path.p3], e=ENDINGS[S.path.end];
+  const routeStr=[p2?p2.label:null,p3?p3.label:null,e?e.label:null].filter(Boolean).join('  →  ');
+
+  function qTable(rows){
+    return `<table class="q-table">${rows.map(([l,r])=>`<tr><td>${l}</td><td>${r}</td></tr>`).join('')}</table>`;
+  }
+  function cogRow(title, textHTML, glossPairs, qs){
+    return `<tr>
+      <td class="cog-left">
+        <div class="cog-title">${title}</div>
+        ${stripTags(textHTML)}
+        <div class="cog-gloss">${gl(glossPairs)}</div>
+      </td>
+      <td>
+        ${qs.map((q,i)=>`<div class="cog-q"><b>${i+1}.</b> ${q}</div>`).join('')}
+      </td>
+    </tr>`;
+  }
+  function neutBox(label){
+    return `<div class="ws-neut-box"><h4>🟪 PPP analysis — ${label}</h4>
+      <table class="ws-neut-table"><tr>
+        <td>PPP from this section:</td>
+        <td>Which noun does it describe? <b>How do the endings prove it?</b></td>
+        <td>PPP or perfect verb? <b>How can you tell?</b></td>
+      </tr></table></div>`;
+  }
+  function wsSection(title, para, glossPairs, rows, featSent, sumKey, predKey){
+    const sumTxt=S.summaries[sumKey]?`<span class="ws-student-content">${S.summaries[sumKey]}</span>`:'';
+    const qTxt=S.questions[sumKey]?`<span class="ws-student-content">${S.questions[sumKey]}</span>`:'';
+    const pred=predKey&&S.predictions[predKey]?`<div class="ws-prediction"><b>My prediction:</b> ${S.predictions[predKey]}</div>`:'';
+    return `<div class="ws-section">
+      <p class="ws-h">${title}</p>
+      ${pred}
+      <p class="ws-para">${para}</p>
+      <p class="ws-gloss">${gl(glossPairs)}</p>
+      ${qTable(rows)}
+      ${neutBox(title)}
+      <p class="feat-sent"><em>${featSent}</em></p>
+      <table class="ws-student-table"><tr>
+        <td><span class="ws-stu-label">Summa mea — What happened?</span>${sumTxt}</td>
+        <td><span class="ws-stu-label">Quaestiōnēs meae — My questions:</span>${qTxt}</td>
+      </tr></table>
+      <div class="sect-line"></div>
+    </div>`;
+  }
+
+  pg().innerHTML=`
+  <div class="full-card">
+    <div class="scene-label">📜 Summa — Results</div>
+    <div class="route-line"><b>Your route:</b> ${routeStr||'(no route chosen)'}</div>
+    <div class="result-score-box">
+      <h3>Score</h3>
+      <div class="big-score">${S.score.c} / ${S.score.t}</div>
+      <div class="score-comment">${comment}</div>
+    </div>
+    <div class="produce-box">
+      <h4>✍️ Scrībe Latīnē — Now you write</h4>
+      <p><b>a)</b> Write one Latin sentence about the story containing a <b>PPP that agrees with its noun</b> (epistula scrīpta, popīna clausa, cēna parāta…).</p>
+      <textarea class="rq-input" rows="2" placeholder="Scrībe hīc…"></textarea>
+      <p style="margin-top:8px;"><b>b)</b> Write a pair: first the <b>perfect verb</b> (senex epistulam scrīpsit), then the same idea as a <b>PPP phrase</b> (epistula scrīpta…) — one action, two costumes.</p>
+      <textarea class="rq-input" rows="2" placeholder="Scrībe hīc…"></textarea>
+    </div>
+    <hr class="div">
+    <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:#7a5c3a;margin-bottom:10px;">Your summaries</div>
+    ${[['s1','Pars I — Mercātor Graecus'],['s2',p2?p2.label:'Pars II'],['s3',p3?p3.label:'Pars III'],['s4',e?e.label:'Exitus']]
+      .map(([k,lbl])=>`<div class="sum-review"><h4>${lbl}</h4><p>${S.summaries[k]||'(not entered)'}</p></div>`).join('')}
+    <button class="btn-primary show" style="margin-top:14px;" onclick="window.print()">🖨 Export as PDF</button>
+    <button class="btn-secondary" onclick="location.reload()">⬅ Start over — try another route (26 to go!)</button>
+  </div>
+
+  <div id="print-body">
+    <p class="ws-title">Iter Grumiōnis — I · Epistula Scrīpta</p>
+    <p class="ws-sub">Review worksheet for Stage 24 · One new thing: the PPP (4th principal part as adjective). Everything else is Stage 1–12 + Stage 24 vocabulary.
+      ${routeStr?` &nbsp;·&nbsp; Route: ${routeStr}`:''}</p>
+    <p class="ws-meta">Nōmen: ___________________________________ &nbsp;&nbsp;&nbsp; Classis: _____________ &nbsp;&nbsp;&nbsp; Diēs: _______________</p>
+    <table class="ws-vocab-table">
+      <tr><th>Latin word</th><th>Definition</th><th class="wsv-der">Derivative</th></tr>
+      ${VOCAB.map(([l,d,n])=>`<tr><td><em>${l}</em>${n?' <b>[13]</b>':''}</td><td>${d}</td><td class="wsv-der">&nbsp;</td></tr>`).join('')}
+    </table>
+    ${wsSection(S1.title, stripTags(S1.text), S1.glosses, S1.rows, S1.feat, 's1', null)}
+    ${p2?wsSection(p2.label, stripTags(p2.text), p2.glosses, p2.rows, p2.feat, 's2', 'd1'):''}
+    ${p3?wsSection(p3.label, stripTags(p3.text), p3.glosses, p3.rows, p3.feat, 's3', 'd2'):''}
+    ${e?wsSection(e.label, stripTags(e.text), e.glosses, e.rows, e.feat, 's4', 'd3'):''}
+    <div class="ws-produce-box"><h4>✍️ Scrībe Latīnē — Now you write</h4>
+      <p style="font-size:8pt;">a) One Latin sentence with a <b>PPP agreeing with its noun</b> (epistula scrīpta, popīna clausa…):</p>
+      <div class="sect-line"></div>
+      <p style="font-size:8pt;">b) The same action twice: as a <b>perfect verb</b> (scrīpsit), then as a <b>PPP phrase</b> (scrīpta):</p>
+      <div class="sect-line"></div>
+    </div>
+    <div class="ws-cog-box"><h4>🕰 Cōgitātiōnēs (Reflections) — For a later session</h4>
+      <p style="font-size:7.5pt;color:#333;">Re-read each part of YOUR route on the left. Answer on the right in complete sentences. Cite Latin where the question asks for evidence.</p>
+      <table class="cog-table">
+        ${cogRow(S1.title, S1.text, S1.glosses, S1.cog)}
+        ${p2?cogRow(p2.label, p2.text, p2.glosses, p2.cog):''}
+        ${p3?cogRow(p3.label, p3.text, p3.glosses, p3.cog):''}
+        ${e?cogRow(e.label, e.text, e.glosses, e.cog):''}
+      </table>
+    </div>
+  </div>`;
+  document.body.appendChild($('print-body'));
+}
+
+/* ═══════════════════════════════════════════
+   PRACTICE — NEUTRA EXERCĒ
+   ═══════════════════════════════════════════ */
+
+/* ── Item pools (drawn at random; 🔀 Shuffle re-draws) ── */
+const SPOT = [
+  {words:['Grumio','epistulam','scrīptam','lēgit'], pf:2, note:'scrīptam rides epistulam (-am); lēgit is the perfect VERB — he read.'},
+  {words:['Nīcander','epistulam','scrīptam','trādidit'], pf:2, note:'scrīptam = PPP on the letter; trādidit (Stage 24!) is the verb.'},
+  {words:['vīcīna','popīnam','trāditam','servāvit'], pf:2, note:'trāditam — the handed-over popīna; servāvit is what SHE did.'},
+  {words:['coquus','cēnam','parātam','in','mēnsā','posuit'], pf:2, note:'parātam describes cēnam; posuit (pōnō, Stage 24) is the verb.'},
+  {words:['Cerberus','cibum','relictum','cōnsūmpsit'], pf:2, note:'relictum — the left-behind food; cōnsūmpsit — the crime itself.'},
+  {words:['Grumio','popīnam','clausam','spectāvit'], pf:2, note:'clausam describes popīnam; spectāvit is the perfect verb.'},
+  {words:['verba','scrīpta','lacrimās','mōvērunt'], pf:1, note:'scrīpta agrees with verba (n pl); mōvērunt (moveō) is the plural perfect verb.'},
+  {words:['senex','sepulcra','facta','spectābat'], pf:2, note:'facta — the made tombs (n pl); spectābat is imperfect background.'},
+  {words:['mercātor','pecūniam','datam','cēpit'], pf:2, note:'datam (dō → datus, Stage 24) rides pecūniam; cēpit is the verb.'},
+  {words:['fēmina','verba','dicta','audīvit'], pf:2, note:'dicta — the spoken words (dīcō → dictus); audīvit is what she did.'},
+  {words:['Grumio','patriam','relictam','vīdit'], pf:2, note:'relictam — the homeland left behind; vīdit is the perfect verb.'},
+  {words:['servī','cibum','parātum','portāvērunt'], pf:2, note:'parātum agrees with cibum (m); portāvērunt is the plural perfect.'},
+  {words:['epistula','lēcta','multa','nārrāvit'], pf:1, note:'lēcta — the read letter (subject!); nārrāvit is the verb.'},
+  {words:['canis','cēnam','relictam','cēpit'], pf:2, note:'relictam describes cēnam; cēpit — Cerberus struck again.'},
+  {words:['nāvis','parāta','in','portū','stābat'], pf:1, note:'parāta agrees with nāvis (subject); stābat is imperfect.'},
+  {words:['dominus','pecūniam','prōmissam','dedit'], pf:2, note:'prōmissam (prōmittō, Stage 24) rides pecūniam; dedit is the verb.'},
+  {words:['puer','captus','ōlim','lacrimāvit'], pf:1, note:'captus — the taken boy (capiō → captus); lacrimāvit is what he did.'},
+  {words:['senex','nōmina','scrīpta','legēbat'], pf:2, note:'scrīpta — the written names (n pl); legēbat is imperfect.'},
+  {words:['Nīcander','popīnam','ēmptam','amāvit'], pf:2, note:'ēmptam — the bought popīna (emō → ēmptus); amāvit is the verb.'},
+  {words:['Grumio','vīnum','datum','bibit'], pf:2, note:'datum agrees with vīnum (n); bibit is the finite verb.'},
+  {words:['omnēs','cēnam','parātam','laudāvērunt'], pf:2, note:'parātam rides cēnam; laudāvērunt — they all praised it.'},
+  {words:['coquus','pānem','coctum','dedit'], pf:2, note:'coctum — the baked bread (coquō → coctus); dedit is the verb.'},
+  {words:['multī','vīcum','dēlētum','vīdērunt'], pf:2, note:'dēlētum — the destroyed village; vīdērunt is the plural perfect.'},
+  {words:['fēmina','epistulam','acceptam','lēgit'], pf:2, note:'acceptam (accipiō, Stage 24!) rides epistulam; lēgit is the verb.'},
+  {words:['puerī','canem','āmissum','vīdērunt'], pf:2, note:'āmissum — the lost dog (āmittō, Stage 24); vīdērunt is the verb.'},
+  {words:['Grumio','verba','scrīpta','amāvit'], pf:2, note:'scrīpta agrees with verba (n pl DO); amāvit is the verb.'},
+  {words:['vīcīna','pecūniam','redditam','cēpit'], pf:2, note:'redditam (reddō, Stage 24) rides pecūniam; cēpit is the verb.'},
+  {words:['nautae','nāvem','mōtam','tenuērunt'], pf:2, note:'mōtam (moveō → mōtus) rides nāvem; tenuērunt (teneō) is the verb.'},
+  {words:['sepulcra','facta','in','vīcō','stant'], pf:1, note:'facta — the made tombs (subject, n pl); stant is plain present.'},
+  {words:['mercātor','vīnum','vēnditum','mīsit'], pf:2, note:'vēnditum — the sold wine; mīsit (mittō, Stage 24) is the verb.'},
+];
+const NUMSORT = [
+  {w:'scrīpta', pf:false, note:'PPP — "written," describing a noun. The verb would be scrīpsit.'},
+  {w:'scrīpsit', pf:true, note:'perfect verb — he/she wrote. The participle is scrīptus/-a/-um.'},
+  {w:'captus', pf:false, note:'PPP — "taken" (capiō, cēpī, captus).'},
+  {w:'cēpit', pf:true, note:'perfect verb — took.'},
+  {w:'missus', pf:false, note:'PPP — "sent" (mittō → missus).'},
+  {w:'mīsit', pf:true, note:'perfect verb — sent (he did the sending).'},
+  {w:'factus', pf:false, note:'PPP — "made, done" (faciō → factus).'},
+  {w:'fēcit', pf:true, note:'perfect verb — made, did.'},
+  {w:'datus', pf:false, note:'PPP — "given" (dō → datus).'},
+  {w:'dedit', pf:true, note:'perfect verb — gave.'},
+  {w:'dictus', pf:false, note:'PPP — "said, spoken" (dīcō → dictus).'},
+  {w:'dīxit', pf:true, note:'perfect verb — said.'},
+  {w:'positus', pf:false, note:'PPP — "placed" (pōnō → positus).'},
+  {w:'posuit', pf:true, note:'perfect verb — placed.'},
+  {w:'mōtus', pf:false, note:'PPP — "moved" (moveō → mōtus).'},
+  {w:'mōvit', pf:true, note:'perfect verb — moved.'},
+  {w:'āctus', pf:false, note:'PPP — "done, driven" (agō → āctus).'},
+  {w:'ēgit', pf:true, note:'perfect verb — did, drove.'},
+  {w:'trāditus', pf:false, note:'PPP — "handed over" (trādō → trāditus).'},
+  {w:'trādidit', pf:true, note:'perfect verb — handed over.'},
+  {w:'perditus', pf:false, note:'PPP — "ruined, lost" (perdō → perditus).'},
+  {w:'perdidit', pf:true, note:'perfect verb — ruined, lost.'},
+  {w:'redditus', pf:false, note:'PPP — "given back" (reddō → redditus).'},
+  {w:'reddidit', pf:true, note:'perfect verb — gave back.'},
+  {w:'acceptus', pf:false, note:'PPP — "received" (accipiō → acceptus).'},
+  {w:'accēpit', pf:true, note:'perfect verb — received.'},
+  {w:'tentus', pf:false, note:'PPP — "held" (teneō → tentus).'},
+  {w:'tenuit', pf:true, note:'perfect verb — held.'},
+  {w:'lātus', pf:false, note:'PPP — "carried" (ferō, ferre, tulī, lātus — the strangest family!).'},
+  {w:'tulit', pf:true, note:'perfect verb — carried (ferō’s wild perfect).'},
+  {w:'parāta', pf:false, note:'PPP — "prepared," dressed to match its noun.'},
+  {w:'parāvit', pf:true, note:'perfect verb — prepared.'},
+  {w:'portāta', pf:false, note:'PPP — "carried" (portō → portātus).'},
+  {w:'portāvit', pf:true, note:'perfect verb — carried.'},
+];
+const ROLEQ = [
+  {sent:'Grumio cēnam parātam amīcīs dat.', q:'Which noun does parātam describe?',
+   opts:['cēnam — same -am ending, same job (DO): the prepared dinner.','amīcīs — they receive it.','Grumio — he prepared it.'],
+   correct:0, note:'The participle copies its noun: cēnam parātam, both accusative.'},
+  {sent:'verba scrīpta lacrimās movent.', q:'Which noun does scrīpta describe?',
+   opts:['lacrimās — tears are written.','verba — neuter plural -a matching -a, the subject of movent.','None — scrīpta is the verb.'],
+   correct:1, note:'verba (n pl) + scrīpta (n pl): the written words do the moving.'},
+  {sent:'senex epistulam scrīpsit.', q:'Is scrīpsit a PPP?',
+   opts:['Yes — it describes epistulam.','Yes — all scrīp- words are participles.','No — it is the perfect VERB: the old man wrote. The PPP would be scrīptam.'],
+   correct:2, note:'-sit = perfect verb; the participle is scrīptus/-a/-um.'},
+  {sent:'vīcīna popīnam trāditam servābit.', q:'Which noun does trāditam describe?',
+   opts:['popīnam — matching -am: the handed-over shop.','vīcīna — she was handed over.','servābit — it strengthens the verb.'],
+   correct:0, note:'popīnam trāditam — participle and noun move together as one phrase.'},
+  {sent:'in popīnā clausā erant decem annī.', q:'Why does clausā end in -ā?',
+   opts:['It is plural.','It agrees with popīnā, which follows in — the participle copies the PP form.','It is a mistake for clausam.'],
+   correct:1, note:'After in, the noun changes form — and its participle changes with it.'},
+  {sent:'Cerberus cibum relictum invēnit.', q:'Which noun does relictum describe?',
+   opts:['Cerberus — the abandoned dog.','invēnit — it completes the verb.','cibum — matching -um: the left-behind food.'],
+   correct:2, note:'cibum relictum — both accusative masculine: the food someone left.'},
+  {sent:'nāvis parāta in portū stābat.', q:'Which word is the subject?',
+   opts:['nāvis — with parāta agreeing: the readied ship stood in the harbor.','portū — the harbor stood.','parāta — participles are subjects.'],
+   correct:0, note:'nāvis parāta = one subject phrase; stābat is its verb.'},
+  {sent:'Grumio verba scrīpta vīcīnae dedit.', q:'What is vīcīnae doing?',
+   opts:['It is the DO.','It is the dative — the neighbor receives the written words (Stage 9!).','scrīpta describes it.'],
+   correct:1, note:'dedit: DO = verba scrīpta; receiver = vīcīnae (dative).'},
+  {sent:'puer captus in nāve lacrimābat.', q:'Which noun does captus describe?',
+   opts:['nāve — the captured ship.','lacrimābat — it intensifies the crying.','puer — matching masculine singular: the taken boy.'],
+   correct:2, note:'puer captus — the participle carries the boy’s whole story in one word.'},
+  {sent:'mercātor pecūniam prōmissam dedit.', q:'prōmissam comes from which Stage 24 verb?',
+   opts:['prōmittō — its 4th part prōmissus, here riding pecūniam.','pōnō — placed money.','pereō — perished money.'],
+   correct:0, note:'prōmittō, prōmittere, prōmīsī, prōmissus — chart form four.'},
+  {sent:'sepulcra facta in vīcō stant.', q:'Which noun does facta describe?',
+   opts:['vīcō — the made village.','sepulcra — neuter plural -a with -a: the built tombs stand.','stant — it completes the verb.'],
+   correct:1, note:'sepulcra facta (n pl) is the subject of the plural stant.'},
+  {sent:'Grumio epistulam acceptam diū tenēbat.', q:'Which noun does acceptam describe?',
+   opts:['epistulam — matching -am: the received letter (accipiō, Stage 24).','Grumio — the received cook.','It is the main verb.'],
+   correct:0, note:'epistulam acceptam — he held the letter he had received.'},
+  {sent:'coquus cēnam parāvit.', q:'Is parāvit a PPP?',
+   opts:['Yes — it describes cēnam.','No — -āvit is the perfect VERB; the participle is parātus/-a/-um.','Yes — all parā- words are participles.'],
+   correct:1, note:'parāvit = he prepared (did it); parāta = prepared (done-to).'},
+  {sent:'omnēs vīnum datum laudāvērunt.', q:'Which noun does datum describe?',
+   opts:['omnēs — the given guests.','laudāvērunt — it completes the verb.','vīnum — matching neuter -um: the given wine.'],
+   correct:2, note:'vīnum datum — neuter noun, neuter participle.'},
+  {sent:'templa clausa in viīs stābant.', q:'Which noun does clausa describe?',
+   opts:['templa — neuter plural: the closed temples stood.','viīs — the closed streets.','It is the verb of the sentence.'],
+   correct:0, note:'templa clausa (n pl subject) + stābant (plural imperfect).'},
+  {sent:'Grumio patriam relictam iterum vīdit.', q:'What does patriam relictam mean here?',
+   opts:['He left his homeland again.','The homeland (once) left behind — relictam rides patriam; vīdit is what Grumio did.','The homeland abandoned Grumio.'],
+   correct:1, note:'One phrase, forty years of story: the left-behind homeland, seen again.'},
+  {sent:'nautae vēla facta tenuērunt.', q:'Which word is the perfect VERB?',
+   opts:['facta — it means "did."','vēla — it acts on the sailors.','tenuērunt — teneō’s perfect: they held. facta is the participle on vēla.'],
+   correct:2, note:'Find the doer-form: tenuērunt (-ērunt). facta just describes.'},
+  {sent:'epistula lēcta multa nārrāvit.', q:'What does lēcta add to epistula?',
+   opts:['"once read" — the letter, having been read, told much.','"reading" — the letter is reading.','Nothing — it is decorative.'],
+   correct:0, note:'PPP = a completed done-to: the read letter. nārrāvit is its verb.'},
+];
+
+/* Random draw + shuffle */
+const DRAWN={0:null,1:null,2:null}, DRAW_N={0:6,1:8,2:5};
+let drawSeq=0;
+function drawItems(tab,force){
+  if(DRAWN[tab]&&!force) return;
+  const pool=[SPOT,NUMSORT,ROLEQ][tab];
+  const idx=pool.map((_,i)=>i);
+  for(let i=idx.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [idx[i],idx[j]]=[idx[j],idx[i]]; }
+  DRAWN[tab]=idx.slice(0,DRAW_N[tab]);
+  drawSeq++;
+}
+function shufflePractice(tab){ drawItems(tab,true); renderPractice(tab); }
+
+function renderPractice(tab){
+  const tabs=['① Spot the PPP','② PPP or perfect verb?','③ Which noun? (agreement)'];
+  drawItems(tab,false);
+  const picks=DRAWN[tab];
+  let body='';
+  if(tab===0){
+    body=`<div class="acc-intro">Every sentence has a <b>PPP</b> and a <b>finite verb</b>. Click the <b>PPP</b> — the participle riding a noun, not the verb doing the action. New sentences every 🔀 shuffle — the pool holds ${SPOT.length}.
+      <div class="acc-rule">The PPP is the 4th principal part (scrīptus, captus, missus, factus…) wearing adjective endings that MATCH A NOUN. The finite verb has a doer and a tense ending (-vit, -ērunt, -bat…).</div></div>`+
+    picks.map((si,k)=>{ const s=SPOT[si], uid=`sp${drawSeq}x${si}`;
+      return `<div class="spot-sent">
+      <div class="spot-num">Sentence ${k+1}</div>
+      <div class="spot-words">
+        ${s.words.map((w,wi)=>`<button class="word-btn" id="${uid}-${wi}" onclick="spotTap(${si},${wi},'${uid}')">${w}</button>`).join('')}
+        <span class="spot-period">.</span>
+      </div>
+      <div class="spot-fb" id="${uid}-fb"></div>
+    </div>`;}).join('');
+  } else if(tab===1){
+    body=`<div class="acc-intro">Done-to, or done-by? Tap <b>PPP</b> (participle — describes a noun) or <b>Pf</b> (perfect verb — someone did it) for each form. New forms every 🔀 shuffle — the pool holds ${NUMSORT.length}.
+      <div class="acc-rule">Pairs from your Stage 24 chart: scrīp<b>ta</b> / scrīp<b>sit</b> · cap<b>tus</b> / cēp<b>it</b> · mis<b>sus</b> / mīs<b>it</b>. The participle ends like an adjective (-us/-a/-um); the verb ends like a verb (-it/-ērunt).</div></div>
+    <div class="sort-grid">
+      ${picks.map(i=>{ const w=NUMSORT[i], uid=`np${drawSeq}x${i}`;
+        return `<div class="sort-item">
+        <div class="sort-word"><em>${w.w}</em></div>
+        <div class="sort-btns">
+          <button class="sb" id="${uid}-1" onclick="numTap(${i},1,'${uid}')">PPP</button>
+          <button class="sb" id="${uid}-2" onclick="numTap(${i},2,'${uid}')">Pf</button>
+        </div>
+      </div>
+      <div class="spot-fb" id="${uid}-fb"></div>`;}).join('')}
+    </div>`;
+  } else {
+    body=`<div class="acc-intro">A PPP always belongs to a noun. Find its noun — the one whose gender, number, and ending it copies. Choose the best answer. New sentences every 🔀 shuffle — the pool holds ${ROLEQ.length}.
+      <div class="acc-rule">Strategy: strip the participle's ending, then hunt for the noun wearing the SAME ending and job. Watch for the verb impostor: parāvit / scrīpsit / cēpit are verbs, never participles.</div></div>`+
+    picks.map((ri,k)=>{ const r=ROLEQ[ri], uid=`role${drawSeq}x${ri}`;
+      return `<div class="spot-sent">
+      <div class="spot-num">Sentence ${k+1}: &nbsp;<em style="font-size:1rem;">${r.sent}</em></div>
+      <div class="cq-prompt" style="margin:4px 0 8px;">${r.q}</div>
+      <ul class="mc-list" id="${uid}">
+        ${r.opts.map((o,oi)=>`<li><button class="mc-btn" onclick="mcAnswer('${uid}','${uid}-fb',${oi},${r.correct},
+          '${attrStr('Optimē! '+r.note)}','${attrStr('Temptā iterum — find the person ending, then ask: finished or ongoing? ')}')">${o}</button></li>`).join('')}
+      </ul>
+      <div class="fb" id="${uid}-fb"></div>
+    </div>`;}).join('');
+  }
+  pg().innerHTML=`
+  <span class="back-link" onclick="renderHome()">← Home</span>
+  <div class="acc-header"><h2>Participia Exercē</h2>
+    <p>Three drills on the Stage 8 perfect tense — the only new grammar in this episode.</p></div>
+  <div class="acc-tabs">
+    ${tabs.map((t,i)=>`<button class="ast ${i===tab?'active':''}" onclick="renderPractice(${i})">${t}</button>`).join('')}
+    <button class="ast ast-shuffle" onclick="shufflePractice(${tab})" title="Draw a new random set">🔀 Shuffle</button>
+  </div>
+  <div class="acc-layout">
+    <div class="acc-ref">
+      <h4>Word bank — PPPs</h4>
+      <div class="wb-head">Regular (-ātus)</div>
+      <div class="wb-row"><span class="wb-nom">parō</span><span class="wb-arr">→</span><span class="wb-acc">parātus</span></div>
+      <div class="wb-row"><span class="wb-nom">portō</span><span class="wb-arr">→</span><span class="wb-acc">portātus</span></div>
+      <div class="wb-row"><span class="wb-nom">dō</span><span class="wb-arr">→</span><span class="wb-acc">datus</span></div>
+      <div class="wb-row"><span class="wb-nom">servō</span><span class="wb-arr">→</span><span class="wb-acc">servātus</span></div>
+      <div class="wb-head">Stage 24 stem-changers</div>
+      <div class="wb-row"><span class="wb-nom">capiō</span><span class="wb-arr">→</span><span class="wb-acc">captus</span></div>
+      <div class="wb-row"><span class="wb-nom">mittō</span><span class="wb-arr">→</span><span class="wb-acc">missus</span></div>
+      <div class="wb-row"><span class="wb-nom">faciō</span><span class="wb-arr">→</span><span class="wb-acc">factus</span></div>
+      <div class="wb-row"><span class="wb-nom">dīcō</span><span class="wb-arr">→</span><span class="wb-acc">dictus</span></div>
+      <div class="wb-row"><span class="wb-nom">pōnō</span><span class="wb-arr">→</span><span class="wb-acc">positus</span></div>
+      <div class="wb-row"><span class="wb-nom">agō</span><span class="wb-arr">→</span><span class="wb-acc">āctus</span></div>
+      <div class="wb-row"><span class="wb-nom">moveō</span><span class="wb-arr">→</span><span class="wb-acc">mōtus</span></div>
+      <div class="wb-row"><span class="wb-nom">trādō</span><span class="wb-arr">→</span><span class="wb-acc">trāditus</span></div>
+      <div class="wb-head">Episode anchors</div>
+      <div class="wb-row"><span class="wb-nom">scrībō</span><span class="wb-arr">→</span><span class="wb-acc">scrīptus</span></div>
+      <div class="wb-row"><span class="wb-nom">relinquō</span><span class="wb-arr">→</span><span class="wb-acc">relictus</span></div>
+      <div class="wb-row"><span class="wb-nom">claudō</span><span class="wb-arr">→</span><span class="wb-acc">clausus</span></div>
+      <div class="wb-row"><span class="wb-nom">sepeliō</span><span class="wb-arr">→</span><span class="wb-acc">sepultus</span></div>
+      <div class="wb-note">The 4th principal part IS the PPP. It is an adjective: it agrees with its noun in gender, number, and job.</div>
+    </div>
+    
+<div class="acc-main">${body}</div>
+  </div>`;
+}
+function spotTap(si,wi,uid){
+  const s=SPOT[si];
+  if(S.spotState[uid]) return;
+  const ok=(wi===s.pf);
+  S.spotState[uid]=true;
+  S.score.t++; if(ok) S.score.c++; updateScore();
+  const btn=$(`${uid}-${wi}`);
+  btn.classList.add(ok?'correct':'wrong');
+  if(!ok) $(`${uid}-${s.pf}`).classList.add('correct');
+  for(let i=0;i<s.words.length;i++){ const b=$(`${uid}-${i}`); if(b) b.disabled=true; }
+  const fb=$(`${uid}-fb`);
+  fb.textContent=(ok?'Optimē! ':'')+s.note;
+  fb.className=`spot-fb ${ok?'ok':'err'}`;
+}
+function numTap(i,choice,uid){
+  const w=NUMSORT[i];
+  if(S.spotState[uid]) return;
+  S.spotState[uid]=true;
+  const correct=w.pf?2:1, ok=(choice===correct);
+  S.score.t++; if(ok) S.score.c++; updateScore();
+  [1,2].forEach(d=>{
+    const b=$(`${uid}-${d}`); if(!b) return; b.disabled=true;
+    if(d===choice) b.classList.add(ok?'s-ok':'s-err');
+    if(!ok&&d===correct) b.classList.add('s-rev');
+  });
+  const fb=$(`${uid}-fb`);
+  fb.textContent=(ok?'Optimē! ':'')+w.note;
+  fb.className=`spot-fb ${ok?'ok':'err'}`;
+}
+
+/* INIT */
+applySupports();
+renderHome();
+</script>
+</body>
+</html>

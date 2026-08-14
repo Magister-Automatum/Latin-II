@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Iter Grumiōnis — Omnēs Exercitātiōnēs</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Georgia',serif;background:#1a1209;display:flex;flex-direction:column;height:100vh;overflow:hidden;}
+
+  #topbar{
+    background:#2c1a07;
+    border-bottom:3px solid #8b5e1a;
+    padding:8px 12px 6px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    flex-shrink:0;
+  }
+  #topbar h1{
+    color:#f5dfa0;
+    font-size:.95rem;
+    letter-spacing:.06em;
+    text-align:center;
+  }
+  #nav{
+    display:flex;
+    gap:5px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .nav-btn{
+    background:#3d2608;
+    border:1px solid #8b5e1a;
+    border-radius:6px;
+    color:#e8c97a;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:.72rem;
+    padding:5px 10px;
+    transition:background .15s,color .15s;
+    white-space:nowrap;
+  }
+  .nav-btn:hover{background:#5a3a10;color:#fff5d6;}
+  .nav-btn.active{background:#8b5e1a;color:#fff5d6;font-weight:700;border-color:#c9920a;}
+
+  #frame-container{flex:1;position:relative;overflow:hidden;}
+  iframe{
+    position:absolute;inset:0;
+    width:100%;height:100%;
+    border:none;
+    display:none;
+  }
+  iframe.active{display:block;}
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <h1>Iter Grumiōnis — Omnēs Exercitātiōnēs</h1>
+  <div id="nav">
+    <button class="nav-btn active" onclick="show(0)">I · Epistula Scrīpta <span style="opacity:.7">(PPP)</span></button>
+    <button class="nav-btn"        onclick="show(1)">II · Nāvis Ācta <span style="opacity:.7">(Perfect Passive)</span></button>
+    <button class="nav-btn"        onclick="show(2)">III · Quaerēns <span style="opacity:.7">(PAP &amp; FAP)</span></button>
+    <button class="nav-btn"        onclick="show(3)">IV · Sepulcrum Cūrātur <span style="opacity:.7">(Present Passive)</span></button>
+    <button class="nav-btn"        onclick="show(4)">V · Rītūs <span style="opacity:.7">(Ablatives)</span></button>
+    <button class="nav-btn"        onclick="show(5)">VI · Familiā Sepultā <span style="opacity:.7">(Abl. Absolute)</span></button>
+  </div>
+</div>
+
+<div id="frame-container">
+  <iframe id="f0" class="active" src="grumio_iter_1_ppp.html"></iframe>
+  <iframe id="f1"               src="grumio_iter_2_perfpass.html"></iframe>
+  <iframe id="f2"               src="grumio_iter_3_participles.html"></iframe>
+  <iframe id="f3"               src="grumio_iter_4_prespass.html"></iframe>
+  <iframe id="f4"               src="grumio_iter_5_ablatives.html"></iframe>
+  <iframe id="f5"               src="grumio_iter_6_ablabs.html"></iframe>
+</div>
+
+<script>
+  const btns   = document.querySelectorAll('.nav-btn');
+  const frames = document.querySelectorAll('iframe');
+  let current  = 0;
+
+  function show(i){
+    btns[current].classList.remove('active');
+    frames[current].classList.remove('active');
+    current = i;
+    btns[current].classList.add('active');
+    frames[current].classList.add('active');
+  }
+</script>
+
+</body>
+</html>

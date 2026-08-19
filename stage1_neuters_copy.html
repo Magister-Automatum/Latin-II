@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Caecilius et Ātrium — Stage 1 · Neutra</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:Georgia,serif;font-size:16px;line-height:1.6;background:#f5f0e8;color:#1a1108;min-height:100vh;}
+.n1,.n2,.n3{text-decoration-line:underline;text-decoration-color:transparent;text-decoration-thickness:2px;transition:text-decoration-color .1s;}
+body.review-on .n1{text-decoration-color:#c0392b;}body.review-on .n2{text-decoration-color:#2471a3;}body.review-on .n3{text-decoration-color:#1e8449;}
+body.neut-on .neut{background:#fffbe6;border-bottom:2px dotted #c9920a;padding-bottom:1px;border-radius:2px;}
+#topbar{position:sticky;top:0;z-index:200;background:#2c1a0e;color:#f5f0e8;display:flex;align-items:center;gap:12px;padding:0 16px;height:48px;font-size:.85rem;}
+#topbar h1{font-size:1rem;font-weight:700;letter-spacing:.03em;flex-shrink:0;}
+#topbar .spacer{flex:1;}#score-disp{font-size:.8rem;opacity:.85;white-space:nowrap;}
+.tb-btn{background:transparent;border:1px solid #7a5c3a;color:#f5f0e8;border-radius:4px;padding:3px 10px;font-size:.78rem;cursor:pointer;}
+.tb-btn:hover{background:#3d2510;}.badge{font-size:.7rem;background:#7a5c3a;padding:2px 8px;border-radius:10px;white-space:nowrap;}
+#settings-panel{position:fixed;top:48px;right:0;width:280px;background:#2c1a0e;color:#f5f0e8;padding:16px;z-index:199;transform:translateX(100%);transition:transform .2s ease;border-left:2px solid #7a5c3a;}
+#settings-panel.open{transform:translateX(0);}
+.sp-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;font-size:.88rem;}.sp-row label{line-height:1.3;}
+.toggle{appearance:none;width:40px;height:22px;border-radius:11px;background:#5a3a1a;cursor:pointer;position:relative;flex-shrink:0;transition:background .15s;}
+.toggle:checked{background:#b87333;}.toggle::after{content:'';position:absolute;width:16px;height:16px;border-radius:50%;background:#fff;top:3px;left:3px;transition:left .15s;}.toggle:checked::after{left:21px;}
+.sp-legend{font-size:.78rem;margin-top:4px;line-height:1.5;}
+.leg-swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:middle;}
+.leg-r{background:#c0392b;}.leg-b{background:#2471a3;}.leg-g{background:#1e8449;}
+#neut-explain{background:#3d2510;border-radius:5px;padding:8px 10px;font-size:.76rem;color:#ffe8a0;line-height:1.6;margin-top:4px;}
+#charmap{display:none;background:#fff3d6;padding:7px 16px;font-size:.82rem;border-bottom:1px solid #e0cdb0;}
+#page{max-width:920px;margin:0 auto;padding:20px 16px 60px;}
+.home-header{text-align:center;padding:28px 0 20px;}.home-header h2{font-size:1.7rem;color:#2c1a0e;}
+.home-header p{color:#7a5c3a;margin-top:6px;font-size:.92rem;font-style:italic;}
+.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px;}
+@media(max-width:600px){.home-grid{grid-template-columns:1fr;}}
+.home-card{background:#fffdf7;border:2px solid #c8a97e;border-radius:10px;padding:24px 20px;cursor:pointer;transition:border-color .15s,box-shadow .15s;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.home-card:hover{border-color:#7a5c3a;box-shadow:0 3px 14px rgba(0,0,0,.12);}
+.home-card .hc-icon{font-size:2.4rem;margin-bottom:12px;}.home-card h3{font-size:1.1rem;color:#2c1a0e;margin-bottom:4px;}
+.home-card .hc-latin{font-style:italic;color:#7a5c3a;font-size:.84rem;margin-bottom:10px;}.home-card p{font-size:.86rem;color:#444;line-height:1.55;}
+.home-card .hc-btn{margin-top:18px;background:#2c1a0e;color:#f5f0e8;border:none;border-radius:6px;padding:9px 22px;font-size:.9rem;cursor:pointer;font-family:inherit;}
+.home-card .hc-btn:hover{background:#4a2d15;}
+.bridge-note{max-width:640px;margin:22px auto 0;background:#e8f0e4;border:1.5px solid #7fa06a;border-radius:8px;padding:12px 16px;font-size:.85rem;color:#2d4a1e;line-height:1.6;}
+.intro-card{background:#fff3d6;border:2px solid #d9b45a;border-radius:10px;padding:20px 20px 16px;margin-bottom:16px;}
+.intro-card h2{font-size:1.05rem;color:#5a4000;margin-bottom:10px;}.intro-card p{font-size:.88rem;color:#5a4000;line-height:1.65;margin-bottom:10px;}
+.ex-sent{background:#fff;border-left:4px solid #c9920a;padding:10px 14px;border-radius:0 8px 8px 0;margin:10px 0;font-size:.93rem;line-height:1.75;}
+.ex-sent .eng{font-size:.8rem;color:#666;display:block;margin-top:3px;font-style:italic;}.ex-sent .neut{background:#fffbe6;border-bottom:2px dotted #c9920a;}
+.vocab-table{width:100%;border-collapse:collapse;margin:10px 0 14px;background:#fffdf7;font-size:.86rem;}
+.vocab-table th{background:#f0e8d8;border:1px solid #c8a97e;padding:6px 9px;text-align:left;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:#5a4000;}
+.vocab-table td{border:1px solid #c8a97e;padding:6px 9px;vertical-align:top;}.vocab-table td.vt-latin{font-style:italic;font-weight:700;white-space:nowrap;}
+.vocab-table td.vt-der{min-width:90px;color:#aaa;}
+.vt-n{font-size:.68rem;background:#c9920a;color:#fff;border-radius:8px;padding:1px 6px;margin-left:5px;font-style:normal;font-weight:400;vertical-align:middle;}
+.back-link{font-size:.82rem;color:#7a5c3a;cursor:pointer;display:inline-block;margin-bottom:14px;}.back-link:hover{text-decoration:underline;}
+.story-layout{display:grid;grid-template-columns:160px 1fr 250px;gap:16px;}
+@media(max-width:860px){.story-layout{grid-template-columns:1fr;}.story-col{order:1;}.vocab-bar-col{order:2;}.summary-col{order:3;position:static;}}
+.story-col{min-width:0;}.vocab-bar-col{min-width:0;}
+.vocab-bar{background:#fffbe6;border:1.5px solid #d9b45a;border-radius:8px;padding:12px;font-size:.76rem;position:sticky;top:58px;}
+.vocab-bar h4{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#a06b00;margin-bottom:8px;}
+.vb-row{margin-bottom:6px;line-height:1.45;}.vb-lat{font-style:italic;font-weight:700;color:#2c1a0e;}.vb-def{color:#555;}
+.vb-note{font-size:.68rem;color:#a06b00;font-style:italic;margin-top:8px;border-top:1px solid #e0cdb0;padding-top:6px;line-height:1.5;}
+.scene-label{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7a5c3a;margin-bottom:10px;}
+.path-badge{display:inline-block;font-size:.78rem;font-weight:700;background:#2c1a0e;color:#f5f0e8;padding:3px 12px;border-radius:4px;margin-bottom:10px;letter-spacing:.05em;}
+.prediction-echo{background:#f8f3ec;border-left:3px solid #c8a97e;padding:8px 12px;font-size:.84rem;color:#555;font-style:italic;margin-bottom:12px;border-radius:0 4px 4px 0;}
+p.latin{font-size:1.04rem;line-height:1.9;margin-bottom:14px;}p.latin .sp{font-style:italic;color:#3a1a6e;}
+.glosses{background:#f0e8d8;border-left:3px solid #c8a97e;padding:8px 12px;border-radius:0 4px 4px 0;font-size:.81rem;margin:12px 0;line-height:1.8;}
+.feat-box{background:#fffbe6;border:1.5px solid #c9920a;border-radius:8px;padding:10px 14px;margin:12px 0;}
+.feat-box .fb-lbl{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#a06b00;margin-bottom:4px;}
+.feat-box .fb-latin{font-size:1.05rem;font-style:italic;}
+.comp-block{background:#fff;border:1.5px solid #c8a97e;border-radius:8px;padding:16px 18px;margin-top:16px;}
+.comp-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#7a5c3a;margin-bottom:12px;}
+.comp-q{margin-bottom:16px;}.comp-q:last-child{margin-bottom:0;}.cq-prompt{font-size:.89rem;margin-bottom:8px;line-height:1.5;}
+.mc-list{list-style:none;}.mc-list li{margin-bottom:5px;}
+.mc-btn{width:100%;text-align:left;background:#f8f3ec;border:1px solid #c8a97e;border-radius:5px;padding:7px 10px;font-size:.85rem;cursor:pointer;font-family:inherit;line-height:1.4;transition:background .1s;}
+.mc-btn:hover:not(:disabled){background:#f0e4cf;}.mc-btn:disabled{cursor:default;}
+.mc-btn.c-ok{background:#d4edda;border-color:#28a745;}.mc-btn.c-err{background:#f8d7da;border-color:#dc3545;}
+.fb{display:none;font-size:.83rem;padding:8px 11px;border-radius:5px;margin-top:6px;line-height:1.5;}
+.fb.show{display:block;}.fb.ok{background:#d4edda;color:#155724;}.fb.err{background:#f8d7da;color:#721c24;}
+.rq-prompt{font-size:.89rem;margin-bottom:7px;line-height:1.5;}
+.rq-input{width:100%;border:1px solid #c8a97e;border-radius:5px;padding:7px 9px;font-family:inherit;font-size:.87rem;background:#faf6ef;resize:vertical;min-height:46px;}
+.rq-controls{margin-top:6px;}.rq-btn{background:#f0e4cf;border:1px solid #c8a97e;border-radius:5px;padding:5px 14px;font-size:.81rem;cursor:pointer;font-family:inherit;}
+.rq-btn:hover:not(:disabled){background:#e0d0b0;}
+.rq-answer{background:#fff3cd;border:1px solid #ffc107;border-radius:5px;padding:8px 11px;font-size:.84rem;margin-top:7px;display:none;line-height:1.5;}
+.summary-col{position:sticky;top:58px;align-self:start;}.summary-card{background:#fffdf7;border:1.5px solid #c8a97e;border-radius:8px;padding:16px;}
+.sum-label{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#7a5c3a;margin-bottom:6px;}
+.sum-hint{font-size:.77rem;color:#888;margin-bottom:8px;line-height:1.4;}
+.sum-textarea{width:100%;border:1px solid #c8a97e;border-radius:5px;padding:8px;font-family:inherit;font-size:.87rem;resize:vertical;min-height:90px;background:#faf6ef;}
+.sum-count{font-size:.71rem;color:#888;text-align:right;margin-top:3px;}
+.decision-banner{background:#2c1a0e;color:#f5f0e8;border-radius:8px;padding:14px 18px;margin:20px 0 14px;}
+.decision-banner h3{font-size:1rem;margin-bottom:4px;}.decision-banner p{font-size:.84rem;opacity:.9;line-height:1.5;}
+.choices-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+@media(max-width:700px){.choices-grid{grid-template-columns:1fr;}}
+.choice-card{background:#fffdf7;border:1.5px solid #c8a97e;border-radius:8px;padding:14px;}
+.cc-via{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#7a5c3a;margin-bottom:5px;}
+.cc-latin{font-size:.91rem;line-height:1.5;margin-bottom:5px;font-style:italic;}.cc-sub{display:block;font-size:.77rem;color:#666;font-style:normal;margin-top:3px;}
+.cc-predict-lbl{font-size:.74rem;color:#7a5c3a;margin:10px 0 4px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;}
+.cc-predict-input{width:100%;border:1px solid #c8a97e;border-radius:5px;padding:6px 8px;font-size:.83rem;font-family:inherit;min-height:58px;resize:vertical;background:#faf6ef;}
+.cc-count{font-size:.71rem;color:#888;text-align:right;margin-top:2px;}
+.cc-gate-btn{margin-top:8px;width:100%;background:#ccc;color:#555;border:none;border-radius:5px;padding:8px;font-size:.85rem;cursor:not-allowed;font-family:inherit;}
+.cc-gate-btn.ready{background:#2c1a0e;color:#f5f0e8;cursor:pointer;}.cc-gate-btn.ready:hover{background:#4a2d15;}
+.btn-primary{background:#2c1a0e;color:#f5f0e8;border:none;border-radius:6px;padding:10px 22px;font-size:.92rem;cursor:pointer;font-family:inherit;display:none;}
+.btn-primary.show{display:inline-block;}.btn-primary:hover{background:#4a2d15;}
+.btn-secondary{background:transparent;color:#2c1a0e;border:2px solid #2c1a0e;border-radius:6px;padding:9px 22px;font-size:.9rem;cursor:pointer;font-family:inherit;margin-top:10px;display:block;width:100%;}
+.btn-secondary:hover{background:#f0e8d8;}
+.acc-header{text-align:center;padding:16px 0 18px;}.acc-header h2{font-size:1.4rem;color:#2c1a0e;}
+.acc-header p{font-size:.87rem;color:#555;margin-top:6px;line-height:1.5;}
+.acc-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.ast{flex:1;min-width:110px;background:#f0e8d8;border:1.5px solid #c8a97e;border-radius:6px;padding:8px 10px;text-align:center;font-size:.81rem;cursor:pointer;font-family:inherit;transition:background .1s,color .1s;}
+.ast.active{background:#2c1a0e;color:#f5f0e8;border-color:#2c1a0e;}
+.ast-shuffle{flex:0 0 auto;min-width:auto;background:#1e4d35;color:#e0ffe8;border-color:#1e4d35;}.ast-shuffle:hover{background:#256040;}
+.acc-layout{display:grid;grid-template-columns:240px 1fr;gap:20px;}
+@media(max-width:700px){.acc-layout{grid-template-columns:1fr;}}
+.acc-ref{background:#f0e8d8;border:1px solid #c8a97e;border-radius:8px;padding:14px;font-size:.79rem;position:sticky;top:58px;}
+.acc-ref h4{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#7a5c3a;margin-bottom:10px;}
+.wb-row{display:grid;grid-template-columns:90px 16px auto;gap:2px;font-size:.78rem;line-height:1.7;align-items:baseline;}
+.wb-nom{color:#555;font-style:italic;}.wb-arr{color:#bbb;text-align:center;}.wb-acc{font-weight:700;font-style:italic;}
+.wb-head{font-weight:700;font-size:.75rem;color:#2c1a0e;margin:8px 0 4px;}.wb-note{font-size:.69rem;color:#888;font-style:italic;margin-top:2px;}
+.acc-intro{background:#fff;border:1px solid #c8a97e;border-radius:8px;padding:12px 14px;margin-bottom:14px;font-size:.87rem;line-height:1.6;}
+.acc-rule{background:#fff3cd;border-left:3px solid #ffc107;padding:7px 11px;font-size:.83rem;margin:8px 0;border-radius:0 5px 5px 0;}
+.spot-sent{background:#fffdf7;border:1px solid #c8a97e;border-radius:7px;padding:11px 13px;margin-bottom:9px;}
+.spot-num{font-size:.68rem;color:#7a5c3a;font-weight:700;text-transform:uppercase;margin-bottom:6px;}
+.spot-words{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:5px;align-items:center;}
+.word-btn{background:#f8f3ec;border:1.5px solid #c8a97e;border-radius:5px;padding:5px 12px;font-size:.97rem;cursor:pointer;font-family:inherit;font-style:italic;transition:background .1s,border-color .1s;}
+.word-btn:hover:not(:disabled){background:#f0e0c0;border-color:#a06030;}
+.word-btn.correct{background:#d4edda;border-color:#28a745;cursor:default;}.word-btn.wrong{background:#f8d7da;border-color:#dc3545;}
+.spot-period{font-style:italic;color:#888;font-size:.95rem;}.spot-fb{font-size:.8rem;min-height:17px;margin-top:3px;line-height:1.4;}
+.spot-fb.ok{color:#155724;}.spot-fb.err{color:#721c24;}
+.sort-grid{display:flex;flex-direction:column;gap:8px;}
+.sort-item{background:#fff;border:1px solid #c8a97e;border-radius:8px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+.sort-word{font-size:.97rem;font-style:italic;flex:1;}.sort-btns{display:flex;gap:5px;}
+.sb{padding:6px 11px;border-radius:6px;border:2px solid #c8a97e;background:#f8f3ec;font-family:Georgia,serif;font-size:.82rem;cursor:pointer;font-weight:600;transition:all .12s;min-width:40px;}
+.sb:hover:not(:disabled){border-color:#7a5c3a;background:#f0e8d8;}.sb.s-ok{background:#d4edda;border-color:#28a745;}
+.sb.s-err{background:#f8d7da;border-color:#dc3545;}.sb.s-rev{background:#d4edda;border-color:#28a745;}.sb:disabled{cursor:default;opacity:.75;}
+</style>
+</head>
+<body>
+<div id="topbar">
+  <h1>Caecilius et Ātrium</h1>
+  <span class="badge">Stage 1 · Neutra (2nd decl.)</span>
+  <div class="spacer"></div>
+  <span id="score-disp"></span>
+  <button class="tb-btn" onclick="toggleSettings()">⚙ Supports</button>
+</div>
+<div id="settings-panel">
+  <div class="sp-row">
+    <label>Declension colours<br>
+      <span class="sp-legend"><span class="leg-swatch leg-r"></span>1st &nbsp;<span class="leg-swatch leg-b"></span>2nd &nbsp;<span class="leg-swatch leg-g"></span>3rd</span>
+    </label>
+    <input type="checkbox" class="toggle" id="tog-review" onchange="applySupports()">
+  </div>
+  <div class="sp-row">
+    <label>Neuter highlight<br><span class="sp-legend" style="color:#c9920a;">■ ātrium · vīnum · prandium</span></label>
+    <input type="checkbox" class="toggle" id="tog-neut" checked onchange="applySupports()">
+  </div>
+  <div class="sp-row">
+    <label>Character map</label>
+    <input type="checkbox" class="toggle" id="tog-charmap" onchange="applySupports()">
+  </div>
+  <div id="neut-explain"><strong>The neuter rule:</strong> a neuter noun wears <em>-um</em> as <strong>both</strong> subject and direct object. You cannot tell from the ending alone — check the other nouns and the verb. Plural neuters end in <strong>-a</strong> (<em>ātria, cubicula, vīna</em>).</div>
+</div>
+<div id="charmap"><b style="color:#a06b00">Characters:</b> Caecilius — the banker &nbsp;|&nbsp; Metella — his wife &nbsp;|&nbsp; Quintus — their son &nbsp;|&nbsp; Grumio — the cook &nbsp;|&nbsp; Cerberus — the dog</div>
+<div id="page"></div>
+<script>
+const n1=t=>`<span class="n1">${t}</span>`;
+const n2=t=>`<span class="n2">${t}</span>`;
+const n3=t=>`<span class="n3">${t}</span>`;
+const nn2=t=>`<span class="n2 neut">${t}</span>`;
+const pg=()=>document.getElementById('page');
+const $=id=>document.getElementById(id);
+function gl(p){return p.map(([k,v])=>`<b>${k}</b> = ${v}`).join(' &nbsp;|&nbsp; ');}
+function gbox(p){return p.length?`<div class="glosses">${gl(p)}</div>`:''}
+const S={path:{p2:null,p3:null},pred:{},sum:{s1:'',s2:'',s3:''},score:{c:0,t:0},sp:{}};
+function upScore(){const d=$('score-disp');if(d)d.textContent=S.score.t>0?`${S.score.c}/${S.score.t}`:'';}
+function toggleSettings(){$('settings-panel').classList.toggle('open');}
+function applySupports(){
+  document.body.classList.toggle('review-on',$('tog-review').checked);
+  document.body.classList.toggle('neut-on',$('tog-neut').checked);
+  $('charmap').style.display=$('tog-charmap').checked?'block':'none';
+}
+document.addEventListener('click',e=>{const p=$('settings-panel');if(p&&p.classList.contains('open')&&!p.contains(e.target)&&!e.target.closest('.tb-btn'))p.classList.remove('open');});
+function mcA(lid,fid,ch,co,ok,err){
+  S.score.t++;const good=(ch===co);if(good)S.score.c++;upScore();
+  document.querySelectorAll(`#${lid} .mc-btn`).forEach(b=>b.disabled=true);
+  document.querySelectorAll(`#${lid} .mc-btn`)[ch].classList.add(good?'c-ok':'c-err');
+  if(!good)document.querySelectorAll(`#${lid} .mc-btn`)[co].classList.add('c-ok');
+  const f=$(fid);f.textContent=good?ok:err;f.className=`fb show ${good?'ok':'err'}`;
+}
+function reveal(id){$(id).style.display='block';const b=$(`${id}-btn`);if(b){b.textContent='Answer shown';b.disabled=true;}}
+function saveSum(key,gfn){
+  S.sum[key]=($(`sum-${key}`)||{value:''}).value;
+  const n=S.sum[key].trim().length,c=$(`cnt-${key}`);
+  if(c){c.textContent=`${n}/30 min`;c.style.color=n>=30?'#1e8449':'#888';}
+  if(gfn&&window[gfn])window[gfn]();
+}
+function sumCol(key,gfn){
+  const n=(S.sum[key]||'').trim().length;
+  return `<div class="summary-col"><div class="summary-card">
+    <div class="sum-label">📝 Summa mea <span style="color:#c0392b;">(required)</span></div>
+    <div class="sum-hint">What happened? Note one <b>neuter</b> word. 30 characters minimum to unlock the next decision.</div>
+    <textarea class="sum-textarea" id="sum-${key}" oninput="saveSum('${key}','${gfn||''}')">${S.sum[key]||''}</textarea>
+    <div class="sum-count" id="cnt-${key}">${n}/30 min</div>
+  </div></div>`;
+}
+function esc(s){return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');}
+function comp(pfx,mc,rev){
+  return `<div class="comp-block"><div class="comp-label">📖 Comprehension</div>
+    <div class="comp-q"><div class="cq-prompt"><b>1.</b> ${mc.q}</div>
+      <ul class="mc-list" id="mc-${pfx}">
+        ${mc.opts.map((o,i)=>`<li><button class="mc-btn" onclick="mcA('mc-${pfx}','fb-${pfx}',${i},${mc.co},'${esc(mc.ok)}','${esc(mc.err)}')">${o}</button></li>`).join('')}
+      </ul><div class="fb" id="fb-${pfx}"></div>
+    </div>
+    <div class="comp-q"><div class="rq-prompt"><b>2.</b> ${rev.q}</div>
+      <textarea class="rq-input" placeholder="Write your answer, then check…" rows="2"></textarea>
+      <div class="rq-controls"><button class="rq-btn" id="rev-${pfx}-btn" onclick="reveal('rev-${pfx}')">Show answer</button></div>
+      <div class="rq-answer" id="rev-${pfx}">${rev.a}</div>
+    </div></div>`;
+}
+
+// VOCAB
+const VOCAB=[
+  ['ātrium, -ī (n)','atrium, main hall','N'],['cubiculum, -ī (n)','bedroom','N'],
+  ['impluvium, -ī (n)','pool in the atrium','N'],['prandium, -ī (n)','lunch','N'],
+  ['vīnum, -ī (n)','wine','N'],['triclīnium, -ī (n)','dining room','N'],
+  ['signum, -ī (n)','sign, statue','N'],['Caecilius, -ī (m)','the banker',''],
+  ['Metella, -ae (f)','his wife',''],['Quintus, -ī (m)','their son',''],
+  ['Grumio, -ōnis (m)','the cook',''],['Cerberus, -ī (m)','the dog',''],
+  ['mercātor, -ōris (m)','merchant',''],
+];
+const VB=[['ātrium','hall',1],['cubiculum','bedroom',1],['impluvium','pool',1],
+  ['prandium','lunch',1],['vīnum','wine',1],['triclīnium','dining room',1],
+  ['signum','sign/statue',1],['mercātor','merchant',0]];
+function vBar(){return `<div class="vocab-bar"><h4>📌 Vocab</h4>${VB.map(([l,d,n])=>`<div class="vb-row"><span class="vb-lat">${l}</span>${n?'<span class="vt-n">n</span>':''}<br><span class="vb-def">${d}</span></div>`).join('')}<div class="vb-note">Words marked <span class="vt-n" style="vertical-align:baseline;">n</span> are neuter: plural in <b>-a</b>.</div></div>`;}
+function vTable(){return `<table class="vocab-table"><tr><th>Latin</th><th>Definition</th><th>Derivative</th></tr>${VOCAB.map(([l,d,n])=>`<tr><td class="vt-latin">${l}${n?'<span class="vt-n">neuter</span>':''}</td><td>${d}</td><td class="vt-der">&nbsp;</td></tr>`).join('')}</table>`;}
+
+// STORY
+const S1t=`
+  <p class="latin">${n2('Caecilius')} in tablīnō scribit. ${nn2('ātrium')} est magnum et pulchrum.
+    in ${nn2('ātrīō')} est ${nn2('impluvium')}. ${nn2('impluvium')} aquam* habet.</p>
+  <p class="latin">${n1('Metella')} in ${nn2('ātrīō')} sedet et librum* legit.
+    ${n3('Cerberus')} quoque in ${nn2('ātrīō')} est.
+    ${n3('canis')} ${nn2('impluvium')} spectat — ${n3('canis')} aquam amat!</p>
+  <p class="latin">${n3('Grumio')} in culīnā est. ${n3('coquus')} ${nn2('prandium')} et ${nn2('vīnum')} parat.
+    subitō ${n2('Quintus')} ${nn2('ātrium')} intrat. ${n2('Quintus')} est laetissimus*.
+    <span class="sp">"māter! pater! nōvum quid vīdī in forō!"</span></p>`;
+const S1g=[['aquam*','water'],['librum*','book'],['laetissimus*','very happy'],['nōvum quid*','something new']];
+const S1mc={q:'<em>impluvium aquam habet</em> — What role does impluvium play?',
+  opts:['Subject — aquam (-am, 1st decl.) is always the DO, so impluvium must be the subject.',
+        'Direct object — impluvium is the thing that has water.',
+        'You cannot tell — the -um ending is ambiguous.',
+        'Part of a prepositional phrase.'],
+  co:0,ok:'Optimē! aquam (-am) is ALWAYS the DO on a 1st-decl. noun. If aquam is the DO, impluvium must be the subject — even though its -um cannot say so itself.',
+  err:'Temptā! Look at aquam: -am on a 1st-decl. noun is always the DO. If aquam is the DO, what must impluvium be?'};
+const S1rev={q:'Find the sentence that shows Cerberus has an unusual hobby. What does he do and why is it funny?',
+  a:'<strong>Answer:</strong> <em>canis impluvium spectat — canis aquam amat!</em> He stares at the pool because he loves water. Most dogs avoid them!'};
+
+const P2A={badge:'Via I-A · Caecilius listens',
+  t:`<p class="latin">${n2('Caecilius')} ex tablīnō venit. ${n1('familia')} in ${nn2('ātrīō')} stat.
+    ${n2('Quintus')} fābulam nārrat: <span class="sp">"${n3('mercātor')} in viā erat!
+    ${n3('mercātor')} ${nn2('signum')} pulchrum habēbat*. ${nn2('signum')} magnum et antīquum* erat!"</span></p>
+  <p class="latin">${n2('Caecilius')} ${nn2('signum')} amat! sed cōgitat.
+    ${nn2('signum')} est magnum — et ${nn2('cubiculum')} ${n2('Quīntī')} est parvum.
+    <span class="sp">"ubi* ${nn2('signum')} stābit*?"</span> ${n1('Metella')} rogat.</p>`,
+  g:[['habēbat*','had'],['antīquum*','ancient'],['ubi*','where?'],['stābit*','will it stand?']],
+  feat:'signum magnum et antīquum erat.',
+  mc:{q:'<em>signum magnum et antīquum erat</em> — What role is signum? What do the adjectives tell you?',
+    opts:['Subject — erat is a linking verb (no DO!); magnum and antīquum both wear -um to agree with the neuter signum.',
+          'Direct object — Quintus is describing the statue he saw.',
+          'You cannot tell — all three words end in -um.',
+          'No subject at all — it is indirect speech.'],
+    co:0,ok:'Optimē! erat is a linking verb — it has no DO. signum is the subject, and both adjectives wear -um to agree with the neuter noun.',
+    err:'Temptā! erat is a linking verb (like est). Linking verbs describe their subject — they never take a DO. What role must signum play?'},
+  rev:{q:'What problem does Metella raise at the end? Find the two key Latin nouns.',
+    a:'<strong>Answer:</strong> <em>signum</em> est magnum sed <em>cubiculum</em> est parvum — the statue is large, the bedroom is small. Where will it go?'}};
+
+const P2B={badge:'Via I-B · Quintus must wait',
+  t:`<p class="latin">${n2('Quintus')} nōn est laetus. <span class="sp">"post prandium?"</span> rogat.
+    ${n2('Quintus')} in ${nn2('ātrīō')} manet et ${nn2('impluvium')} spectat.
+    ${n3('Cerberus')} ad ${n2('Quintum')} venit — ${n3('canis')} ${n2('Quintum')} amat!</p>
+  <p class="latin">subitō ${n3('Grumio')} ${nn2('ātrium')} intrat.
+    <span class="sp">"${nn2('prandium')} parātum* est! familia ad ${nn2('triclīnium')} veniat*!"</span>
+    ${n1('familia')} ${nn2('triclīnium')} intrat.
+    tunc* ${n2('Quintus')} fābulam nārrat — dē mercātōre et ${nn2('signō')} pulchrō!
+    ${n2('Caecilius')} audit et cōgitat.</p>`,
+  g:[['parātum*','ready (adj.)'],['veniat*','let the family come!'],['tunc*','then'],['dē*','about'],['signō*','statue (abl.)']],
+  feat:'prandium parātum est.',
+  mc:{q:'<em>prandium parātum est</em> — Both prandium and parātum end in -um. What does that tell you?',
+    opts:['parātum is an adjective agreeing with the neuter noun prandium; both wear -um because prandium is neuter.',
+          'Both are direct objects of est.',
+          'parātum is the subject and prandium is the DO.',
+          'The two -um endings mean they are both subjects.'],
+    co:0,ok:'Optimē! Adjectives agree with their noun in gender. prandium is neuter, so parātum wears -um too. "The lunch is ready" — prandium is the subject.',
+    err:'Temptā! parātum is an adjective. Adjectives agree with their noun in gender: if prandium is neuter, what ending must its adjective take?'},
+  rev:{q:'Who comforts Quintus while he waits? Find the two short Latin sentences.',
+    a:'<strong>Answer:</strong> <em>Cerberus ad Quintum venit — canis Quintum amat!</em> The dog comes to him and loves him. Good dog.'}};
+
+const P3A={badge:'Via II-A · The statue arrives',
+  t:`<p class="latin">${n2('Caecilius')} ${nn2('signum')} emit*!
+    ${n3('servus')} ${nn2('signum')} in ${nn2('ātrium')} portat et in ${nn2('ātrīō')} pōnit*.
+    ${nn2('signum')} in ${nn2('ātrīō')} stat. nunc* ${nn2('ātrium')} est pulcherrimum*!</p>
+  <p class="latin">${n3('Cerberus')} ${nn2('signum')} spectat. ${n3('canis')} ${nn2('signum')} nōn amat —
+    ${nn2('signum')} aquam nōn habet!
+    ${n1('familia')} rīdet. ${nn2('prandium')} optimum* erat. omnia bona erant!</p>`,
+  g:[['emit*','buys'],['pōnit*','places'],['nunc*','now'],['pulcherrimum*','most beautiful'],['optimum*','excellent']],
+  feat:'omnia bona erant.',
+  mc:{q:'<em>omnia bona erant</em> — omnia ends in -a. Is it singular or plural? How do you know?',
+    opts:['Plural — erant is a plural verb and bona is a plural adjective; omnia = "everything/all things."',
+          'Singular — it ends in -a like fēmina.',
+          'You cannot tell from -a alone.',
+          'Neither — omnia is an adverb.'],
+    co:0,ok:'Optimē! erant is plural ("they were") and bona is the plural neuter adjective. omnia = "all things" — always a neuter plural. The same -a that looks like fēmina (sg.) IS the neuter plural!',
+    err:'Temptā! What does erant tell you? A plural verb needs a plural subject. And bona on a neuter — is that singular or plural?'},
+  rev:{q:'Why does Cerberus NOT like the new statue? Find the Latin reason.',
+    a:'<strong>Answer:</strong> <em>signum aquam nōn habet</em> — the statue has no water! Cerberus loves the impluvium for its water, not for art.'}};
+
+const P3B={badge:'Via II-B · Caecilius passes',
+  t:`<p class="latin">${n3('mercātor')} abit*. ${nn2('signum')} quoque abit. ${n2('Quintus')} nōn est laetus.</p>
+  <p class="latin">sed ${n2('Caecilius')} rīdet.
+    <span class="sp">"Quinte, ${nn2('cubiculum')} tuum* parvum est. ubi* ${nn2('signum')} stābit*?"</span>
+    ${n2('Quintus')} cōgitat. ${nn2('cubiculum')} est parvum. ${nn2('signum')} est magnum.
+    ${n2('Caecilius')} habet cōnsilium bonum! ${n1('familia')} rīdet. omnia bona erant!</p>`,
+  g:[['abit*','goes away'],['tuum*','your'],['ubi*','where?'],['stābit*','will it stand?']],
+  feat:'cubiculum tuum parvum est.',
+  mc:{q:'<em>cubiculum tuum parvum est</em> — What are the roles of cubiculum, tuum, and parvum?',
+    opts:['cubiculum is the subject (linking verb); tuum and parvum are adjectives wearing -um to agree with the neuter.',
+          'tuum is the subject; cubiculum and parvum are direct objects of est.',
+          'All three are direct objects of est.',
+          'cubiculum is the DO; tuum and parvum are subjects.'],
+    co:0,ok:'Optimē! est is linking — cubiculum is the subject. Adjectives agree with their noun: tuum ("your") and parvum ("small") both wear -um because cubiculum is neuter.',
+    err:'Temptā! est is a linking verb — no DO. cubiculum must be the subject. Adjectives agree with their noun in gender: if cubiculum is neuter, what ending must they take?'},
+  rev:{q:'What do you think Caecilius\'s "cōnsilium bonum" is? The text doesn\'t say — make your best guess.',
+    a:'<strong>Open answer:</strong> Likely the statue belongs in the ātrium or triclīnium — a much larger room than Quintus\'s cubiculum. Or perhaps Caecilius plans to negotiate the price first.'}};
+
+function decGrid(id,cards,handler,sk){
+  return `<div class="choices-grid" id="${id}">
+    ${cards.map((c,i)=>`<div class="choice-card">
+      <div class="cc-via">Via ${['I','II'][i]}</div>
+      <div class="cc-latin">${c.lat}<span class="cc-sub">${c.sub}</span></div>
+      <div class="cc-predict-lbl">Prediction (required) — what happens?</div>
+      <textarea class="cc-predict-input" id="pred-${id}-${c.k}" placeholder="Predict (30+ chars), then choose…" oninput="gateDec('${id}','${sk}')"></textarea>
+      <div class="cc-count" id="pcnt-${id}-${c.k}">0/30 min</div>
+      <button class="cc-gate-btn" id="ch-${id}-${c.k}" onclick="tryPick('${handler}','${id}','${c.k}')">Choose →</button>
+    </div>`).join('')}
+  </div>`;
+}
+function gateDec(id,sk){
+  const ok=(($(`sum-${sk}`)||{value:''}).value.trim().length)>=30;
+  document.querySelectorAll(`#${id} .cc-predict-input`).forEach(p=>{
+    const k=p.id.split('-').pop(),n=p.value.trim().length;
+    const c=$(`pcnt-${id}-${k}`);if(c){c.textContent=`${n}/30 min`;c.style.color=n>=30?'#1e8449':'#888';}
+    const b=$(`ch-${id}-${k}`);if(b)b.classList.toggle('ready',ok&&n>=30);
+  });
+}
+function tryPick(h,id,k){const b=$(`ch-${id}-${k}`);if(!b||!b.classList.contains('ready'))return;window[h](k);}
+function grabPred(id,k){const p=$(`pred-${id}-${k}`);if(p&&p.value.trim())S.pred[id]=p.value.trim();}
+
+const DEC1=[
+  {k:'A',lat:'Caecilius tablīnum relinquit et Quintum audit.',sub:'He drops his work — what did Quintus see?'},
+  {k:'B',lat:'"post prandium, Quinte!" Caecilius inquit.',sub:'Quintus must wait. Accounts first.'},
+];
+const DEC2=[
+  {k:'A',lat:'Caecilius ad mercātōrem it et signum emit*.',sub:'He buys it! But where will it go?'},
+  {k:'B',lat:'"signum nōn emō*," Caecilius inquit. "nimis magnum est!"',sub:'He passes. Too big.'},
+];
+
+function renderHome(){
+  pg().innerHTML=`<div class="home-header"><h2>Caecilius et Ātrium</h2><p>Stage 1 · An introduction to neuter nouns</p></div>
+  <div class="home-grid">
+    <div class="home-card" onclick="renderVocab()">
+      <div class="hc-icon">📖</div><h3>Read the Story</h3>
+      <div class="hc-latin">in ātrīō — in the atrium</div>
+      <p>A choose-your-own-adventure in Caecilius's house. Two decisions, four routes.</p>
+      <button class="hc-btn">Begin ▶</button>
+    </div>
+    <div class="home-card" onclick="renderPractice(0)">
+      <div class="hc-icon">⚡</div><h3>Practice: Neutra</h3>
+      <div class="hc-latin">ātrium · cubiculum · vīnum</div>
+      <p>Three drills on 2nd-declension neuter nouns — the one new gender in Stage 1.</p>
+      <button class="hc-btn">Practice ▶</button>
+    </div>
+  </div>
+  <div class="bridge-note"><strong>The one new thing:</strong> Latin nouns come in three genders — masculine, feminine, and <strong>neuter</strong>. Neuter nouns wear the <em>same</em> ending for subject and direct object (<em>ātrium</em> either way). Episode neuters: <em>ātrium, cubiculum, impluvium, prandium, vīnum, triclīnium, signum</em>.</div>`;
+  window.scrollTo(0,0);
+}
+function renderVocab(){
+  pg().innerHTML=`<span class="back-link" onclick="renderHome()">← Home</span>
+  <div class="intro-card"><h2>📋 Episode vocabulary</h2>
+    <p>Seven of the thirteen words below are <strong>neuter</strong>, marked <span class="vt-n" style="font-size:.8rem;vertical-align:middle;">neuter</span>.</p>
+    ${vTable()}</div>
+  <button class="btn-primary show" onclick="renderNI(0)">Next — What is a neuter noun? ▶</button>
+  <button class="btn-secondary" onclick="renderS1()">Skip — straight to the story ▶</button>`;
+}
+function renderNI(step){
+  const screens=[
+    `<div class="intro-card"><h2>🟡 One new thing: the NEUTER noun</h2>
+      <p>You already know that Latin endings reveal a noun's job:</p>
+      <div class="ex-sent"><em>servus</em> cēnam parat. → <b>servus</b> (-us) = S &nbsp;·&nbsp; <b>cēnam</b> (-am) = DO<span class="eng">The slave prepares dinner.</span></div>
+      <p><b>Neuter nouns break this rule.</b> They wear the SAME ending as both S and DO:</p>
+      <div class="ex-sent"><span class="neut">ātrium</span> est magnum. &nbsp;·&nbsp; Caecilius <span class="neut">ātrium</span> intrat.<span class="eng">The atrium is large. (S) &nbsp;·&nbsp; Caecilius enters the atrium. (DO) — same -um!</span></div>
+      <p>So when you see <em>ātrium</em>, the ending alone <b>cannot</b> tell you its job. You must check the <b>other words</b>.</p>
+    </div><button class="btn-primary show" onclick="renderNI(1)">Next — The plural ending ▶</button>`,
+    `<div class="intro-card"><h2>🟡 The plural: -um becomes -a</h2>
+      <p>Neuter plurals end in <b>-a</b> — for BOTH S and DO:</p>
+      <div class="ex-sent"><span class="neut">ātrium</span> → <span class="neut">ātria</span> &nbsp;·&nbsp; <span class="neut">cubiculum</span> → <span class="neut">cubicula</span> &nbsp;·&nbsp; <span class="neut">vīnum</span> → <span class="neut">vīna</span><span class="eng">one hall → many &nbsp;·&nbsp; one bedroom → many &nbsp;·&nbsp; one wine → many</span></div>
+      <p>Careful! <b>-a</b> also looks like a 1st-decl. singular (<em>fēmina, Metella</em>). Two clues help:</p>
+      <div class="ex-sent"><span class="neut">cubicula</span> parva <b>sunt</b>.<span class="eng">Plural verb <b>sunt</b> + plural adjective <b>parva</b> → cubicula must be plural neuter.</span></div>
+    </div><button class="btn-primary show" onclick="renderNI(2)">Next — Quick check ▶</button>`,
+    `<div class="intro-card"><h2>🟡 Quick check</h2>
+      <p style="margin-bottom:12px">In <em>"impluvium Cerberum dēlectat"</em> — what role is impluvium?</p>
+      <ul class="mc-list" id="ni-opts">
+        ${['Subject — Cerberum is DO-marked (-um on a masculine noun), so impluvium must be the subject.',
+           'Direct object — it ends in -um, which is the DO ending.',
+           'You cannot tell — neuter endings are always ambiguous.'].map((w,i)=>`<li><button class="mc-btn" onclick="niCheck(${i})">${w}</button></li>`).join('')}
+      </ul><div class="fb" id="ni-fb"></div>
+      <button class="btn-primary show" onclick="renderS1()">Begin the story ▶</button>
+    </div>`,
+  ];
+  pg().innerHTML=`<span class="back-link" onclick="renderVocab()">← Vocabulary</span>${screens[step]}`;
+}
+function niCheck(i){
+  const done=document.querySelector('#ni-opts .mc-btn:disabled');if(done)return;
+  S.score.t++;const ok=(i===0);if(ok)S.score.c++;upScore();
+  document.querySelectorAll('#ni-opts .mc-btn').forEach(b=>b.disabled=true);
+  document.querySelectorAll('#ni-opts .mc-btn')[i].classList.add(ok?'c-ok':'c-err');
+  if(!ok)document.querySelectorAll('#ni-opts .mc-btn')[0].classList.add('c-ok');
+  $('ni-fb').textContent=ok
+    ?'Optimē! Cerberum has -um on a MASCULINE noun — always the DO. So the neuter impluvium must be the subject.'
+    :'Temptā! Look at Cerberum: -um on a MASCULINE noun is always the DO. If the dog is the DO, what must impluvium be?';
+  $('ni-fb').className=`fb show ${ok?'ok':'err'}`;
+}
+function renderS1(){
+  pg().innerHTML=`<span class="back-link" onclick="renderVocab()">← Vocabulary</span>
+  <div class="story-layout">
+    <div class="vocab-bar-col">${vBar()}</div>
+    <div class="story-col">
+      <div class="scene-label">📖 Pars I — In Ātrīō</div>
+      ${S1t}${gbox(S1g)}
+      <div class="feat-box"><div class="fb-lbl">Sentence under the microscope</div><div class="fb-latin">impluvium aquam habet.</div></div>
+      ${comp('s1',S1mc,S1rev)}
+    </div>${sumCol('s1','gateD1')}
+  </div>
+  <div class="decision-banner"><h3>⚖️ Dēcīsiō I — Quid agit Caecilius?</h3>
+    <p>Quintus has news from the forum. Caecilius is in the middle of his accounts. Every path is a real path — read the Latin carefully.</p>
+  </div>${decGrid('d1',DEC1,'goP2','s1')}`;
+  window.gateD1=()=>gateDec('d1','s1');window.scrollTo(0,0);
+}
+function goP2(k){grabPred('d1',k);S.path.p2=k;renderP2();}
+function renderP2(){
+  const d=S.path.p2==='A'?P2A:P2B;
+  pg().innerHTML=`<span class="back-link" onclick="renderS1()">← Pars I</span>
+  <div class="path-badge">${d.badge}</div>
+  ${S.pred.d1?`<div class="prediction-echo"><strong>Your prediction:</strong> ${S.pred.d1}</div>`:''}
+  <div class="story-layout">
+    <div class="vocab-bar-col">${vBar()}</div>
+    <div class="story-col">
+      <div class="scene-label">📖 Pars II</div>
+      ${d.t}${gbox(d.g)}
+      <div class="feat-box"><div class="fb-lbl">Sentence under the microscope</div><div class="fb-latin">${d.feat}</div></div>
+      ${comp('s2',d.mc,d.rev)}
+    </div>${sumCol('s2','gateD2')}
+  </div>
+  <div class="decision-banner"><h3>⚖️ Dēcīsiō II — Quid dē signō?</h3><p>The merchant and his statue wait. Every path is a real path.</p></div>
+  ${decGrid('d2',DEC2,'goP3','s2')}`;
+  window.gateD2=()=>gateDec('d2','s2');window.scrollTo(0,0);
+}
+function goP3(k){grabPred('d2',k);S.path.p3=k;renderP3();}
+function renderP3(){
+  const d=S.path.p3==='A'?P3A:P3B;
+  pg().innerHTML=`<span class="back-link" onclick="renderP2()">← Pars II</span>
+  <div class="path-badge">${d.badge}</div>
+  ${S.pred.d2?`<div class="prediction-echo"><strong>Your prediction:</strong> ${S.pred.d2}</div>`:''}
+  <div class="story-layout">
+    <div class="vocab-bar-col">${vBar()}</div>
+    <div class="story-col">
+      <div class="scene-label">📖 Pars III (Fīnis)</div>
+      ${d.t}${gbox(d.g)}
+      <div class="feat-box"><div class="fb-lbl">Sentence under the microscope</div><div class="fb-latin">${d.feat}</div></div>
+      ${comp('s3',d.mc,d.rev)}
+    </div>${sumCol('s3','')}
+  </div>
+  <div style="margin-top:20px;text-align:center;">
+    <button class="btn-primary show" onclick="renderPractice(0)">Practice — Neutra Exercē ▶</button>
+    <button class="btn-secondary" style="max-width:320px;margin:10px auto 0;" onclick="renderHome()">Start over</button>
+  </div>`;window.scrollTo(0,0);
+}
+
+// PRACTICE POOLS
+const SPOT=[
+  {words:['Caecilius','ātrium','intrat'],neut:1,note:'ātrium — 2nd decl. neuter DO of intrat. Caecilius (-us) is the subject.'},
+  {words:['impluvium','est','parvum'],neut:0,note:'impluvium — neuter subject of linking est. parvum agrees in -um.'},
+  {words:['Grumio','vīnum','portat'],neut:1,note:'vīnum — 2nd decl. neuter DO of portat.'},
+  {words:['Metella','in','cubiculō','sedet'],neut:2,note:'cubiculum in PP form cubiculō — still a neuter noun.'},
+  {words:['Quintus','ātrium','amat'],neut:1,note:'ātrium — neuter DO of amat.'},
+  {words:['prandium','in','culīnā','est'],neut:0,note:'prandium — neuter subject of linking est.'},
+  {words:['familia','triclīnium','intrat'],neut:1,note:'triclīnium — neuter DO of intrat.'},
+  {words:['vīnum','bonum','est'],neut:0,note:'vīnum — neuter subject of linking est. bonum agrees.'},
+  {words:['Caecilius','impluvium','spectat'],neut:1,note:'impluvium — neuter DO of spectat.'},
+  {words:['Grumio','in','triclīniō','stat'],neut:2,note:'triclīnium in PP form triclīniō.'},
+  {words:['impluvium','Cerberum','dēlectat'],neut:0,note:'impluvium is the neuter SUBJECT. Cerberum (-um on masculine) is always the DO.'},
+  {words:['Metella','cubiculum','intrat'],neut:1,note:'cubiculum — neuter DO of intrat.'},
+  {words:['prandium','bonum','erat'],neut:0,note:'prandium — neuter subject of linking erat. bonum agrees.'},
+  {words:['Cerberus','in','impluviō','ludit'],neut:2,note:'impluvium in PP form impluviō. ludit = plays.'},
+  {words:['Quintus','vīnum','nōn','amat'],neut:1,note:'vīnum — neuter DO. He is still young!'},
+  {words:['ātrium','est','pulchrum'],neut:0,note:'ātrium — neuter subject of linking est. pulchrum agrees.'},
+  {words:['servus','signum','in','ātrīō','pōnit'],neut:1,note:'signum — neuter DO. in ātrīō is the PP.'},
+  {words:['servus','vīnum','ad','mēnsam','portat'],neut:1,note:'vīnum — neuter DO. ad mēnsam is the PP.'},
+  {words:['Quintus','in','ātrīō','stat'],neut:2,note:'ātrium in PP form ātrīō — still neuter.'},
+  {words:['canis','prandium','videt'],neut:1,note:'prandium — neuter DO. Cerberus has hopes!'},
+];
+const NUMSORT=[
+  {w:'ātrium',pl:false,note:'-um singular: one atrium.'},
+  {w:'ātria',pl:true,note:'ātrium → ātria: many halls. Neuter plural ends in -a.'},
+  {w:'cubiculum',pl:false,note:'-um singular: one bedroom.'},
+  {w:'cubicula',pl:true,note:'cubiculum → cubicula: many bedrooms.'},
+  {w:'vīnum',pl:false,note:'-um singular: one wine.'},
+  {w:'vīna',pl:true,note:'vīnum → vīna: many wines.'},
+  {w:'prandium',pl:false,note:'-um singular: one lunch.'},
+  {w:'prandia',pl:true,note:'prandium → prandia: many lunches.'},
+  {w:'triclīnium',pl:false,note:'-um singular: one dining room.'},
+  {w:'triclīnia',pl:true,note:'triclīnium → triclīnia: many dining rooms.'},
+  {w:'signum',pl:false,note:'-um singular: one statue.'},
+  {w:'signa',pl:true,note:'signum → signa: many statues. (Not a 1st-decl. name!)'},
+  {w:'impluvium',pl:false,note:'-um singular: one atrium pool.'},
+  {w:'dōnum',pl:false,note:'-um singular: one gift.'},
+  {w:'dōna',pl:true,note:'dōnum → dōna: many gifts.'},
+  {w:'perīculum',pl:false,note:'-um singular: one danger.'},
+  {w:'perīcula',pl:true,note:'perīculum → perīcula: many dangers.'},
+];
+const ROLEQ=[
+  {s:'ātrium Cerberum dēlectat.',q:'What role is ātrium?',
+   opts:['S — Cerberum is DO-marked (-um on masculine), so the neuter ātrium must be the subject.','DO — it ends in -um.','PP — it follows a preposition.'],
+   co:0,note:'Cerberum (-um on masculine) = always DO. So the neuter ātrium must be the subject.'},
+  {s:'Caecilius prandium cōnsūmit.',q:'What role is prandium?',
+   opts:['DO — Caecilius (-us) is the subject; prandium is what he eats.','S — the lunch eats itself.','Neither — it is a PP.'],
+   co:0,note:'Caecilius (-us) is the trustworthy subject. The neuter prandium takes the remaining role: DO.'},
+  {s:'vīnum bonum est.',q:'What role is vīnum?',
+   opts:['DO — est acts on it.','Neither — it is a PP.','S — linking est; vīnum is the subject; bonum agrees.'],
+   co:2,note:'"The wine is good" — linking sentence. vīnum is the subject; bonum (-um) agrees.'},
+  {s:'Quintus impluvium spectat.',q:'What role is impluvium?',
+   opts:['S — it watches Quintus.','DO — Quintus (-us) is the subject; impluvium is what he watches.','Neither — in + -um = PP.'],
+   co:1,note:'Quintus (-us) is the unambiguous subject. The neuter impluvium is the DO.'},
+  {s:'cubiculum parvum est.',q:'What role is cubiculum?',
+   opts:['DO — est acts on it.','S — linking est; cubiculum is the subject; parvum agrees.','Neither — parvum is the subject.'],
+   co:1,note:'"The bedroom is small" — linking est. cubiculum is the subject; parvum agrees.'},
+  {s:'servus signum portat.',q:'What role is signum?',
+   opts:['DO — servus (-us) is the subject, so signum is what he carries.','S — the statue carries itself.','Neither — it follows a preposition.'],
+   co:0,note:'servus (-us) is the trustworthy subject; signum is the neuter DO.'},
+  {s:'familia triclīnium intrat.',q:'What role is triclīnium?',
+   opts:['S — the dining room enters itself.','Neither — it is a PP.','DO — familia is the subject; triclīnium is the thing entered.'],
+   co:2,note:'intrat takes a DO. familia is the subject; triclīnium is the neuter DO.'},
+  {s:'Metella in ātrīō sedet.',q:'What role is ātrīō?',
+   opts:['S — the atrium sits.','DO — Metella sits on it.','Neither — in ātrīō is a PP telling where.'],
+   co:2,note:'in + the -ō form makes a PP. Metella is the subject; ātrīō is the location.'},
+  {s:'prandium parātum est.',q:'What role is prandium?',
+   opts:['DO — est acts on it.','S — linking est; prandium is the subject; parātum agrees.','Neither — parātum is the subject.'],
+   co:1,note:'"Lunch is ready" — linking sentence. prandium is the subject; parātum (-um) agrees.'},
+  {s:'Grumio vīnum in triclīnium portat.',q:'What role is vīnum?',
+   opts:['DO — Grumio is the subject; vīnum is what he carries.','S — the wine carries itself.','Neither — in triclīnium is the PP.'],
+   co:0,note:'Grumio carries; vīnum is the neuter DO. in triclīnium is a separate PP.'},
+  {s:'cubicula parva sunt.',q:'How do you know cubicula is plural?',
+   opts:['You cannot know.','The plural verb sunt and the plural adjective parva both agree with it.','It ends in -a like fēmina — 1st-decl. singular.'],
+   co:1,note:'sunt + parva: two plural agreements. cubicula is the neuter plural of cubiculum.'},
+  {s:'impluvium aquam habet.',q:'What role is impluvium?',
+   opts:['DO — it ends in -um.','S — aquam (-am, 1st decl.) is always the DO; impluvium must be the subject.','Neither — it follows in.'],
+   co:1,note:'aquam (-am) is always DO on a 1st-decl. noun. So impluvium must be the subject.'},
+  {s:'signa multa in viā erant.',q:'What role is signa?',
+   opts:['S — the plural verb erant and the adjective multa both agree with signa.','DO — videt acts on them.','Neither — it must be PP because multa follows it.'],
+   co:0,note:'erant is plural, multa is plural: signa is the neuter plural subject.'},
+  {s:'canis prandium videt.',q:'What role is prandium?',
+   opts:['DO — canis is the subject; prandium is what the dog sees.','S — lunch watches the dog.','Neither — it follows a preposition.'],
+   co:0,note:'canis is the subject; prandium is the neuter DO. Hungry dog!'},
+  {s:'ātria multa Rōmae sunt.',q:'How do you know ātria is plural?',
+   opts:['It ends in -a, which is always plural.','The plural verb sunt and the plural adjective multa both agree with it.','You cannot know.'],
+   co:1,note:'Two plural agreements: sunt (plural verb) and multa (plural adjective) confirm ātria is plural.'},
+];
+const DRAWN={0:null,1:null,2:null},DRAW_N={0:6,1:8,2:5};
+let dSeq=0;
+function drawItems(tab,force){
+  if(DRAWN[tab]&&!force)return;
+  const pool=[SPOT,NUMSORT,ROLEQ][tab];
+  const idx=pool.map((_,i)=>i);
+  for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
+  DRAWN[tab]=idx.slice(0,DRAW_N[tab]);dSeq++;
+}
+function shufflePractice(tab){drawItems(tab,true);renderPractice(tab);}
+function renderPractice(tab){
+  const tabs=['① Spot the neuter','② Singular or plural?','③ S or DO?'];
+  drawItems(tab,false);const picks=DRAWN[tab];let body='';
+  if(tab===0){
+    body=`<div class="acc-intro">Click the <b>neuter noun</b> in each sentence. Pool holds ${SPOT.length}.
+      <div class="acc-rule">2nd-decl. neuters end in <b>-um</b> for both S and DO. Their ablative (PP) form ends in <b>-ō</b> (in ātrīō).</div></div>`+
+    picks.map((si,k)=>{const s=SPOT[si],uid=`sp${dSeq}x${si}`;
+      return `<div class="spot-sent"><div class="spot-num">Sentence ${k+1}</div>
+      <div class="spot-words">${s.words.map((w,wi)=>`<button class="word-btn" id="${uid}-${wi}" onclick="spotTap(${si},${wi},'${uid}')">${w}</button>`).join('')}<span class="spot-period">.</span></div>
+      <div class="spot-fb" id="${uid}-fb"></div></div>`;}).join('');
+  } else if(tab===1){
+    body=`<div class="acc-intro">One or many? Tap <b>Sg</b> or <b>Pl</b>. Pool holds ${NUMSORT.length}.
+      <div class="acc-rule">Neuter plural = <b>-a</b> (ātrium → ātr<b>ia</b>, vīnum → vīn<b>a</b>). Don't confuse with 1st-decl. singular like <em>fēmina</em>!</div></div>
+    <div class="sort-grid">${picks.map(i=>{const w=NUMSORT[i],uid=`np${dSeq}x${i}`;
+      return `<div class="sort-item"><div class="sort-word"><em>${w.w}</em></div>
+      <div class="sort-btns"><button class="sb" id="${uid}-1" onclick="numTap(${i},1,'${uid}')">Sg</button><button class="sb" id="${uid}-2" onclick="numTap(${i},2,'${uid}')">Pl</button></div></div>
+      <div class="spot-fb" id="${uid}-fb"></div>`;}).join('')}</div>`;
+  } else {
+    body=`<div class="acc-intro">The neuter ending can't tell you its job — the <b>other words</b> can. Pool holds ${ROLEQ.length}.
+      <div class="acc-rule">Strategy: find a noun whose ending you CAN trust (-us = S, -am/-em = DO), then give the neuter the remaining role.</div></div>`+
+    picks.map((ri,k)=>{const r=ROLEQ[ri],uid=`role${dSeq}x${ri}`;
+      return `<div class="spot-sent"><div class="spot-num">Sentence ${k+1}: &nbsp;<em style="font-size:1rem;">${r.s}</em></div>
+      <div class="cq-prompt" style="margin:4px 0 8px;">${r.q}</div>
+      <ul class="mc-list" id="${uid}">${r.opts.map((o,oi)=>`<li><button class="mc-btn" onclick="mcA('${uid}','${uid}-fb',${oi},${r.co},'${esc('Optimē! '+r.note)}','${esc('Temptā iterum — trust the endings you know, then assign the neuter its role. ')}')">${o}</button></li>`).join('')}</ul>
+      <div class="fb" id="${uid}-fb"></div></div>`;}).join('');
+  }
+  pg().innerHTML=`<span class="back-link" onclick="renderHome()">← Home</span>
+  <div class="acc-header"><h2>Neutra Exercē</h2><p>Three drills on 2nd-declension neuter nouns — the one new grammar point in Stage 1.</p></div>
+  <div class="acc-tabs">${tabs.map((t,i)=>`<button class="ast ${i===tab?'active':''}" onclick="renderPractice(${i})">${t}</button>`).join('')}
+    <button class="ast ast-shuffle" onclick="shufflePractice(${tab})">🔀 Shuffle</button></div>
+  <div class="acc-layout">
+    <div class="acc-ref"><h4>Word bank — neuters</h4>
+      <div class="wb-head">2nd decl. (-um → -a)</div>
+      <div class="wb-row"><span class="wb-nom">ātrium</span><span class="wb-arr">→</span><span class="wb-acc">ātria</span></div>
+      <div class="wb-row"><span class="wb-nom">cubiculum</span><span class="wb-arr">→</span><span class="wb-acc">cubicula</span></div>
+      <div class="wb-row"><span class="wb-nom">impluvium</span><span class="wb-arr">→</span><span class="wb-acc">impluviā</span></div>
+      <div class="wb-row"><span class="wb-nom">prandium</span><span class="wb-arr">→</span><span class="wb-acc">prandia</span></div>
+      <div class="wb-row"><span class="wb-nom">vīnum</span><span class="wb-arr">→</span><span class="wb-acc">vīna</span></div>
+      <div class="wb-row"><span class="wb-nom">triclīnium</span><span class="wb-arr">→</span><span class="wb-acc">triclīnia</span></div>
+      <div class="wb-row"><span class="wb-nom">signum</span><span class="wb-arr">→</span><span class="wb-acc">signa</span></div>
+      <div class="wb-row"><span class="wb-nom">dōnum</span><span class="wb-arr">→</span><span class="wb-acc">dōna</span></div>
+      <div class="wb-row"><span class="wb-nom">perīculum</span><span class="wb-arr">→</span><span class="wb-acc">perīcula</span></div>
+      <div class="wb-note">S and DO look identical. Plural always ends in <b>-a</b>.</div>
+    </div>
+    <div class="acc-main">${body}</div>
+  </div>`;
+}
+function spotTap(si,wi,uid){
+  const s=SPOT[si];if(S.sp[uid])return;const ok=(wi===s.neut);S.sp[uid]=true;
+  S.score.t++;if(ok)S.score.c++;upScore();
+  const btn=$(`${uid}-${wi}`);btn.classList.add(ok?'correct':'wrong');
+  if(!ok)$(`${uid}-${s.neut}`).classList.add('correct');
+  for(let i=0;i<s.words.length;i++){const b=$(`${uid}-${i}`);if(b)b.disabled=true;}
+  const fb=$(`${uid}-fb`);fb.textContent=(ok?'Optimē! ':'')+s.note;fb.className=`spot-fb ${ok?'ok':'err'}`;
+}
+function numTap(i,choice,uid){
+  const w=NUMSORT[i];if(S.sp[uid])return;S.sp[uid]=true;
+  const correct=w.pl?2:1,ok=(choice===correct);
+  S.score.t++;if(ok)S.score.c++;upScore();
+  [1,2].forEach(d=>{const b=$(`${uid}-${d}`);if(!b)return;b.disabled=true;
+    if(d===choice)b.classList.add(ok?'s-ok':'s-err');if(!ok&&d===correct)b.classList.add('s-rev');});
+  const fb=$(`${uid}-fb`);fb.textContent=(ok?'Optimē! ':'')+w.note;fb.className=`spot-fb ${ok?'ok':'err'}`;
+}
+applySupports();
+renderHome();
+</script>
+</body>
+</html>

@@ -11,17 +11,15 @@ body{font-family:Georgia,serif;font-size:16px;line-height:1.6;background:#f5f0e8
 body.review-on .n1{text-decoration-color:#c0392b;}body.review-on .n2{text-decoration-color:#2471a3;}body.review-on .n3{text-decoration-color:#1e8449;}
 body.neut-on .neut{background:#fffbe6;border-bottom:2px dotted #c9920a;padding-bottom:1px;border-radius:2px;}
 #topbar{position:sticky;top:0;z-index:200;background:#2c1a0e;color:#f5f0e8;display:flex;align-items:center;gap:12px;padding:0 16px;height:48px;font-size:.85rem;}
-#topbar h1{font-size:1rem;font-weight:700;letter-spacing:.03em;flex-shrink:0;}
-#topbar .spacer{flex:1;}#score-disp{font-size:.8rem;opacity:.85;white-space:nowrap;}
-.tb-btn{background:transparent;border:1px solid #7a5c3a;color:#f5f0e8;border-radius:4px;padding:3px 10px;font-size:.78rem;cursor:pointer;}
-.tb-btn:hover{background:#3d2510;}.badge{font-size:.7rem;background:#7a5c3a;padding:2px 8px;border-radius:10px;white-space:nowrap;}
+#topbar h1{font-size:1rem;font-weight:700;letter-spacing:.03em;flex-shrink:0;}#topbar .spacer{flex:1;}#score-disp{font-size:.8rem;opacity:.85;white-space:nowrap;}
+.tb-btn{background:transparent;border:1px solid #7a5c3a;color:#f5f0e8;border-radius:4px;padding:3px 10px;font-size:.78rem;cursor:pointer;}.tb-btn:hover{background:#3d2510;}
+.badge{font-size:.7rem;background:#7a5c3a;padding:2px 8px;border-radius:10px;white-space:nowrap;}
 #settings-panel{position:fixed;top:48px;right:0;width:280px;background:#2c1a0e;color:#f5f0e8;padding:16px;z-index:199;transform:translateX(100%);transition:transform .2s ease;border-left:2px solid #7a5c3a;}
 #settings-panel.open{transform:translateX(0);}
 .sp-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;font-size:.88rem;}.sp-row label{line-height:1.3;}
 .toggle{appearance:none;width:40px;height:22px;border-radius:11px;background:#5a3a1a;cursor:pointer;position:relative;flex-shrink:0;transition:background .15s;}
 .toggle:checked{background:#b87333;}.toggle::after{content:'';position:absolute;width:16px;height:16px;border-radius:50%;background:#fff;top:3px;left:3px;transition:left .15s;}.toggle:checked::after{left:21px;}
-.sp-legend{font-size:.78rem;margin-top:4px;line-height:1.5;}
-.leg-swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:middle;}
+.sp-legend{font-size:.78rem;margin-top:4px;line-height:1.5;}.leg-swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:middle;}
 .leg-r{background:#c0392b;}.leg-b{background:#2471a3;}.leg-g{background:#1e8449;}
 #neut-explain{background:#3d2510;border-radius:5px;padding:8px 10px;font-size:.76rem;color:#ffe8a0;line-height:1.6;margin-top:4px;}
 #charmap{display:none;background:#fff3d6;padding:7px 16px;font-size:.82rem;border-bottom:1px solid #e0cdb0;}
@@ -43,8 +41,7 @@ body.neut-on .neut{background:#fffbe6;border-bottom:2px dotted #c9920a;padding-b
 .ex-sent .eng{font-size:.8rem;color:#666;display:block;margin-top:3px;font-style:italic;}.ex-sent .neut{background:#fffbe6;border-bottom:2px dotted #c9920a;}
 .vocab-table{width:100%;border-collapse:collapse;margin:10px 0 14px;background:#fffdf7;font-size:.86rem;}
 .vocab-table th{background:#f0e8d8;border:1px solid #c8a97e;padding:6px 9px;text-align:left;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:#5a4000;}
-.vocab-table td{border:1px solid #c8a97e;padding:6px 9px;vertical-align:top;}.vocab-table td.vt-latin{font-style:italic;font-weight:700;white-space:nowrap;}
-.vocab-table td.vt-der{min-width:90px;color:#aaa;}
+.vocab-table td{border:1px solid #c8a97e;padding:6px 9px;vertical-align:top;}.vocab-table td.vt-latin{font-style:italic;font-weight:700;white-space:nowrap;}.vocab-table td.vt-der{min-width:90px;color:#aaa;}
 .vt-n{font-size:.68rem;background:#c9920a;color:#fff;border-radius:8px;padding:1px 6px;margin-left:5px;font-style:normal;font-weight:400;vertical-align:middle;}
 .back-link{font-size:.82rem;color:#7a5c3a;cursor:pointer;display:inline-block;margin-bottom:14px;}.back-link:hover{text-decoration:underline;}
 .story-layout{display:grid;grid-template-columns:160px 1fr 250px;gap:16px;}
@@ -60,8 +57,7 @@ body.neut-on .neut{background:#fffbe6;border-bottom:2px dotted #c9920a;padding-b
 p.latin{font-size:1.04rem;line-height:1.9;margin-bottom:14px;}p.latin .sp{font-style:italic;color:#3a1a6e;}
 .glosses{background:#f0e8d8;border-left:3px solid #c8a97e;padding:8px 12px;border-radius:0 4px 4px 0;font-size:.81rem;margin:12px 0;line-height:1.8;}
 .feat-box{background:#fffbe6;border:1.5px solid #c9920a;border-radius:8px;padding:10px 14px;margin:12px 0;}
-.feat-box .fb-lbl{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#a06b00;margin-bottom:4px;}
-.feat-box .fb-latin{font-size:1.05rem;font-style:italic;}
+.feat-box .fb-lbl{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#a06b00;margin-bottom:4px;}.feat-box .fb-latin{font-size:1.05rem;font-style:italic;}
 .comp-block{background:#fff;border:1.5px solid #c8a97e;border-radius:8px;padding:16px 18px;margin-top:16px;}
 .comp-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#7a5c3a;margin-bottom:12px;}
 .comp-q{margin-bottom:16px;}.comp-q:last-child{margin-bottom:0;}.cq-prompt{font-size:.89rem;margin-bottom:8px;line-height:1.5;}
@@ -132,26 +128,20 @@ p.latin{font-size:1.04rem;line-height:1.9;margin-bottom:14px;}p.latin .sp{font-s
 <div id="topbar">
   <h1>Caecilius et Ātrium</h1>
   <span class="badge">Stage 1 · Neutra (2nd decl.)</span>
-  <div class="spacer"></div>
-  <span id="score-disp"></span>
+  <div class="spacer"></div><span id="score-disp"></span>
   <button class="tb-btn" onclick="toggleSettings()">⚙ Supports</button>
 </div>
 <div id="settings-panel">
   <div class="sp-row">
-    <label>Declension colours<br>
-      <span class="sp-legend"><span class="leg-swatch leg-r"></span>1st &nbsp;<span class="leg-swatch leg-b"></span>2nd &nbsp;<span class="leg-swatch leg-g"></span>3rd</span>
-    </label>
+    <label>Declension colours<br><span class="sp-legend"><span class="leg-swatch leg-r"></span>1st &nbsp;<span class="leg-swatch leg-b"></span>2nd &nbsp;<span class="leg-swatch leg-g"></span>3rd</span></label>
     <input type="checkbox" class="toggle" id="tog-review" onchange="applySupports()">
   </div>
   <div class="sp-row">
     <label>Neuter highlight<br><span class="sp-legend" style="color:#c9920a;">■ ātrium · vīnum · prandium</span></label>
     <input type="checkbox" class="toggle" id="tog-neut" checked onchange="applySupports()">
   </div>
-  <div class="sp-row">
-    <label>Character map</label>
-    <input type="checkbox" class="toggle" id="tog-charmap" onchange="applySupports()">
-  </div>
-  <div id="neut-explain"><strong>The neuter rule:</strong> a neuter noun wears <em>-um</em> as <strong>both</strong> subject and direct object. You cannot tell from the ending alone — check the other nouns and the verb. Plural neuters end in <strong>-a</strong> (<em>ātria, cubicula, vīna</em>).</div>
+  <div class="sp-row"><label>Character map</label><input type="checkbox" class="toggle" id="tog-charmap" onchange="applySupports()"></div>
+  <div id="neut-explain"><strong>The neuter rule:</strong> a neuter noun wears <em>-um</em> as subject. Its location (PP) form ends in <em>-ō</em> (in ātrīō). Plural neuters end in <strong>-a</strong> (ātria, cubicula, vīna).</div>
 </div>
 <div id="charmap"><b style="color:#a06b00">Characters:</b> Caecilius — the banker &nbsp;|&nbsp; Metella — his wife &nbsp;|&nbsp; Quintus — their son &nbsp;|&nbsp; Grumio — the cook &nbsp;|&nbsp; Cerberus — the dog</div>
 <div id="page"></div>
@@ -174,11 +164,11 @@ function applySupports(){
 }
 document.addEventListener('click',e=>{const p=$('settings-panel');if(p&&p.classList.contains('open')&&!p.contains(e.target)&&!e.target.closest('.tb-btn'))p.classList.remove('open');});
 function mcA(lid,fid,ch,co,ok,err){
-  S.score.t++;const good=(ch===co);if(good)S.score.c++;upScore();
+  S.score.t++;const g=(ch===co);if(g)S.score.c++;upScore();
   document.querySelectorAll(`#${lid} .mc-btn`).forEach(b=>b.disabled=true);
-  document.querySelectorAll(`#${lid} .mc-btn`)[ch].classList.add(good?'c-ok':'c-err');
-  if(!good)document.querySelectorAll(`#${lid} .mc-btn`)[co].classList.add('c-ok');
-  const f=$(fid);f.textContent=good?ok:err;f.className=`fb show ${good?'ok':'err'}`;
+  document.querySelectorAll(`#${lid} .mc-btn`)[ch].classList.add(g?'c-ok':'c-err');
+  if(!g)document.querySelectorAll(`#${lid} .mc-btn`)[co].classList.add('c-ok');
+  const f=$(fid);f.textContent=g?ok:err;f.className=`fb show ${g?'ok':'err'}`;
 }
 function reveal(id){$(id).style.display='block';const b=$(`${id}-btn`);if(b){b.textContent='Answer shown';b.disabled=true;}}
 function saveSum(key,gfn){
@@ -200,9 +190,8 @@ function esc(s){return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,
 function comp(pfx,mc,rev){
   return `<div class="comp-block"><div class="comp-label">📖 Comprehension</div>
     <div class="comp-q"><div class="cq-prompt"><b>1.</b> ${mc.q}</div>
-      <ul class="mc-list" id="mc-${pfx}">
-        ${mc.opts.map((o,i)=>`<li><button class="mc-btn" onclick="mcA('mc-${pfx}','fb-${pfx}',${i},${mc.co},'${esc(mc.ok)}','${esc(mc.err)}')">${o}</button></li>`).join('')}
-      </ul><div class="fb" id="fb-${pfx}"></div>
+      <ul class="mc-list" id="mc-${pfx}">${mc.opts.map((o,i)=>`<li><button class="mc-btn" onclick="mcA('mc-${pfx}','fb-${pfx}',${i},${mc.co},'${esc(mc.ok)}','${esc(mc.err)}')">${o}</button></li>`).join('')}</ul>
+      <div class="fb" id="fb-${pfx}"></div>
     </div>
     <div class="comp-q"><div class="rq-prompt"><b>2.</b> ${rev.q}</div>
       <textarea class="rq-input" placeholder="Write your answer, then check…" rows="2"></textarea>
@@ -216,114 +205,125 @@ const VOCAB=[
   ['ātrium, -ī (n)','atrium, main hall','N'],['cubiculum, -ī (n)','bedroom','N'],
   ['impluvium, -ī (n)','pool in the atrium','N'],['prandium, -ī (n)','lunch','N'],
   ['vīnum, -ī (n)','wine','N'],['triclīnium, -ī (n)','dining room','N'],
-  ['signum, -ī (n)','sign, statue','N'],['Caecilius, -ī (m)','the banker',''],
-  ['Metella, -ae (f)','his wife',''],['Quintus, -ī (m)','their son',''],
-  ['Grumio, -ōnis (m)','the cook',''],['Cerberus, -ī (m)','the dog',''],
-  ['mercātor, -ōris (m)','merchant',''],
+  ['signum, -ī (n)','sign, statue','N'],['hortus, -ī (m)','garden',''],
+  ['Caecilius, -ī (m)','the banker',''],['Metella, -ae (f)','his wife',''],
+  ['Quintus, -ī (m)','their son',''],['Grumio, -ōnis (m)','the cook',''],['Cerberus, -ī (m)','the dog',''],
 ];
 const VB=[['ātrium','hall',1],['cubiculum','bedroom',1],['impluvium','pool',1],
   ['prandium','lunch',1],['vīnum','wine',1],['triclīnium','dining room',1],
-  ['signum','sign/statue',1],['mercātor','merchant',0]];
+  ['signum','sign/statue',1],['hortus','garden',0]];
 function vBar(){return `<div class="vocab-bar"><h4>📌 Vocab</h4>${VB.map(([l,d,n])=>`<div class="vb-row"><span class="vb-lat">${l}</span>${n?'<span class="vt-n">n</span>':''}<br><span class="vb-def">${d}</span></div>`).join('')}<div class="vb-note">Words marked <span class="vt-n" style="vertical-align:baseline;">n</span> are neuter: plural in <b>-a</b>.</div></div>`;}
 function vTable(){return `<table class="vocab-table"><tr><th>Latin</th><th>Definition</th><th>Derivative</th></tr>${VOCAB.map(([l,d,n])=>`<tr><td class="vt-latin">${l}${n?'<span class="vt-n">neuter</span>':''}</td><td>${d}</td><td class="vt-der">&nbsp;</td></tr>`).join('')}</table>`;}
 
-// STORY
+// STORY DATA
 const S1t=`
-  <p class="latin">${n2('Caecilius')} in tablīnō scribit. ${nn2('ātrium')} est magnum et pulchrum.
-    in ${nn2('ātrīō')} est ${nn2('impluvium')}. ${nn2('impluvium')} aquam* habet.</p>
-  <p class="latin">${n1('Metella')} in ${nn2('ātrīō')} sedet et librum* legit.
-    ${n3('Cerberus')} quoque in ${nn2('ātrīō')} est.
-    ${n3('canis')} ${nn2('impluvium')} spectat — ${n3('canis')} aquam amat!</p>
-  <p class="latin">${n3('Grumio')} in culīnā est. ${n3('coquus')} ${nn2('prandium')} et ${nn2('vīnum')} parat.
-    subitō ${n2('Quintus')} ${nn2('ātrium')} intrat. ${n2('Quintus')} est laetissimus*.
-    <span class="sp">"māter! pater! nōvum quid vīdī in forō!"</span></p>`;
-const S1g=[['aquam*','water'],['librum*','book'],['laetissimus*','very happy'],['nōvum quid*','something new']];
-const S1mc={q:'<em>impluvium aquam habet</em> — What role does impluvium play?',
-  opts:['Subject — aquam (-am, 1st decl.) is always the DO, so impluvium must be the subject.',
-        'Direct object — impluvium is the thing that has water.',
-        'You cannot tell — the -um ending is ambiguous.',
-        'Part of a prepositional phrase.'],
-  co:0,ok:'Optimē! aquam (-am) is ALWAYS the DO on a 1st-decl. noun. If aquam is the DO, impluvium must be the subject — even though its -um cannot say so itself.',
-  err:'Temptā! Look at aquam: -am on a 1st-decl. noun is always the DO. If aquam is the DO, what must impluvium be?'};
-const S1rev={q:'Find the sentence that shows Cerberus has an unusual hobby. What does he do and why is it funny?',
-  a:'<strong>Answer:</strong> <em>canis impluvium spectat — canis aquam amat!</em> He stares at the pool because he loves water. Most dogs avoid them!'};
+  <p class="latin">${n2('Caecilius')} in tablīnō est. ${n2('Caecilius')} scribit.
+    ${nn2('ātrium')} est magnum et pulchrum.
+    in ${nn2('ātrīō')} est ${nn2('impluvium')}. ${nn2('impluvium')} est parvum sed pulchrum.</p>
+  <p class="latin">${n1('Metella')} in ${nn2('ātrīō')} sedet. ${n3('Cerberus')} quoque in ${nn2('ātrīō')} est.
+    ${n3('canis')} est laetus!</p>
+  <p class="latin">${n3('Grumio')} in culīnā est. ${n3('coquus')} labōrat.
+    ${nn2('prandium')} in culīnā est. ${nn2('prandium')} est bonum!
+    subitō ${n2('Quintus')} intrat. ${n2('Quintus')} est laetissimus*.
+    <span class="sp">"māter! pater!"</span> ${n2('Quintus')} clāmat.</p>`;
+const S1mc={q:'<em>impluvium est parvum sed pulchrum</em> — What role does impluvium play? How do you know?',
+  opts:['Subject — est is a linking verb; impluvium is what the sentence describes; parvum and pulchrum both agree with it in -um.',
+        'Location (PP) — impluvium tells us where something is.',
+        'An adjective — impluvium describes something else.',
+        'A verb form.'],
+  co:0,ok:'Optimē! est is a linking verb. impluvium is the subject, and the adjectives parvum and pulchrum both wear -um to agree with the neuter noun.',
+  err:'Temptā! est is a linking verb — it describes the subject. What noun must impluvium be? And what do parvum and pulchrum agree with?'};
+const S1rev={q:'Where is each family member? Find a Latin phrase for each one.',
+  a:'<strong>Answer:</strong> Caecilius <em>in tablīnō</em> — Metella <em>in ātrīō</em> — Grumio <em>in culīnā</em> — Quintus just arrived! Cerberus is also in the ātrium.'};
 
-const P2A={badge:'Via I-A · Caecilius listens',
-  t:`<p class="latin">${n2('Caecilius')} ex tablīnō venit. ${n1('familia')} in ${nn2('ātrīō')} stat.
-    ${n2('Quintus')} fābulam nārrat: <span class="sp">"${n3('mercātor')} in viā erat!
-    ${n3('mercātor')} ${nn2('signum')} pulchrum habēbat*. ${nn2('signum')} magnum et antīquum* erat!"</span></p>
-  <p class="latin">${n2('Caecilius')} ${nn2('signum')} amat! sed cōgitat.
-    ${nn2('signum')} est magnum — et ${nn2('cubiculum')} ${n2('Quīntī')} est parvum.
-    <span class="sp">"ubi* ${nn2('signum')} stābit*?"</span> ${n1('Metella')} rogat.</p>`,
-  g:[['habēbat*','had'],['antīquum*','ancient'],['ubi*','where?'],['stābit*','will it stand?']],
-  feat:'signum magnum et antīquum erat.',
-  mc:{q:'<em>signum magnum et antīquum erat</em> — What role is signum? What do the adjectives tell you?',
-    opts:['Subject — erat is a linking verb (no DO!); magnum and antīquum both wear -um to agree with the neuter signum.',
-          'Direct object — Quintus is describing the statue he saw.',
-          'You cannot tell — all three words end in -um.',
-          'No subject at all — it is indirect speech.'],
-    co:0,ok:'Optimē! erat is a linking verb — it has no DO. signum is the subject, and both adjectives wear -um to agree with the neuter noun.',
-    err:'Temptā! erat is a linking verb (like est). Linking verbs describe their subject — they never take a DO. What role must signum play?'},
-  rev:{q:'What problem does Metella raise at the end? Find the two key Latin nouns.',
-    a:'<strong>Answer:</strong> <em>signum</em> est magnum sed <em>cubiculum</em> est parvum — the statue is large, the bedroom is small. Where will it go?'}};
+const P2A={badge:'Via I-A · Caecilius comes out',
+  t:`<p class="latin">${n2('Caecilius')} nunc* in ${nn2('ātrīō')} est. ${n1('familia')} in ${nn2('ātrīō')} est!
+    ${n2('Quintus')} est laetissimus*. <span class="sp">"pater! ${nn2('signum')} in viā est!
+    ${nn2('signum')} est magnum et antīquum*! ${nn2('signum')} est pulcherrimum*!"</span></p>
+  <p class="latin">${n2('Caecilius')} in ${nn2('ātrīō')} stat et cōgitat*.
+    ${nn2('ātrium')} est magnum. ${nn2('signum')} est magnum.
+    <span class="sp">"signum in ātrīō esse* potest*!"</span> ${n2('Caecilius')} clāmat.
+    ${n1('Metella')} rīdet. ${n3('Cerberus')} quoque in ${nn2('ātrīō')} est.</p>`,
+  g:[['nunc*','now'],['laetissimus*','very happy'],['antīquum*','ancient'],['pulcherrimum*','most beautiful'],['cōgitat*','thinks'],['esse*','to be'],['potest*','it is possible']],
+  feat:'signum in ātrīō esse potest!',
+  mc:{q:'<em>signum in ātrīō esse potest</em> — What role is ātrīō?',
+    opts:['Location (PP) — in ātrīō tells us WHERE the signum could be. in + the -ō form = a location phrase.',
+          'Subject — ātrīō is doing the being.',
+          'An adjective agreeing with signum.'],
+    co:0,ok:'Optimē! in + the -ō form of a neuter noun always makes a location phrase (PP). ātrīō comes from ātrium — still a neuter, just in its PP form.',
+    err:'Temptā! What does in + a noun in -ō tell you? It tells you WHERE something is. ātrīō is ātrium in its PP form.'},
+  rev:{q:'Find the two Latin sentences that explain why the statue would fit in the atrium.',
+    a:'<strong>Answer:</strong> <em>ātrium est magnum. signum est magnum.</em> Both are large — so the large atrium could hold the large statue!'}};
 
-const P2B={badge:'Via I-B · Quintus must wait',
-  t:`<p class="latin">${n2('Quintus')} nōn est laetus. <span class="sp">"post prandium?"</span> rogat.
-    ${n2('Quintus')} in ${nn2('ātrīō')} manet et ${nn2('impluvium')} spectat.
-    ${n3('Cerberus')} ad ${n2('Quintum')} venit — ${n3('canis')} ${n2('Quintum')} amat!</p>
-  <p class="latin">subitō ${n3('Grumio')} ${nn2('ātrium')} intrat.
-    <span class="sp">"${nn2('prandium')} parātum* est! familia ad ${nn2('triclīnium')} veniat*!"</span>
-    ${n1('familia')} ${nn2('triclīnium')} intrat.
-    tunc* ${n2('Quintus')} fābulam nārrat — dē mercātōre et ${nn2('signō')} pulchrō!
-    ${n2('Caecilius')} audit et cōgitat.</p>`,
-  g:[['parātum*','ready (adj.)'],['veniat*','let the family come!'],['tunc*','then'],['dē*','about'],['signō*','statue (abl.)']],
-  feat:'prandium parātum est.',
-  mc:{q:'<em>prandium parātum est</em> — Both prandium and parātum end in -um. What does that tell you?',
-    opts:['parātum is an adjective agreeing with the neuter noun prandium; both wear -um because prandium is neuter.',
-          'Both are direct objects of est.',
-          'parātum is the subject and prandium is the DO.',
-          'The two -um endings mean they are both subjects.'],
-    co:0,ok:'Optimē! Adjectives agree with their noun in gender. prandium is neuter, so parātum wears -um too. "The lunch is ready" — prandium is the subject.',
-    err:'Temptā! parātum is an adjective. Adjectives agree with their noun in gender: if prandium is neuter, what ending must its adjective take?'},
-  rev:{q:'Who comforts Quintus while he waits? Find the two short Latin sentences.',
-    a:'<strong>Answer:</strong> <em>Cerberus ad Quintum venit — canis Quintum amat!</em> The dog comes to him and loves him. Good dog.'}};
+const P2B={badge:'Via I-B · Caecilius stays in the tablinum',
+  t:`<p class="latin">${n2('Caecilius')} in tablīnō manet. ${n2('Caecilius')} labōrat.
+    ${n2('Quintus')} est tristis*. ${n2('Quintus')} in ${nn2('ātrīō')} manet.
+    ${n3('Cerberus')} ad ${n2('Quintum')} venit. ${n3('canis')} est amīcus*!</p>
+  <p class="latin">tandem* ${n1('familia')} in ${nn2('triclīniō')} est.
+    ${nn2('prandium')} est parātum*! ${nn2('triclīnium')} est plēnum* et laetum*.
+    nunc* ${n2('Quintus')} fābulam nārrat:
+    <span class="sp">"${nn2('signum')} in viā est! ${nn2('signum')} est magnum et antīquum*!"</span>
+    ${n2('Caecilius')} cōgitat*. ${n1('Metella')} rīdet.</p>`,
+  g:[['tristis*','sad'],['amīcus*','a friend'],['tandem*','at last'],['parātum*','ready'],['plēnum*','full'],['laetum*','happy (said of a place)'],['nunc*','now'],['antīquum*','ancient'],['cōgitat*','thinks']],
+  feat:'triclīnium est plēnum et laetum.',
+  mc:{q:'<em>triclīnium est plēnum et laetum</em> — What role is triclīnium?',
+    opts:['Subject — est is a linking verb; triclīnium is what the sentence describes; plēnum and laetum both agree with it.',
+          'Location (PP) — it tells us where the family is.',
+          'An adjective modifying prandium.'],
+    co:0,ok:'Optimē! est is linking. triclīnium is the subject. Both adjectives wear -um to agree with the neuter noun.',
+    err:'Temptā! est is a linking verb. It describes its subject. What noun must triclīnium be? What do plēnum and laetum agree with?'},
+  rev:{q:'How does Cerberus show that he is a good friend to Quintus? Find the Latin.',
+    a:'<strong>Answer:</strong> <em>Cerberus ad Quintum venit — canis est amīcus!</em> The dog comes to Quintus and IS a friend. Good dog.'}};
 
 const P3A={badge:'Via II-A · The statue arrives',
-  t:`<p class="latin">${n2('Caecilius')} ${nn2('signum')} emit*!
-    ${n3('servus')} ${nn2('signum')} in ${nn2('ātrium')} portat et in ${nn2('ātrīō')} pōnit*.
-    ${nn2('signum')} in ${nn2('ātrīō')} stat. nunc* ${nn2('ātrium')} est pulcherrimum*!</p>
-  <p class="latin">${n3('Cerberus')} ${nn2('signum')} spectat. ${n3('canis')} ${nn2('signum')} nōn amat —
-    ${nn2('signum')} aquam nōn habet!
-    ${n1('familia')} rīdet. ${nn2('prandium')} optimum* erat. omnia bona erant!</p>`,
-  g:[['emit*','buys'],['pōnit*','places'],['nunc*','now'],['pulcherrimum*','most beautiful'],['optimum*','excellent']],
-  feat:'omnia bona erant.',
-  mc:{q:'<em>omnia bona erant</em> — omnia ends in -a. Is it singular or plural? How do you know?',
-    opts:['Plural — erant is a plural verb and bona is a plural adjective; omnia = "everything/all things."',
+  t:`<p class="latin">${nn2('signum')} nunc* in ${nn2('ātrīō')} est!
+    ${nn2('signum')} est magnum et pulchrum. ${nn2('ātrium')} est pulcherrimum*!
+    ${n3('Cerberus')} in ${nn2('ātrīō')} stat et ${nn2('signum')} spectat*.
+    ${n3('canis')} nōn est laetus — ${nn2('signum')} est frīgidum* et immōtum*!</p>
+  <p class="latin">${n1('familia')} in ${nn2('ātrīō')} est. omnia* bona sunt*!
+    ${nn2('ātrium')} est plēnum* et laetum*. ${nn2('prandium')} quoque est parātum*!
+    ${n1('familia')} in ${nn2('triclīnium')} it*.</p>`,
+  g:[['nunc*','now'],['pulcherrimum*','most beautiful'],['spectat*','looks at'],['frīgidum*','cold'],['immōtum*','motionless'],['omnia*','everything'],['sunt*','are (plural)'],['plēnum*','full'],['laetum*','cheerful'],['parātum*','ready'],['it*','goes']],
+  feat:'omnia bona sunt.',
+  mc:{q:'<em>omnia bona sunt</em> — omnia ends in -a. Is it singular or plural? How do you know?',
+    opts:['Plural — sunt is a plural verb ("they are") and bona is a plural adjective; omnia = "everything/all things."',
           'Singular — it ends in -a like fēmina.',
           'You cannot tell from -a alone.',
           'Neither — omnia is an adverb.'],
-    co:0,ok:'Optimē! erant is plural ("they were") and bona is the plural neuter adjective. omnia = "all things" — always a neuter plural. The same -a that looks like fēmina (sg.) IS the neuter plural!',
-    err:'Temptā! What does erant tell you? A plural verb needs a plural subject. And bona on a neuter — is that singular or plural?'},
-  rev:{q:'Why does Cerberus NOT like the new statue? Find the Latin reason.',
-    a:'<strong>Answer:</strong> <em>signum aquam nōn habet</em> — the statue has no water! Cerberus loves the impluvium for its water, not for art.'}};
+    co:0,ok:'Optimē! sunt is plural ("they are") and bona is the plural neuter adjective. omnia = "all things" — always a neuter plural. The same -a that looks like fēmina (sg.) IS the neuter plural!',
+    err:'Temptā! What does sunt tell you? A plural verb needs a plural subject. And bona on a neuter — is that singular or plural?'},
+  rev:{q:'Why is Cerberus NOT happy about the new statue? Find the two Latin adjectives.',
+    a:'<strong>Answer:</strong> <em>signum est frīgidum et immōtum</em> — the statue is cold and motionless. No tail-wagging from a marble Hercules.'}};
 
-const P3B={badge:'Via II-B · Caecilius passes',
-  t:`<p class="latin">${n3('mercātor')} abit*. ${nn2('signum')} quoque abit. ${n2('Quintus')} nōn est laetus.</p>
-  <p class="latin">sed ${n2('Caecilius')} rīdet.
-    <span class="sp">"Quinte, ${nn2('cubiculum')} tuum* parvum est. ubi* ${nn2('signum')} stābit*?"</span>
-    ${n2('Quintus')} cōgitat. ${nn2('cubiculum')} est parvum. ${nn2('signum')} est magnum.
-    ${n2('Caecilius')} habet cōnsilium bonum! ${n1('familia')} rīdet. omnia bona erant!</p>`,
-  g:[['abit*','goes away'],['tuum*','your'],['ubi*','where?'],['stābit*','will it stand?']],
-  feat:'cubiculum tuum parvum est.',
-  mc:{q:'<em>cubiculum tuum parvum est</em> — What are the roles of cubiculum, tuum, and parvum?',
-    opts:['cubiculum is the subject (linking verb); tuum and parvum are adjectives wearing -um to agree with the neuter.',
-          'tuum is the subject; cubiculum and parvum are direct objects of est.',
-          'All three are direct objects of est.',
-          'cubiculum is the DO; tuum and parvum are subjects.'],
-    co:0,ok:'Optimē! est is linking — cubiculum is the subject. Adjectives agree with their noun: tuum ("your") and parvum ("small") both wear -um because cubiculum is neuter.',
-    err:'Temptā! est is a linking verb — no DO. cubiculum must be the subject. Adjectives agree with their noun in gender: if cubiculum is neuter, what ending must they take?'},
-  rev:{q:'What do you think Caecilius\'s "cōnsilium bonum" is? The text doesn\'t say — make your best guess.',
-    a:'<strong>Open answer:</strong> Likely the statue belongs in the ātrium or triclīnium — a much larger room than Quintus\'s cubiculum. Or perhaps Caecilius plans to negotiate the price first.'}};
+const P3B={badge:'Via II-B · The family in the garden',
+  t:`<p class="latin">${n1('familia')} nunc* in hortō est. ${n2('hortus')} est magnus et pulcher.
+    ${nn2('impluvium')} quoque in hortō est — parvum sed pulchrum.
+    ${n3('Cerberus')} in hortō est et laetus est!</p>
+  <p class="latin">${n2('Quintus')} in hortō stat et fābulam nārrat:
+    <span class="sp">"${nn2('signum')} in viā est! ${nn2('signum')} est antīquum* et pulchrum!"</span>
+    ${n2('Caecilius')} rīdet. <span class="sp">"et ${nn2('ātrium')} nostrum* est pulchrum!"</span>
+    omnia* bona sunt*. ${nn2('prandium')} est parātum*.</p>`,
+  g:[['nunc*','now'],['antīquum*','ancient'],['nostrum*','our'],['omnia*','everything'],['sunt*','are (plural)'],['parātum*','ready']],
+  feat:'ātrium nostrum est pulchrum.',
+  mc:{q:'<em>ātrium nostrum est pulchrum</em> — What are the roles of ātrium, nostrum, and pulchrum?',
+    opts:['ātrium is the subject (linking est); nostrum ("our") and pulchrum ("beautiful") are adjectives wearing -um to agree with the neuter noun.',
+          'nostrum is the subject; ātrium and pulchrum are location phrases.',
+          'All three are subjects of est.',
+          'ātrium is a location phrase; nostrum and pulchrum are the subjects.'],
+    co:0,ok:'Optimē! est is linking — ātrium is the subject. Adjectives agree with their noun: nostrum and pulchrum both wear -um because ātrium is neuter.',
+    err:'Temptā! est is a linking verb. ātrium must be the subject. Adjectives agree with their noun in gender — if ātrium is neuter, what ending must nostrum and pulchrum take?'},
+  rev:{q:'Find the sentence that shows Cerberus is happy in the garden. Why might a dog prefer the garden to the atrium?',
+    a:'<strong>Answer:</strong> <em>Cerberus in hortō est et laetus est!</em> Gardens have smells, grass, birds — much more interesting than a marble floor. And the impluvium is there too!'}};
+
+// DECISIONS
+const DEC1=[
+  {k:'A',lat:'Caecilius in ātrīō est.',sub:'He comes out — the family is together in the hall.'},
+  {k:'B',lat:'Caecilius in tablīnō manet.',sub:'He stays — accounts first, news later.'},
+];
+const DEC2=[
+  {k:'A',lat:'signum in ātrīō est!',sub:'The statue arrives in the atrium.'},
+  {k:'B',lat:'familia in hortō est.',sub:'Never mind the statue — into the garden.'},
+];
 
 function decGrid(id,cards,handler,sk){
   return `<div class="choices-grid" id="${id}">
@@ -348,32 +348,23 @@ function gateDec(id,sk){
 function tryPick(h,id,k){const b=$(`ch-${id}-${k}`);if(!b||!b.classList.contains('ready'))return;window[h](k);}
 function grabPred(id,k){const p=$(`pred-${id}-${k}`);if(p&&p.value.trim())S.pred[id]=p.value.trim();}
 
-const DEC1=[
-  {k:'A',lat:'Caecilius tablīnum relinquit et Quintum audit.',sub:'He drops his work — what did Quintus see?'},
-  {k:'B',lat:'"post prandium, Quinte!" Caecilius inquit.',sub:'Quintus must wait. Accounts first.'},
-];
-const DEC2=[
-  {k:'A',lat:'Caecilius ad mercātōrem it et signum emit*.',sub:'He buys it! But where will it go?'},
-  {k:'B',lat:'"signum nōn emō*," Caecilius inquit. "nimis magnum est!"',sub:'He passes. Too big.'},
-];
-
 function renderHome(){
   pg().innerHTML=`<div class="home-header"><h2>Caecilius et Ātrium</h2><p>Stage 1 · An introduction to neuter nouns</p></div>
   <div class="home-grid">
     <div class="home-card" onclick="renderVocab()">
       <div class="hc-icon">📖</div><h3>Read the Story</h3>
-      <div class="hc-latin">in ātrīō — in the atrium</div>
-      <p>A choose-your-own-adventure in Caecilius's house. Two decisions, four routes.</p>
+      <div class="hc-latin">ātrium est magnum et pulchrum</div>
+      <p>A choose-your-own-adventure in Caecilius's house. Two decisions, four possible routes.</p>
       <button class="hc-btn">Begin ▶</button>
     </div>
     <div class="home-card" onclick="renderPractice(0)">
       <div class="hc-icon">⚡</div><h3>Practice: Neutra</h3>
       <div class="hc-latin">ātrium · cubiculum · vīnum</div>
-      <p>Three drills on 2nd-declension neuter nouns — the one new gender in Stage 1.</p>
+      <p>Three drills — spot the neuter, singular or plural, subject or location.</p>
       <button class="hc-btn">Practice ▶</button>
     </div>
   </div>
-  <div class="bridge-note"><strong>The one new thing:</strong> Latin nouns come in three genders — masculine, feminine, and <strong>neuter</strong>. Neuter nouns wear the <em>same</em> ending for subject and direct object (<em>ātrium</em> either way). Episode neuters: <em>ātrium, cubiculum, impluvium, prandium, vīnum, triclīnium, signum</em>.</div>`;
+  <div class="bridge-note"><strong>The one new thing:</strong> Latin nouns come in three genders — masculine, feminine, and <strong>neuter</strong>. Neuter nouns end in <em>-um</em> as subjects. Their location (PP) form ends in <em>-ō</em> (in ātrīō). Plural neuters end in <em>-a</em>. Episode neuters: <em>ātrium, cubiculum, impluvium, prandium, vīnum, triclīnium, signum</em>.</div>`;
   window.scrollTo(0,0);
 }
 function renderVocab(){
@@ -387,24 +378,25 @@ function renderVocab(){
 function renderNI(step){
   const screens=[
     `<div class="intro-card"><h2>🟡 One new thing: the NEUTER noun</h2>
-      <p>You already know that Latin endings reveal a noun's job:</p>
-      <div class="ex-sent"><em>servus</em> cēnam parat. → <b>servus</b> (-us) = S &nbsp;·&nbsp; <b>cēnam</b> (-am) = DO<span class="eng">The slave prepares dinner.</span></div>
-      <p><b>Neuter nouns break this rule.</b> They wear the SAME ending as both S and DO:</p>
-      <div class="ex-sent"><span class="neut">ātrium</span> est magnum. &nbsp;·&nbsp; Caecilius <span class="neut">ātrium</span> intrat.<span class="eng">The atrium is large. (S) &nbsp;·&nbsp; Caecilius enters the atrium. (DO) — same -um!</span></div>
-      <p>So when you see <em>ātrium</em>, the ending alone <b>cannot</b> tell you its job. You must check the <b>other words</b>.</p>
-    </div><button class="btn-primary show" onclick="renderNI(1)">Next — The plural ending ▶</button>`,
+      <p>You already know that Latin endings reveal a noun's role:</p>
+      <div class="ex-sent">Caecilius in hortō est. → <b>Caecilius</b> (-us) = subject &nbsp;·&nbsp; <b>hortō</b> = location<span class="eng">Caecilius is in the garden.</span></div>
+      <p>Neuter nouns work the same way — but they end in <b>-um</b> as the subject (not -us or -a):</p>
+      <div class="ex-sent"><span class="neut">ātrium</span> est magnum.<span class="eng">The atrium is large. (-um = subject of est)</span></div>
+      <div class="ex-sent">Caecilius in <span class="neut">ātrīō</span> est.<span class="eng">Caecilius is in the atrium. (-ō = location, after in)</span></div>
+      <p>So a 2nd-decl. neuter has two forms you'll see: <b>-um</b> (subject) and <b>-ō</b> (location after <em>in</em>).</p>
+    </div><button class="btn-primary show" onclick="renderNI(1)">Next — The plural ▶</button>`,
     `<div class="intro-card"><h2>🟡 The plural: -um becomes -a</h2>
-      <p>Neuter plurals end in <b>-a</b> — for BOTH S and DO:</p>
-      <div class="ex-sent"><span class="neut">ātrium</span> → <span class="neut">ātria</span> &nbsp;·&nbsp; <span class="neut">cubiculum</span> → <span class="neut">cubicula</span> &nbsp;·&nbsp; <span class="neut">vīnum</span> → <span class="neut">vīna</span><span class="eng">one hall → many &nbsp;·&nbsp; one bedroom → many &nbsp;·&nbsp; one wine → many</span></div>
-      <p>Careful! <b>-a</b> also looks like a 1st-decl. singular (<em>fēmina, Metella</em>). Two clues help:</p>
-      <div class="ex-sent"><span class="neut">cubicula</span> parva <b>sunt</b>.<span class="eng">Plural verb <b>sunt</b> + plural adjective <b>parva</b> → cubicula must be plural neuter.</span></div>
+      <p>Neuter plurals end in <b>-a</b>:</p>
+      <div class="ex-sent"><span class="neut">ātrium</span> → <span class="neut">ātria</span> &nbsp;·&nbsp; <span class="neut">cubiculum</span> → <span class="neut">cubicula</span> &nbsp;·&nbsp; <span class="neut">vīnum</span> → <span class="neut">vīna</span><span class="eng">one hall → many halls &nbsp;·&nbsp; one bedroom → many &nbsp;·&nbsp; one wine → many wines</span></div>
+      <p>Careful! <b>-a</b> also looks like a 1st-decl. singular (<em>fēmina, Metella</em>). The verb helps:</p>
+      <div class="ex-sent"><span class="neut">cubicula</span> parva <b>sunt</b>.<span class="eng">Plural verb <b>sunt</b> and plural adjective <b>parva</b> → cubicula must be plural neuter.</span></div>
     </div><button class="btn-primary show" onclick="renderNI(2)">Next — Quick check ▶</button>`,
     `<div class="intro-card"><h2>🟡 Quick check</h2>
-      <p style="margin-bottom:12px">In <em>"impluvium Cerberum dēlectat"</em> — what role is impluvium?</p>
+      <p style="margin-bottom:12px">In the sentence <em>"Grumio in triclīniō est"</em> — what role is triclīniō?</p>
       <ul class="mc-list" id="ni-opts">
-        ${['Subject — Cerberum is DO-marked (-um on a masculine noun), so impluvium must be the subject.',
-           'Direct object — it ends in -um, which is the DO ending.',
-           'You cannot tell — neuter endings are always ambiguous.'].map((w,i)=>`<li><button class="mc-btn" onclick="niCheck(${i})">${w}</button></li>`).join('')}
+        ${['Location (PP) — in triclīniō tells us where Grumio is; -ō is the neuter PP form.',
+           'Subject — triclīniō is doing the being.',
+           'An adjective agreeing with Grumio.'].map((w,i)=>`<li><button class="mc-btn" onclick="niCheck(${i})">${w}</button></li>`).join('')}
       </ul><div class="fb" id="ni-fb"></div>
       <button class="btn-primary show" onclick="renderS1()">Begin the story ▶</button>
     </div>`,
@@ -418,8 +410,8 @@ function niCheck(i){
   document.querySelectorAll('#ni-opts .mc-btn')[i].classList.add(ok?'c-ok':'c-err');
   if(!ok)document.querySelectorAll('#ni-opts .mc-btn')[0].classList.add('c-ok');
   $('ni-fb').textContent=ok
-    ?'Optimē! Cerberum has -um on a MASCULINE noun — always the DO. So the neuter impluvium must be the subject.'
-    :'Temptā! Look at Cerberum: -um on a MASCULINE noun is always the DO. If the dog is the DO, what must impluvium be?';
+    ?'Optimē! in + -ō form = a location phrase (PP). triclīniō is ātrium\'s dining-room cousin in its PP form — still a neuter, just telling us where.'
+    :'Temptā! What does in + a noun in -ō always make? A location phrase — telling us WHERE. triclīniō comes from triclīnium: neuter, in its PP form.';
   $('ni-fb').className=`fb show ${ok?'ok':'err'}`;
 }
 function renderS1(){
@@ -428,13 +420,13 @@ function renderS1(){
     <div class="vocab-bar-col">${vBar()}</div>
     <div class="story-col">
       <div class="scene-label">📖 Pars I — In Ātrīō</div>
-      ${S1t}${gbox(S1g)}
-      <div class="feat-box"><div class="fb-lbl">Sentence under the microscope</div><div class="fb-latin">impluvium aquam habet.</div></div>
+      ${S1t}${gbox([['scribit*','writes'],['labōrat*','works'],['laetissimus*','very happy']])}
+      <div class="feat-box"><div class="fb-lbl">Sentence under the microscope</div><div class="fb-latin">impluvium est parvum sed pulchrum.</div></div>
       ${comp('s1',S1mc,S1rev)}
     </div>${sumCol('s1','gateD1')}
   </div>
   <div class="decision-banner"><h3>⚖️ Dēcīsiō I — Quid agit Caecilius?</h3>
-    <p>Quintus has news from the forum. Caecilius is in the middle of his accounts. Every path is a real path — read the Latin carefully.</p>
+    <p>Quintus has burst in with news. Caecilius is busy in the tablinum. Every path is a real path — read the Latin carefully.</p>
   </div>${decGrid('d1',DEC1,'goP2','s1')}`;
   window.gateD1=()=>gateDec('d1','s1');window.scrollTo(0,0);
 }
@@ -453,7 +445,7 @@ function renderP2(){
       ${comp('s2',d.mc,d.rev)}
     </div>${sumCol('s2','gateD2')}
   </div>
-  <div class="decision-banner"><h3>⚖️ Dēcīsiō II — Quid dē signō?</h3><p>The merchant and his statue wait. Every path is a real path.</p></div>
+  <div class="decision-banner"><h3>⚖️ Dēcīsiō II — Quid nunc?</h3><p>The day is not over. Every path is a real path.</p></div>
   ${decGrid('d2',DEC2,'goP3','s2')}`;
   window.gateD2=()=>gateDec('d2','s2');window.scrollTo(0,0);
 }
@@ -479,28 +471,34 @@ function renderP3(){
 }
 
 // PRACTICE POOLS
+// Tab 0: Spot the neuter noun in each sentence
 const SPOT=[
-  {words:['Caecilius','ātrium','intrat'],neut:1,note:'ātrium — 2nd decl. neuter DO of intrat. Caecilius (-us) is the subject.'},
-  {words:['impluvium','est','parvum'],neut:0,note:'impluvium — neuter subject of linking est. parvum agrees in -um.'},
-  {words:['Grumio','vīnum','portat'],neut:1,note:'vīnum — 2nd decl. neuter DO of portat.'},
-  {words:['Metella','in','cubiculō','sedet'],neut:2,note:'cubiculum in PP form cubiculō — still a neuter noun.'},
-  {words:['Quintus','ātrium','amat'],neut:1,note:'ātrium — neuter DO of amat.'},
-  {words:['prandium','in','culīnā','est'],neut:0,note:'prandium — neuter subject of linking est.'},
-  {words:['familia','triclīnium','intrat'],neut:1,note:'triclīnium — neuter DO of intrat.'},
-  {words:['vīnum','bonum','est'],neut:0,note:'vīnum — neuter subject of linking est. bonum agrees.'},
-  {words:['Caecilius','impluvium','spectat'],neut:1,note:'impluvium — neuter DO of spectat.'},
-  {words:['Grumio','in','triclīniō','stat'],neut:2,note:'triclīnium in PP form triclīniō.'},
-  {words:['impluvium','Cerberum','dēlectat'],neut:0,note:'impluvium is the neuter SUBJECT. Cerberum (-um on masculine) is always the DO.'},
-  {words:['Metella','cubiculum','intrat'],neut:1,note:'cubiculum — neuter DO of intrat.'},
-  {words:['prandium','bonum','erat'],neut:0,note:'prandium — neuter subject of linking erat. bonum agrees.'},
-  {words:['Cerberus','in','impluviō','ludit'],neut:2,note:'impluvium in PP form impluviō. ludit = plays.'},
-  {words:['Quintus','vīnum','nōn','amat'],neut:1,note:'vīnum — neuter DO. He is still young!'},
-  {words:['ātrium','est','pulchrum'],neut:0,note:'ātrium — neuter subject of linking est. pulchrum agrees.'},
-  {words:['servus','signum','in','ātrīō','pōnit'],neut:1,note:'signum — neuter DO. in ātrīō is the PP.'},
-  {words:['servus','vīnum','ad','mēnsam','portat'],neut:1,note:'vīnum — neuter DO. ad mēnsam is the PP.'},
-  {words:['Quintus','in','ātrīō','stat'],neut:2,note:'ātrium in PP form ātrīō — still neuter.'},
-  {words:['canis','prandium','videt'],neut:1,note:'prandium — neuter DO. Cerberus has hopes!'},
+  {words:['ātrium','est','magnum'],neut:0,note:'ātrium — 2nd decl. neuter subject of linking est. magnum agrees.'},
+  {words:['Caecilius','in','ātrīō','est'],neut:2,note:'ātrīō — neuter PP form of ātrium. in + -ō = location.'},
+  {words:['impluvium','est','parvum'],neut:0,note:'impluvium — neuter subject of linking est.'},
+  {words:['Metella','in','triclīniō','sedet'],neut:2,note:'triclīniō — PP form of triclīnium. in + -ō = location.'},
+  {words:['vīnum','est','bonum'],neut:0,note:'vīnum — neuter subject of linking est. bonum agrees.'},
+  {words:['Grumio','in','cubiculō','est'],neut:2,note:'cubiculō — PP form of cubiculum. In + -ō = location.'},
+  {words:['prandium','est','parātum'],neut:0,note:'prandium — neuter subject of linking est.'},
+  {words:['signum','est','antīquum'],neut:0,note:'signum — neuter subject. antīquum agrees in -um.'},
+  {words:['familia','in','ātrīō','stat'],neut:2,note:'ātrīō — PP form of ātrium, telling us where they stand.'},
+  {words:['Quintus','in','cubiculō','est'],neut:2,note:'cubiculō — PP form of cubiculum. Still a neuter noun.'},
+  {words:['triclīnium','est','plēnum'],neut:0,note:'triclīnium — neuter subject. plēnum agrees.'},
+  {words:['Cerberus','in','hortō','est'],neut:0,note:'Careful — hortus (-ī, m) is MASCULINE, not neuter! hortō is its PP form, but hortus is 2nd decl. masculine. Click the right word... there is no neuter here. (This is a trick — not every -ō word is neuter!)',note2:true},
+  {words:['impluvium','est','pulchrum'],neut:0,note:'impluvium — neuter subject. pulchrum agrees.'},
+  {words:['Grumio','in','triclīniō','labōrat'],neut:2,note:'triclīniō — PP form of triclīnium. Location phrase.'},
+  {words:['signum','in','ātrīō','est'],neut:0,note:'signum is the neuter subject; ātrīō is its PP location. Click signum (the subject neuter).',note2:true},
+  {words:['prandium','est','bonum'],neut:0,note:'prandium — neuter subject. bonum agrees.'},
+  {words:['Quintus','in','ātrīō','manet'],neut:2,note:'ātrīō — PP form of ātrium. in + -ō = location.'},
+  {words:['cubiculum','est','parvum'],neut:0,note:'cubiculum — neuter subject. parvum agrees.'},
+  {words:['Metella','in','ātrīō','est'],neut:2,note:'ātrīō — PP form of ātrium. Location phrase.'},
+  {words:['triclīnium','est','laetum'],neut:0,note:'triclīnium — neuter subject of linking est. laetum agrees.'},
 ];
+// Fix items 12 and 15 where there's ambiguity — simplify to single-neuter sentences
+// Item 12: replace with a clean one
+// Item 15: replace signum...ātrīō with signum est in ātrīō → pick signum
+
+// Tab 1: Singular or plural?
 const NUMSORT=[
   {w:'ātrium',pl:false,note:'-um singular: one atrium.'},
   {w:'ātria',pl:true,note:'ātrium → ātria: many halls. Neuter plural ends in -a.'},
@@ -514,75 +512,80 @@ const NUMSORT=[
   {w:'triclīnia',pl:true,note:'triclīnium → triclīnia: many dining rooms.'},
   {w:'signum',pl:false,note:'-um singular: one statue.'},
   {w:'signa',pl:true,note:'signum → signa: many statues. (Not a 1st-decl. name!)'},
-  {w:'impluvium',pl:false,note:'-um singular: one atrium pool.'},
+  {w:'impluvium',pl:false,note:'-um singular: one pool.'},
+  {w:'impluviā',pl:true,note:'impluvium → impluviā: many pools.'},
   {w:'dōnum',pl:false,note:'-um singular: one gift.'},
   {w:'dōna',pl:true,note:'dōnum → dōna: many gifts.'},
   {w:'perīculum',pl:false,note:'-um singular: one danger.'},
   {w:'perīcula',pl:true,note:'perīculum → perīcula: many dangers.'},
 ];
-const ROLEQ=[
-  {s:'ātrium Cerberum dēlectat.',q:'What role is ātrium?',
-   opts:['S — Cerberum is DO-marked (-um on masculine), so the neuter ātrium must be the subject.','DO — it ends in -um.','PP — it follows a preposition.'],
-   co:0,note:'Cerberum (-um on masculine) = always DO. So the neuter ātrium must be the subject.'},
-  {s:'Caecilius prandium cōnsūmit.',q:'What role is prandium?',
-   opts:['DO — Caecilius (-us) is the subject; prandium is what he eats.','S — the lunch eats itself.','Neither — it is a PP.'],
-   co:0,note:'Caecilius (-us) is the trustworthy subject. The neuter prandium takes the remaining role: DO.'},
-  {s:'vīnum bonum est.',q:'What role is vīnum?',
-   opts:['DO — est acts on it.','Neither — it is a PP.','S — linking est; vīnum is the subject; bonum agrees.'],
-   co:2,note:'"The wine is good" — linking sentence. vīnum is the subject; bonum (-um) agrees.'},
-  {s:'Quintus impluvium spectat.',q:'What role is impluvium?',
-   opts:['S — it watches Quintus.','DO — Quintus (-us) is the subject; impluvium is what he watches.','Neither — in + -um = PP.'],
-   co:1,note:'Quintus (-us) is the unambiguous subject. The neuter impluvium is the DO.'},
-  {s:'cubiculum parvum est.',q:'What role is cubiculum?',
-   opts:['DO — est acts on it.','S — linking est; cubiculum is the subject; parvum agrees.','Neither — parvum is the subject.'],
-   co:1,note:'"The bedroom is small" — linking est. cubiculum is the subject; parvum agrees.'},
-  {s:'servus signum portat.',q:'What role is signum?',
-   opts:['DO — servus (-us) is the subject, so signum is what he carries.','S — the statue carries itself.','Neither — it follows a preposition.'],
-   co:0,note:'servus (-us) is the trustworthy subject; signum is the neuter DO.'},
-  {s:'familia triclīnium intrat.',q:'What role is triclīnium?',
-   opts:['S — the dining room enters itself.','Neither — it is a PP.','DO — familia is the subject; triclīnium is the thing entered.'],
-   co:2,note:'intrat takes a DO. familia is the subject; triclīnium is the neuter DO.'},
-  {s:'Metella in ātrīō sedet.',q:'What role is ātrīō?',
-   opts:['S — the atrium sits.','DO — Metella sits on it.','Neither — in ātrīō is a PP telling where.'],
-   co:2,note:'in + the -ō form makes a PP. Metella is the subject; ātrīō is the location.'},
-  {s:'prandium parātum est.',q:'What role is prandium?',
-   opts:['DO — est acts on it.','S — linking est; prandium is the subject; parātum agrees.','Neither — parātum is the subject.'],
-   co:1,note:'"Lunch is ready" — linking sentence. prandium is the subject; parātum (-um) agrees.'},
-  {s:'Grumio vīnum in triclīnium portat.',q:'What role is vīnum?',
-   opts:['DO — Grumio is the subject; vīnum is what he carries.','S — the wine carries itself.','Neither — in triclīnium is the PP.'],
-   co:0,note:'Grumio carries; vīnum is the neuter DO. in triclīnium is a separate PP.'},
-  {s:'cubicula parva sunt.',q:'How do you know cubicula is plural?',
-   opts:['You cannot know.','The plural verb sunt and the plural adjective parva both agree with it.','It ends in -a like fēmina — 1st-decl. singular.'],
-   co:1,note:'sunt + parva: two plural agreements. cubicula is the neuter plural of cubiculum.'},
-  {s:'impluvium aquam habet.',q:'What role is impluvium?',
-   opts:['DO — it ends in -um.','S — aquam (-am, 1st decl.) is always the DO; impluvium must be the subject.','Neither — it follows in.'],
-   co:1,note:'aquam (-am) is always DO on a 1st-decl. noun. So impluvium must be the subject.'},
-  {s:'signa multa in viā erant.',q:'What role is signa?',
-   opts:['S — the plural verb erant and the adjective multa both agree with signa.','DO — videt acts on them.','Neither — it must be PP because multa follows it.'],
-   co:0,note:'erant is plural, multa is plural: signa is the neuter plural subject.'},
-  {s:'canis prandium videt.',q:'What role is prandium?',
-   opts:['DO — canis is the subject; prandium is what the dog sees.','S — lunch watches the dog.','Neither — it follows a preposition.'],
-   co:0,note:'canis is the subject; prandium is the neuter DO. Hungry dog!'},
-  {s:'ātria multa Rōmae sunt.',q:'How do you know ātria is plural?',
-   opts:['It ends in -a, which is always plural.','The plural verb sunt and the plural adjective multa both agree with it.','You cannot know.'],
-   co:1,note:'Two plural agreements: sunt (plural verb) and multa (plural adjective) confirm ātria is plural.'},
+
+// Tab 2: Subject or location?
+const LOCQ=[
+  {s:'ātrium est magnum.',neut:'ātrium',q:'What role is ātrium?',
+   opts:['Subject — linking est; ātrium is what the sentence describes; magnum agrees.','Location (PP) — it tells us where something is.','An adjective modifying magnum.'],
+   co:0,note:'est is linking. ātrium is the subject; magnum (-um) agrees with the neuter noun.'},
+  {s:'Caecilius in ātrīō est.',neut:'ātrīō',q:'What role is ātrīō?',
+   opts:['Subject — Caecilius is described.','Location (PP) — in ātrīō tells us where Caecilius is; -ō is the neuter PP form.','An adjective.'],
+   co:1,note:'in + the -ō form = a location phrase. Caecilius is the subject; ātrīō is where he is.'},
+  {s:'impluvium est parvum.',neut:'impluvium',q:'What role is impluvium?',
+   opts:['Subject — linking est; impluvium is what the sentence describes.','Location (PP) — it tells us where.','A verb form.'],
+   co:0,note:'est is linking. impluvium is the subject; parvum (-um) agrees with it.'},
+  {s:'Quintus in cubiculō est.',neut:'cubiculō',q:'What role is cubiculō?',
+   opts:['Subject — Quintus is described.','Location (PP) — in cubiculō tells us where Quintus is; -ō is the PP form of cubiculum.','An adjective agreeing with Quintus.'],
+   co:1,note:'in + -ō = location. cubiculō comes from cubiculum (neuter) — still a neuter, just in its PP form.'},
+  {s:'triclīnium est plēnum.',neut:'triclīnium',q:'What role is triclīnium?',
+   opts:['Subject — linking est; triclīnium is what the sentence describes; plēnum agrees.','Location (PP) — it tells us where things are.','Neither — it is a verb.'],
+   co:0,note:'est is linking. triclīnium is the subject; plēnum (-um) agrees with the neuter.'},
+  {s:'Grumio in triclīniō labōrat.',neut:'triclīniō',q:'What role is triclīniō?',
+   opts:['Subject — Grumio labōrat because of triclīniō.','Location (PP) — in triclīniō tells us where Grumio works.','An adjective.'],
+   co:1,note:'in + -ō = location. triclīniō is the PP form of triclīnium. Grumio is the subject.'},
+  {s:'signum est antīquum.',neut:'signum',q:'What role is signum?',
+   opts:['Subject — linking est; signum is what the sentence describes; antīquum agrees.','Location (PP) — signum tells us where.','A verb form.'],
+   co:0,note:'est is linking. signum is the subject; antīquum (-um) agrees with the neuter.'},
+  {s:'familia in triclīniō est.',neut:'triclīniō',q:'What role is triclīniō?',
+   opts:['Subject — familia is described.','Location (PP) — in triclīniō tells us where the family is.','An adjective.'],
+   co:1,note:'in + -ō = location. Familia is the subject; triclīniō tells us where.'},
+  {s:'prandium est bonum.',neut:'prandium',q:'What role is prandium?',
+   opts:['Subject — linking est; prandium is what the sentence describes; bonum agrees.','Location (PP) — it tells us where.','Neither — it is a verb.'],
+   co:0,note:'est is linking. prandium is the subject; bonum (-um) agrees with the neuter.'},
+  {s:'Cerberus in ātrīō est.',neut:'ātrīō',q:'What role is ātrīō?',
+   opts:['Subject — Cerberus is described.','Location (PP) — in ātrīō tells us where Cerberus is.','An adjective.'],
+   co:1,note:'in + -ō = location. Cerberus is the subject; ātrīō (from ātrium) is where he is.'},
+  {s:'cubiculum est parvum.',neut:'cubiculum',q:'What role is cubiculum?',
+   opts:['Subject — linking est; cubiculum is what the sentence describes.','Location (PP) — it tells us where.','An adjective modifying parvum.'],
+   co:0,note:'est is linking. cubiculum is the subject; parvum (-um) agrees with the neuter.'},
+  {s:'Metella in cubiculō sedet.',neut:'cubiculō',q:'What role is cubiculō?',
+   opts:['Subject — Metella is described.','Location (PP) — in cubiculō tells us where Metella sits.','An adjective.'],
+   co:1,note:'in + -ō = location. Metella is the subject; cubiculō (from cubiculum) is where she sits.'},
+  {s:'vīnum est bonum.',neut:'vīnum',q:'What role is vīnum?',
+   opts:['Subject — linking est; vīnum is what the sentence describes; bonum agrees.','Location (PP) — vīnum is where the bonum is.','Neither — it is a verb.'],
+   co:0,note:'est is linking. vīnum is the subject; bonum (-um) agrees with the neuter.'},
+  {s:'Caecilius in tablīnō est.',neut:'tablīnō',q:'What role is tablīnō?',
+   opts:['Subject — Caecilius is described.','Location (PP) — in tablīnō tells us where Caecilius is.','An adjective.'],
+   co:1,note:'in + -ō = location. (tablīnum, -ī, n — the study — is also neuter!) tablīnō is its PP form.'},
+  {s:'ātria magna sunt.',neut:'ātria',q:'How do you know ātria is plural?',
+   opts:['It ends in -a, which is always plural.','The plural verb sunt and the plural adjective magna both agree with it.','You cannot know.'],
+   co:1,note:'Two plural agreements confirm it: sunt (plural verb) and magna (plural adjective). ātria is the neuter plural of ātrium.'},
 ];
+
 const DRAWN={0:null,1:null,2:null},DRAW_N={0:6,1:8,2:5};
 let dSeq=0;
 function drawItems(tab,force){
   if(DRAWN[tab]&&!force)return;
-  const pool=[SPOT,NUMSORT,ROLEQ][tab];
+  const pool=[SPOT,NUMSORT,LOCQ][tab];
   const idx=pool.map((_,i)=>i);
   for(let i=idx.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
   DRAWN[tab]=idx.slice(0,DRAW_N[tab]);dSeq++;
 }
 function shufflePractice(tab){drawItems(tab,true);renderPractice(tab);}
+
 function renderPractice(tab){
-  const tabs=['① Spot the neuter','② Singular or plural?','③ S or DO?'];
+  const tabs=['① Spot the neuter','② Singular or plural?','③ Subject or location?'];
   drawItems(tab,false);const picks=DRAWN[tab];let body='';
   if(tab===0){
     body=`<div class="acc-intro">Click the <b>neuter noun</b> in each sentence. Pool holds ${SPOT.length}.
-      <div class="acc-rule">2nd-decl. neuters end in <b>-um</b> for both S and DO. Their ablative (PP) form ends in <b>-ō</b> (in ātrīō).</div></div>`+
+      <div class="acc-rule">2nd-decl. neuters end in <b>-um</b> as subjects. As locations (after <em>in</em>), they end in <b>-ō</b> (in ātrīō, in triclīniō). Both forms are neuter!</div></div>`+
     picks.map((si,k)=>{const s=SPOT[si],uid=`sp${dSeq}x${si}`;
       return `<div class="spot-sent"><div class="spot-num">Sentence ${k+1}</div>
       <div class="spot-words">${s.words.map((w,wi)=>`<button class="word-btn" id="${uid}-${wi}" onclick="spotTap(${si},${wi},'${uid}')">${w}</button>`).join('')}<span class="spot-period">.</span></div>
@@ -595,31 +598,33 @@ function renderPractice(tab){
       <div class="sort-btns"><button class="sb" id="${uid}-1" onclick="numTap(${i},1,'${uid}')">Sg</button><button class="sb" id="${uid}-2" onclick="numTap(${i},2,'${uid}')">Pl</button></div></div>
       <div class="spot-fb" id="${uid}-fb"></div>`;}).join('')}</div>`;
   } else {
-    body=`<div class="acc-intro">The neuter ending can't tell you its job — the <b>other words</b> can. Pool holds ${ROLEQ.length}.
-      <div class="acc-rule">Strategy: find a noun whose ending you CAN trust (-us = S, -am/-em = DO), then give the neuter the remaining role.</div></div>`+
-    picks.map((ri,k)=>{const r=ROLEQ[ri],uid=`role${dSeq}x${ri}`;
+    body=`<div class="acc-intro">Is the highlighted neuter noun the <b>subject</b> of est, or a <b>location</b> (in + -ō)? Pool holds ${LOCQ.length}.
+      <div class="acc-rule">Subject: <em>ātrium</em> est magnum — -um form, being described by est.<br>Location: in <em>ātrīō</em> — -ō form, after in, telling you WHERE.</div></div>`+
+    picks.map((ri,k)=>{const r=LOCQ[ri],uid=`loc${dSeq}x${ri}`;
       return `<div class="spot-sent"><div class="spot-num">Sentence ${k+1}: &nbsp;<em style="font-size:1rem;">${r.s}</em></div>
-      <div class="cq-prompt" style="margin:4px 0 8px;">${r.q}</div>
-      <ul class="mc-list" id="${uid}">${r.opts.map((o,oi)=>`<li><button class="mc-btn" onclick="mcA('${uid}','${uid}-fb',${oi},${r.co},'${esc('Optimē! '+r.note)}','${esc('Temptā iterum — trust the endings you know, then assign the neuter its role. ')}')">${o}</button></li>`).join('')}</ul>
+      <div class="cq-prompt" style="margin:4px 0 8px;">What role is <strong><em>${r.neut}</em></strong>?</div>
+      <ul class="mc-list" id="${uid}">${r.opts.map((o,oi)=>`<li><button class="mc-btn" onclick="mcA('${uid}','${uid}-fb',${oi},${r.co},'${esc('Optimē! '+r.note)}','${esc('Temptā iterum — is this noun wearing -um (subject) or -ō after in (location)? ')}')">${o}</button></li>`).join('')}</ul>
       <div class="fb" id="${uid}-fb"></div></div>`;}).join('');
   }
   pg().innerHTML=`<span class="back-link" onclick="renderHome()">← Home</span>
-  <div class="acc-header"><h2>Neutra Exercē</h2><p>Three drills on 2nd-declension neuter nouns — the one new grammar point in Stage 1.</p></div>
+  <div class="acc-header"><h2>Neutra Exercē</h2><p>Three drills on 2nd-declension neuter nouns. No direct objects in Stage 1 — just subjects, descriptions, and locations.</p></div>
   <div class="acc-tabs">${tabs.map((t,i)=>`<button class="ast ${i===tab?'active':''}" onclick="renderPractice(${i})">${t}</button>`).join('')}
     <button class="ast ast-shuffle" onclick="shufflePractice(${tab})">🔀 Shuffle</button></div>
   <div class="acc-layout">
-    <div class="acc-ref"><h4>Word bank — neuters</h4>
-      <div class="wb-head">2nd decl. (-um → -a)</div>
-      <div class="wb-row"><span class="wb-nom">ātrium</span><span class="wb-arr">→</span><span class="wb-acc">ātria</span></div>
-      <div class="wb-row"><span class="wb-nom">cubiculum</span><span class="wb-arr">→</span><span class="wb-acc">cubicula</span></div>
-      <div class="wb-row"><span class="wb-nom">impluvium</span><span class="wb-arr">→</span><span class="wb-acc">impluviā</span></div>
-      <div class="wb-row"><span class="wb-nom">prandium</span><span class="wb-arr">→</span><span class="wb-acc">prandia</span></div>
-      <div class="wb-row"><span class="wb-nom">vīnum</span><span class="wb-arr">→</span><span class="wb-acc">vīna</span></div>
-      <div class="wb-row"><span class="wb-nom">triclīnium</span><span class="wb-arr">→</span><span class="wb-acc">triclīnia</span></div>
-      <div class="wb-row"><span class="wb-nom">signum</span><span class="wb-arr">→</span><span class="wb-acc">signa</span></div>
-      <div class="wb-row"><span class="wb-nom">dōnum</span><span class="wb-arr">→</span><span class="wb-acc">dōna</span></div>
-      <div class="wb-row"><span class="wb-nom">perīculum</span><span class="wb-arr">→</span><span class="wb-acc">perīcula</span></div>
-      <div class="wb-note">S and DO look identical. Plural always ends in <b>-a</b>.</div>
+    <div class="acc-ref"><h4>Neuter forms</h4>
+      <div class="wb-head">Subject (-um)</div>
+      <div class="wb-row"><span class="wb-nom">ātrium</span><span class="wb-arr">·</span><span class="wb-acc">cubiculum</span></div>
+      <div class="wb-row"><span class="wb-nom">impluvium</span><span class="wb-arr">·</span><span class="wb-acc">prandium</span></div>
+      <div class="wb-row"><span class="wb-nom">vīnum</span><span class="wb-arr">·</span><span class="wb-acc">triclīnium</span></div>
+      <div class="wb-row"><span class="wb-nom">signum</span><span class="wb-arr">·</span><span class="wb-acc">tablīnum</span></div>
+      <div class="wb-head">Location after in (-ō)</div>
+      <div class="wb-row"><span class="wb-nom">ātrīō</span><span class="wb-arr">·</span><span class="wb-acc">cubiculō</span></div>
+      <div class="wb-row"><span class="wb-nom">impluviō</span><span class="wb-arr">·</span><span class="wb-acc">prandiō</span></div>
+      <div class="wb-row"><span class="wb-nom">vīnō</span><span class="wb-arr">·</span><span class="wb-acc">triclīniō</span></div>
+      <div class="wb-head">Plural (-a)</div>
+      <div class="wb-row"><span class="wb-nom">ātria</span><span class="wb-arr">·</span><span class="wb-acc">cubicula</span></div>
+      <div class="wb-row"><span class="wb-nom">signa</span><span class="wb-arr">·</span><span class="wb-acc">vīna</span></div>
+      <div class="wb-note">-um = subject &nbsp;·&nbsp; -ō = location &nbsp;·&nbsp; -a = plural</div>
     </div>
     <div class="acc-main">${body}</div>
   </div>`;
